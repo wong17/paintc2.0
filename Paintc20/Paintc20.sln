@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paintc", "Paintc\Paintc.csproj", "{DFDC67E2-F60F-413A-B126-95E5891C07CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44BB7C12-0F6C-4EEB-8177-D0D06E1E1238}
+	EndGlobalSection
+EndGlobal

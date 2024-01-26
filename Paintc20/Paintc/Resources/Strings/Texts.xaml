@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!--MainWindow - Menu bar-->
+    <sys:String x:Key="FileMenu">File</sys:String>
+    <sys:String x:Key="ExitMenuItem">Exit</sys:String>
+    <sys:String x:Key="HelpMenu">Help</sys:String>
+    <sys:String x:Key="AboutMenuItem">About</sys:String>
+    <sys:String x:Key="SelectResolution">Select graphic mode resolution:</sys:String>
+
+</ResourceDictionary>
