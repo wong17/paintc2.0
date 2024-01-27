@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Paintc.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for DrawingPanel.xaml
+    /// Interaction logic for ToolboxPanel.xaml
     /// </summary>
-    public partial class DrawingPanel : UserControl
+    public partial class ToolboxPanel : UserControl
     {
-        public DrawingPanel()
+        public ToolboxPanel()
         {
             InitializeComponent();
         }
