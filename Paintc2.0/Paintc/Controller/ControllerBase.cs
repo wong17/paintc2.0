@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Paintc.ViewModel
+namespace Paintc.Controller
 {
     /* Se utiliza para notificar a las vistas cuando una propiedad ha cambiado. */
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ControllerBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

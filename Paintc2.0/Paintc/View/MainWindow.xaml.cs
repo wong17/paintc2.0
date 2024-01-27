@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Paintc.ViewModels;
+using System.Windows;
 
 namespace Paintc.Views
 {
@@ -10,6 +11,7 @@ namespace Paintc.Views
         public MainWindow()
         {
             InitializeComponent();
+            _ = new MainWindowController(this);
         }
     }
 }

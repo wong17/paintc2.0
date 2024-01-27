@@ -10,9 +10,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ScrollViewer x:Name="MainScrollViewer" Grid.Row="0" Background="LightGray" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
-                      PreviewMouseWheel="MainScrollViewer_PreviewMouseWheel" >
-            <Canvas x:Name="CustomCanvas" Background="White" Width="1280" Height="720" MouseDown="CustomCanvas_MouseDown" MouseMove="CustomCanvas_MouseMove">
+        <ScrollViewer x:Name="MainScrollViewer" Grid.Row="0" Background="LightGray" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+            <Canvas x:Name="CustomCanvas" Background="White" Width="1280" Height="720" >
                 <Border BorderBrush="Black" BorderThickness="1" Height="{Binding ElementName=CustomCanvas, Path=ActualHeight}" Width="{Binding ElementName=CustomCanvas, Path=ActualWidth}" />
             </Canvas>
         </ScrollViewer>
