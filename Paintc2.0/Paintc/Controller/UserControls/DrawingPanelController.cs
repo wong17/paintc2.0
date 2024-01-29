@@ -25,6 +25,7 @@ namespace Paintc.Controller.UserControls
         private void InitController()
         {
             _DrawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
+            _DrawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
             _DrawingPanel.CustomCanvas.MouseWheel += CustomCanvas_MouseWheel;
         }
 
@@ -45,5 +46,16 @@ namespace Paintc.Controller.UserControls
             _DrawingPanel.MainScrollViewer.ScrollToHorizontalOffset(_DrawingPanel.MainScrollViewer.HorizontalOffset + mousePosition.X * factor);
             _DrawingPanel.MainScrollViewer.ScrollToVerticalOffset(_DrawingPanel.MainScrollViewer.VerticalOffset + mousePosition.Y * factor);
         }
+
+        private void MainScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Delta > 0 && IsMaxZoomInReached())
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private bool IsMaxZoomInReached() => scaleTransform.ScaleX == MAX_ZOOM_IN && scaleTransform.ScaleY == MAX_ZOOM_IN;
     }
 }
