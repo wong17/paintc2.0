@@ -2,9 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="Gray">#505050</Color>
+    <Color x:Key="GraySecondary">#989898</Color>
     <Color x:Key="Black">#353535</Color>
     <Color x:Key="Blue">#15539e</Color>
     <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}" />
+    <SolidColorBrush x:Key="GraySecondaryBrush" Color="{StaticResource GraySecondary}" />
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
     <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
 

@@ -37,13 +37,13 @@
             </Grid.ColumnDefinitions>
             
             <!--Left panel-->
-            <StackPanel Grid.Column="0" Background="{StaticResource BlackBrush}"/>
+            <userControls:ToolboxPanel Grid.Column="0"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="1" Width="2" ResizeBehavior="PreviousAndNext" />
+            <GridSplitter Grid.Column="1" Width="3" ResizeBehavior="PreviousAndNext" Background="{StaticResource GraySecondaryBrush}"/>
             <!--Center panel-->
             <userControls:DrawingPanel Grid.Column="2" x:Name="CustomPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="3" Width="2" ResizeBehavior="PreviousAndNext" />
+            <GridSplitter Grid.Column="3" Width="3" ResizeBehavior="PreviousAndNext" Background="{StaticResource GraySecondaryBrush}"/>
             <!--Right panel-->
             <StackPanel Grid.Column="4" Background="{StaticResource BlackBrush}"/>
         </Grid>
