@@ -11,7 +11,7 @@ namespace Paintc.Controller.UserControls
 
         private const double SCALE_FACTOR = 0.1;
         private const double MAX_ZOOM_IN = 5.0;
-        private const double MAX_ZOOM_OUT = 1.0;
+        private const double MAX_ZOOM_OUT = 0.9;
 
         // Crear matrix que va a contener la transformación a aplicar
         private readonly ScaleTransform scaleTransform = new();
