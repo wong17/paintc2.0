@@ -1,5 +1,4 @@
-﻿using Paintc.Controller.UserControls;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Paintc.View.UserControls
 {
@@ -11,7 +10,6 @@ namespace Paintc.View.UserControls
         public ToolboxPanel()
         {
             InitializeComponent();
-            _ = new ToolboxPanelController(this);
         }
     }
 }
