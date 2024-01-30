@@ -8,5 +8,6 @@
     <sys:String x:Key="HelpMenu">Help</sys:String>
     <sys:String x:Key="AboutMenuItem">About</sys:String>
     <sys:String x:Key="SelectResolution">Select graphic mode resolution:</sys:String>
+    <sys:String x:Key="ToolboxPanelTitle">Toolbox</sys:String>
 
 </ResourceDictionary>

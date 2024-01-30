@@ -37,7 +37,7 @@ namespace Paintc.Controller.UserControls
             Point mousePosition = e.GetPosition(_DrawingPanel.CustomCanvas);
             // Positivo si se gira hacia adelante (hacia el monitor), Negativo si se gira hacia atras (hacia el usuario)
             var factor = (e.Delta > 0) ? SCALE_FACTOR : -SCALE_FACTOR;
-            // Aplicar escalación centrada sobre la posición actual del mouse
+            // Aplicar escalación centrada en la posición actual del mouse
             scaleTransform.CenterX = mousePosition.X;
             scaleTransform.CenterY = mousePosition.Y;
             scaleTransform.ScaleX = factor < 0 ? Math.Max(MAX_ZOOM_OUT, scaleTransform.ScaleX + factor) : Math.Min(MAX_ZOOM_IN, scaleTransform.ScaleX + factor);

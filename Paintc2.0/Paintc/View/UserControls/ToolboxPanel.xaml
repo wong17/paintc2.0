@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400">
+             d:DesignHeight="400" d:DesignWidth="400">
     <Grid Background="{StaticResource BlackBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Tools-->
-        <Grid Grid.Row="0" >
+        <Grid Grid.Row="0" Height="200">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -19,10 +23,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!---->
-            
+            <Image Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Margin="5"></Image>
+
+            <Image Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Margin="5"></Image>
+            <Image Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Margin="5"></Image>
         </Grid>
     </Grid>
 </UserControl>

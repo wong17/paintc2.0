@@ -42,7 +42,7 @@ namespace Paintc.ViewModels
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _MainWindow.CustomPanel.MainScrollViewer.Focus();
+            _MainWindow.ucDrawingPanel.MainScrollViewer.Focus();
         }
     }
 }
