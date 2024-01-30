@@ -1,4 +1,5 @@
-﻿using Paintc.Service;
+﻿using Paintc.Enums;
+using Paintc.Service;
 using Paintc.View.UserControls;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ namespace Paintc.Controller.UserControls
 
         private void InitController()
         {
+            ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+
             ToolboxPanel.SelectTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.RectangleTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.CircleTool.MouseEnter += Image_MouseEnter;
@@ -42,9 +45,11 @@ namespace Paintc.Controller.UserControls
 
         private void ImageToolbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is not Image tool) return;
+            if (sender is not Image tool) 
+                return;
 
-            ToolService.Instance.UpdateCurrentTool(tool.Name);
+            if (Enum.TryParse(tool.Name, out ToolType selectedTool)) 
+                ToolService.Instance.UpdateCurrentTool(selectedTool);
         }
     }
 }

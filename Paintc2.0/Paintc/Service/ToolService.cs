@@ -1,4 +1,5 @@
-﻿using Paintc.Model;
+﻿using Paintc.Enums;
+using Paintc.Model;
 
 namespace Paintc.Service
 {
@@ -9,14 +10,14 @@ namespace Paintc.Service
         public static ToolService Instance => instance;
         private ToolService() { }
 
-        private readonly Toolbox Toolbox = new();
+        private readonly Toolbox toolbox = new();
 
-        public void UpdateCurrentTool(string currentTool)
+        public void UpdateCurrentTool(ToolType currentTool)
         {
-            if (Toolbox.CurrentTool != currentTool)
+            if (toolbox.CurrentTool != currentTool)
             {
-                Toolbox.CurrentTool = currentTool;
-                NotifyObservers(Toolbox);
+                toolbox.CurrentTool = currentTool;
+                NotifyObservers(toolbox);
             }
         }
 

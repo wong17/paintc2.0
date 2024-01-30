@@ -25,15 +25,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!---->
-            <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Margin="5" ></Image>
-            <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Margin="5"></Image>
-            <Image x:Name="CircleTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5"></Image>
-            <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Margin="5"></Image>
+            <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Margin="5" ToolTip="Select"></Image>
+            <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Margin="5" ToolTip="Rectangle"></Image>
+            <Image x:Name="CircleTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5" ToolTip="Circle"></Image>
+            <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Margin="5" ToolTip="Polygon"></Image>
 
-            <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Margin="5"></Image>
-            <Image x:Name="EraserTool" Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Margin="5"></Image>
-            <Image x:Name="PencilTool" Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Margin="5"></Image>
-            <Image x:Name="LineTool" Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Margin="5"></Image>
+            <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Margin="5" ToolTip="Filler"></Image>
+            <Image x:Name="EraserTool" Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Margin="5" ToolTip="Eraser"></Image>
+            <Image x:Name="PencilTool" Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Margin="5" ToolTip="Pencil"></Image>
+            <Image x:Name="LineTool" Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Margin="5" ToolTip="Line"></Image>
         </Grid>
     </Grid>
 </UserControl>

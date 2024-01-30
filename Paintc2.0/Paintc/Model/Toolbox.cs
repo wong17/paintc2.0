@@ -1,7 +1,9 @@
-﻿namespace Paintc.Model
+﻿using Paintc.Enums;
+
+namespace Paintc.Model
 {
     public class Toolbox
     {
-        public string? CurrentTool { get; set; }
+        public ToolType CurrentTool { get; set; } = ToolType.None;
     }
 }
