@@ -1,9 +1,10 @@
-﻿using Paintc.View;
+﻿using Paintc.Core;
+using Paintc.View;
 using Paintc.Views;
 
 namespace Paintc.Controller
 {
-    public class AboutWindowController
+    public class AboutWindowViewModel : ViewModel
     {
         private AboutWindow? _AboutWindow;
 

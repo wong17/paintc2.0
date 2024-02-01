@@ -2,7 +2,7 @@
 
 namespace Paintc.Controller
 {
-    public static class GraphicModeController
+    public static class GraphicModeViewModel
     {
         public static List<GraphicMode> GetGraphicModes()
         {
