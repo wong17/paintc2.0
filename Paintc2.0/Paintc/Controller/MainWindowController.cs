@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace Paintc.Controller
 {
-    public class MainWindowController : ViewModel
+    public class MainWindowController : ControllerBase
     {
         private readonly MainWindow MainWindow;
 

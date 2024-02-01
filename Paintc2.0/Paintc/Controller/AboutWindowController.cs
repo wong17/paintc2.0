@@ -2,7 +2,7 @@
 
 namespace Paintc.Controller
 {
-    public class AboutWindowController() : ViewModel
+    public class AboutWindowController() : ControllerBase
     {
         
     }

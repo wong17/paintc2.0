@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Paintc.Controller.UserControls
 {
-    public class ToolboxPanelController : ViewModel
+    public class ToolboxPanelController : ControllerBase
     {
         private readonly ToolboxPanel ToolboxPanel;
 

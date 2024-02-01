@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Paintc.Controller.UserControls
 {
-    public class DrawingPanelController : ViewModel
+    public class DrawingPanelController : ControllerBase
     {
         private readonly DrawingPanel DrawingPanel;
         private Toolbox? toolbox;
