@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Paintc.Controller.UserControls;
+using System.Windows.Controls;
 
 namespace Paintc.View.UserControls
 {
@@ -10,6 +11,7 @@ namespace Paintc.View.UserControls
         public DrawingPanel()
         {
             InitializeComponent();
+            _ = new DrawingPanelController(this);
         }
     }
 }
