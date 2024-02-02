@@ -27,7 +27,7 @@
             <!---->
             <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Margin="5" ToolTip="Select"></Image>
             <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Margin="5" ToolTip="Rectangle"></Image>
-            <Image x:Name="CircleTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5" ToolTip="Circle"></Image>
+            <Image x:Name="EllipseTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5" ToolTip="Ellipse"></Image>
             <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Margin="5" ToolTip="Polygon"></Image>
 
             <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Margin="5" ToolTip="Filler"></Image>

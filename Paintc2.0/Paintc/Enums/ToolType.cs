@@ -2,6 +2,14 @@
 {
     public enum ToolType
     {
-        None, SelectTool, RectangleTool, CircleTool, PolygonTool, FillerTool, EraserTool, PencilTool, LineTool
+        None, 
+        SelectTool, 
+        RectangleTool, 
+        EllipseTool, 
+        PolygonTool, 
+        FillerTool, 
+        EraserTool, 
+        PencilTool, 
+        LineTool
     }
 }

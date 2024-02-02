@@ -17,7 +17,6 @@ namespace Paintc.Controller
 
         private void InitController()
         {
-            MainWindow.Loaded += Window_Loaded;
             MainWindow.AboutMenuItem.Click += MenuItem_Click;
             MainWindow.ExitMenuItem.Click += MenuItem_Click;
         }
@@ -40,9 +39,5 @@ namespace Paintc.Controller
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            MainWindow.ucDrawingPanel.MainScrollViewer.Focus();
-        }
     }
 }

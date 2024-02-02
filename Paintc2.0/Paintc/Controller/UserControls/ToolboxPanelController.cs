@@ -21,7 +21,7 @@ namespace Paintc.Controller.UserControls
         {
             ToolboxPanel.SelectTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.RectangleTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.CircleTool.MouseEnter += Image_MouseEnter;
+            ToolboxPanel.EllipseTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.PolygonTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.FillerTool.MouseEnter += Image_MouseEnter;
             ToolboxPanel.EraserTool.MouseEnter += Image_MouseEnter;
@@ -30,7 +30,7 @@ namespace Paintc.Controller.UserControls
 
             ToolboxPanel.SelectTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
             ToolboxPanel.RectangleTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.CircleTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
+            ToolboxPanel.EllipseTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
             ToolboxPanel.PolygonTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
             ToolboxPanel.FillerTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
             ToolboxPanel.EraserTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;

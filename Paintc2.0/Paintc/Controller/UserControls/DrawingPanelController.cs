@@ -1,9 +1,5 @@
 ﻿using Paintc.Core;
-using Paintc.Enums;
-using Paintc.Model;
-using Paintc.Service;
 using Paintc.View.UserControls;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,8 +9,7 @@ namespace Paintc.Controller.UserControls
     public class DrawingPanelController : ControllerBase
     {
         private readonly DrawingPanel DrawingPanel;
-        private Toolbox? toolbox;
-        private Point lastMousePosition;
+        private readonly DrawingHandler _drawingHandler;
 
         #region ZOOM
 
@@ -28,24 +23,19 @@ namespace Paintc.Controller.UserControls
         public DrawingPanelController(DrawingPanel drawingPanel)
         {
             DrawingPanel = drawingPanel;
+            _drawingHandler = new DrawingHandler(DrawingPanel);
             InitController();
         }
 
         private void InitController()
         {
-            ToolService.Instance.ToolboxEventHandler += ToolboxEventHandler;
-            ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             // Events
             DrawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
             DrawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
             DrawingPanel.CustomCanvas.MouseWheel += CustomCanvas_MouseWheel;
             DrawingPanel.CustomCanvas.MouseLeftButtonDown += CustomCanvas_MouseLeftButtonDown;
+            DrawingPanel.CustomCanvas.MouseRightButtonDown += CustomCanvas_MouseRightButtonDown;
             DrawingPanel.CustomCanvas.MouseMove += CustomCanvas_MouseMove;
-        }
-
-        private void ToolboxEventHandler(object? sender, Toolbox toolbox)
-        {
-            this.toolbox = toolbox;
         }
 
         #region ZOOM
@@ -79,74 +69,18 @@ namespace Paintc.Controller.UserControls
 
         private void CustomCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton != MouseButtonState.Pressed)
-                return;
-
-            if (toolbox is null)
-                return;
-
-            switch (toolbox.CurrentTool)
-            {
-                case ToolType.SelectTool:
-                    SelectToolOnMouseMove(e);
-                    break;
-                case ToolType.RectangleTool:
-                    RectangleToolOnMouseMove(e);
-                    break;
-                case ToolType.CircleTool:
-                    CircleToolOnMouseMove(e);
-                    break;
-                case ToolType.EraserTool:
-                    EraseToolOnMouseMove(e);
-                    break;
-                case ToolType.PencilTool:
-                    PencilToolOnMouseMove(e);
-                    break;
-                case ToolType.LineTool:
-                    LineToolOnMouseMove(e);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void SelectToolOnMouseMove(MouseEventArgs e)
-        {
-            Debug.WriteLine($"SelectTool: {toolbox?.CurrentTool} mouse move");
-        }
-
-        private void RectangleToolOnMouseMove(MouseEventArgs e)
-        {
-            Debug.WriteLine($"RectangleTool: {toolbox?.CurrentTool} mouse move");
-        }
-
-        private void CircleToolOnMouseMove(MouseEventArgs e)
-        {
-            Debug.WriteLine($"CircleTool: {toolbox?.CurrentTool} mouse move");
-        }
-
-        private void EraseToolOnMouseMove(MouseEventArgs e)
-        {
-            Debug.WriteLine($"EraseTool: {toolbox?.CurrentTool} mouse move");
-        }
-
-        private void PencilToolOnMouseMove(MouseEventArgs e)
-        {
-
-            Debug.WriteLine($"PencilTool: {toolbox?.CurrentTool} mouse move");
-        }
-
-        private void LineToolOnMouseMove(MouseEventArgs e)
-        {
-            Debug.WriteLine($"LineTool: {toolbox?.CurrentTool} mouse move");
+            _drawingHandler.OnMouseMove(sender, e);
         }
 
         private void CustomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (toolbox is null)
-                return;
-
-            lastMousePosition = e.GetPosition(DrawingPanel);
+            _drawingHandler.OnMouseLeftButtonDown(sender, e);
         }
+
+        private void CustomCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _drawingHandler.OnMouseRightButtonDown(sender, e);
+        }
+
     }
 }
