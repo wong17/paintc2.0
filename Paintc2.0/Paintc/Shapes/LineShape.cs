@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Model
+namespace Paintc.Shapes
 {
     public class LineShape : ShapeBase
     {

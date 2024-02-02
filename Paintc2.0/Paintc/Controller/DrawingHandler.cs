@@ -1,7 +1,9 @@
 ﻿using Paintc.Core;
 using Paintc.Enums;
+using Paintc.Factory;
 using Paintc.Model;
 using Paintc.Service;
+using Paintc.Shapes;
 using Paintc.View.UserControls;
 using System.Diagnostics;
 using System.Windows;

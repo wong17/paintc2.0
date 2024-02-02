@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Model
+namespace Paintc.Shapes
 {
     public class EllipseShape : ShapeBase
     {
@@ -33,9 +33,10 @@ namespace Paintc.Model
             CurrentMousePosition = currentPosition;
             double width = currentPosition.X - LastMousePosition.X;
             double height = currentPosition.Y - LastMousePosition.Y;
-            double radius = Math.Min(Math.Abs(width), Math.Abs(height)) / 2;
-            _ellipse.Width = radius * 2;
-            _ellipse.Height = radius * 2;
+            Canvas.SetLeft(_ellipse, width < 0 ? currentPosition.X : LastMousePosition.X);
+            Canvas.SetTop(_ellipse, height < 0 ? currentPosition.Y : LastMousePosition.Y);
+            _ellipse.Width = Math.Abs(width);
+            _ellipse.Height = Math.Abs(height);
         }
 
         public override Shape GetShape() => _ellipse;

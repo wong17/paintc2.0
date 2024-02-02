@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Model
+namespace Paintc.Shapes
 {
     public class RectangleShape : ShapeBase
     {
@@ -26,6 +26,8 @@ namespace Paintc.Model
             CurrentMousePosition = currentPosition;
             double width = currentPosition.X - LastMousePosition.X;
             double height = currentPosition.Y - LastMousePosition.Y;
+            Canvas.SetLeft(_rectangle, width < 0 ? currentPosition.X : LastMousePosition.X);
+            Canvas.SetTop(_rectangle, height < 0 ? currentPosition.Y : LastMousePosition.Y);
             _rectangle.Width = Math.Abs(width);
             _rectangle.Height = Math.Abs(height);
         }

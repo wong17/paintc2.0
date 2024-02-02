@@ -1,7 +1,8 @@
-﻿using Paintc.Enums;
-using Paintc.Model;
+﻿using Paintc.Core;
+using Paintc.Enums;
+using Paintc.Shapes;
 
-namespace Paintc.Core
+namespace Paintc.Factory
 {
     public static class ShapeFactory
     {
