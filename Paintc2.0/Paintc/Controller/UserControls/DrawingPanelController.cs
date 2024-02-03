@@ -79,6 +79,17 @@ namespace Paintc.Controller.UserControls
             
             if (_graphicMode is null) return;
 
+            // Comprobar si se ha dibujado...
+            if (DrawingHandler.Instance.NumberOfShapes != 0) 
+            {
+                // Preguntar si desea cambiar el tamaño de la ventana...
+                var result =  MessageBox.Show("Are you sure you want to resize the drawing area? Any unsaved progress will be lost.", "Warning", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No)
+                    return;
+
+                DrawingHandler.Instance.ClearDrawingPanel();
+            }
             _drawingPanel.CustomCanvas.Width = _graphicMode.Width;
             _drawingPanel.CustomCanvas.Height = _graphicMode.Height;
         }

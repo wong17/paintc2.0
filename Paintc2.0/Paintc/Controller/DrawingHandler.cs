@@ -32,6 +32,10 @@ namespace Paintc.Controller
             }
         }
         private readonly List<ShapeBase?> _shapes = [];
+        public int NumberOfShapes
+        {
+            get => _shapes.Count;
+        }
         private ShapeBase? _currentShape;
         private Toolbox? _toolbox;
         private DrawingState _state = DrawingState.Finished;
@@ -40,6 +44,19 @@ namespace Paintc.Controller
         private Point _currentMousePosition = new();
 
         #endregion
+
+        public void ClearDrawingPanel()
+        {
+            if (_drawingPanel is null) return;
+
+            var canvasChildrens = _drawingPanel.CustomCanvas.Children;
+            foreach (var shape in _shapes)
+            {
+                if (canvasChildrens.Contains(shape?.GetShape()))
+                    canvasChildrens.Remove(shape?.GetShape());
+            }
+            _shapes.Clear();
+        }
 
         #region TOOLSERVICE_EVENT
 

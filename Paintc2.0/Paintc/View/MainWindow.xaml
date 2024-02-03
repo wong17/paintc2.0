@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:Paintc.View.UserControls"
         mc:Ignorable="d"
-        Title="Paintc2.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen"
-        >
+        Title="Paintc2.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen">
 
     <!---->
     <Grid x:Name="WindowLayout">
