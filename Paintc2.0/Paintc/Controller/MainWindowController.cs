@@ -1,4 +1,5 @@
 ﻿using Paintc.Core;
+using Paintc.View;
 using Paintc.Views;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +33,7 @@ namespace Paintc.Controller
                     Application.Current.Shutdown();
                     break;
                 case "AboutMenuItem":
-                    
+
                     break;
                 default: 
                     break;

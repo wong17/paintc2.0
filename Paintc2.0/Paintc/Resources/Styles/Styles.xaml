@@ -20,14 +20,45 @@
         <Setter Property="FontWeight" Value="Medium"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
+    <Style x:Key="SidePanelHeaderLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="FontWeight" Value="Medium"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+    </Style>
+    <Style x:Key="SubtitleSidePanelHeaderLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="FontWeight" Value="Normal"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+    </Style>
     <!--ComboBox-->
     <Style x:Key="ComboboxStyle" TargetType="ComboBox">
         <Setter Property="FontSize" Value="14"></Setter>
-        <Setter Property="SelectedIndex" Value="0"></Setter>
-        <Setter Property="Height" Value="25"></Setter>
-        <Setter Property="Width" Value="200"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
     </Style>
-
+    <!--Image-->
+    <Style x:Key="ImageStyle" TargetType="Image">
+        <Setter Property="Margin" Value="8"></Setter>
+    </Style>
+    <!--GridSplitter-->
+    <Style x:Key="GridSplitterStyle" TargetType="GridSplitter">
+        <Setter Property="ResizeBehavior" Value="PreviousAndNext"></Setter>
+        <Setter Property="Background" Value="{StaticResource GraySecondaryBrush}"></Setter>
+    </Style>
+    <!--ListView-->
+    <Style x:Key="ListViewStyle" TargetType="ListView">
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Background" Value="{StaticResource BlackBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <!--ColumnHeaderContainer-->
+    <Style x:Key="ColumnHeaderContainerStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="{StaticResource BlackBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <!---->
     <DrawingBrush x:Key="GrayGridBrush" presentationOptions:Freeze="True" Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
         <DrawingBrush.Drawing>
             <DrawingGroup>

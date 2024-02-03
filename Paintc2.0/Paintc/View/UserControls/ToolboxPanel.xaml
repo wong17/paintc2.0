@@ -10,10 +10,15 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <!--Title-->
+        <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
         <!--Tools-->
-        <Grid Grid.Row="0" Height="150">
+        <Grid Grid.Row="1" Height="150">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -25,15 +30,29 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!---->
-            <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Margin="5" ToolTip="Select"></Image>
-            <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Margin="5" ToolTip="Rectangle"></Image>
-            <Image x:Name="EllipseTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Margin="5" ToolTip="Ellipse"></Image>
-            <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Margin="5" ToolTip="Polygon"></Image>
+            <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Select"></Image>
+            <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Rectangle"></Image>
+            <Image x:Name="EllipseTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Ellipse"></Image>
+            <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Polygon"></Image>
 
-            <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Margin="5" ToolTip="Filler"></Image>
-            <Image x:Name="EraserTool" Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Margin="5" ToolTip="Eraser"></Image>
-            <Image x:Name="PencilTool" Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Margin="5" ToolTip="Pencil"></Image>
-            <Image x:Name="LineTool" Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Margin="5" ToolTip="Line"></Image>
+            <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Filler"></Image>
+            <Image x:Name="EraserTool" Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Eraser"></Image>
+            <Image x:Name="PencilTool" Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Pencil"></Image>
+            <Image x:Name="LineTool" Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Line"></Image>
         </Grid>
+        <!--Shapes explorer-->
+        <Label Grid.Row="2" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
+        <!--<ListView Grid.Row="3" x:Name="ShapesExplorerList" Style="{StaticResource ListViewStyle}">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderContainerStyle}">
+                    <GridViewColumn Header="Type" Width="Auto">
+                        
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="Auto">
+                        
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
     </Grid>
 </UserControl>

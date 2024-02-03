@@ -1,5 +1,8 @@
 ﻿using Paintc.Core;
+using Paintc.Model;
+using Paintc.Service;
 using Paintc.View.UserControls;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -8,8 +11,8 @@ namespace Paintc.Controller.UserControls
 {
     public class DrawingPanelController : ControllerBase
     {
-        private readonly DrawingPanel DrawingPanel;
-        private readonly DrawingHandler _drawingHandler;
+        private readonly DrawingPanel _drawingPanel;
+        private GraphicMode? _graphicMode;
 
         #region ZOOM
 
@@ -22,20 +25,21 @@ namespace Paintc.Controller.UserControls
 
         public DrawingPanelController(DrawingPanel drawingPanel)
         {
-            DrawingPanel = drawingPanel;
-            _drawingHandler = new DrawingHandler(DrawingPanel);
+            _drawingPanel = drawingPanel;
+            DrawingHandler.Instance.DrawingPanel = drawingPanel;
+            CanvasResizerService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
             InitController();
         }
 
         private void InitController()
         {
             // Events
-            DrawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
-            DrawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
-            DrawingPanel.CustomCanvas.MouseWheel += CustomCanvas_MouseWheel;
-            DrawingPanel.CustomCanvas.MouseLeftButtonDown += CustomCanvas_MouseLeftButtonDown;
-            DrawingPanel.CustomCanvas.MouseRightButtonDown += CustomCanvas_MouseRightButtonDown;
-            DrawingPanel.CustomCanvas.MouseMove += CustomCanvas_MouseMove;
+            _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
+            _drawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
+            _drawingPanel.CustomCanvas.MouseWheel += CustomCanvas_MouseWheel;
+            _drawingPanel.CustomCanvas.MouseLeftButtonDown += CustomCanvas_MouseLeftButtonDown;
+            _drawingPanel.CustomCanvas.MouseRightButtonDown += CustomCanvas_MouseRightButtonDown;
+            _drawingPanel.CustomCanvas.MouseMove += CustomCanvas_MouseMove;
         }
 
         #region ZOOM
@@ -45,7 +49,7 @@ namespace Paintc.Controller.UserControls
             if (Keyboard.Modifiers != ModifierKeys.Control) return;
 
             // Obtener posición del mouse sobre el canvas
-            Point mousePosition = e.GetPosition(DrawingPanel.CustomCanvas);
+            Point mousePosition = e.GetPosition(_drawingPanel.CustomCanvas);
             // Positivo si se gira hacia adelante (hacia el monitor), Negativo si se gira hacia atras (hacia el usuario)
             var factor = (e.Delta > 0) ? SCALE_FACTOR : -SCALE_FACTOR;
             // Aplicar escalación centrada en la posición actual del mouse
@@ -54,8 +58,8 @@ namespace Paintc.Controller.UserControls
             scaleTransform.ScaleX = factor < 0 ? Math.Max(MAX_ZOOM_OUT, scaleTransform.ScaleX + factor) : Math.Min(MAX_ZOOM_IN, scaleTransform.ScaleX + factor);
             scaleTransform.ScaleY = factor < 0 ? Math.Max(MAX_ZOOM_OUT, scaleTransform.ScaleY + factor) : Math.Min(MAX_ZOOM_IN, scaleTransform.ScaleY + factor);
             // Ajustar las barras de desplazamiento del ScrollViewer
-            DrawingPanel.MainScrollViewer.ScrollToHorizontalOffset(DrawingPanel.MainScrollViewer.HorizontalOffset + mousePosition.X * factor);
-            DrawingPanel.MainScrollViewer.ScrollToVerticalOffset(DrawingPanel.MainScrollViewer.VerticalOffset + mousePosition.Y * factor);
+            _drawingPanel.MainScrollViewer.ScrollToHorizontalOffset(_drawingPanel.MainScrollViewer.HorizontalOffset + mousePosition.X * factor);
+            _drawingPanel.MainScrollViewer.ScrollToVerticalOffset(_drawingPanel.MainScrollViewer.VerticalOffset + mousePosition.Y * factor);
         }
 
         private void MainScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -67,19 +71,33 @@ namespace Paintc.Controller.UserControls
 
         #endregion
 
+        #region CANVASRESIZER_EVENT
+
+        public void CanvasResizerEventHandler(object? sender, GraphicMode? graphicMode)
+        {
+            _graphicMode = graphicMode;
+            
+            if (_graphicMode is null) return;
+
+            _drawingPanel.CustomCanvas.Width = _graphicMode.Width;
+            _drawingPanel.CustomCanvas.Height = _graphicMode.Height;
+        }
+
+        #endregion
+
         private void CustomCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            _drawingHandler.OnMouseMove(sender, e);
+            DrawingHandler.Instance.OnMouseMove(sender, e);
         }
 
         private void CustomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _drawingHandler.OnMouseLeftButtonDown(sender, e);
+            DrawingHandler.Instance.OnMouseLeftButtonDown(sender, e);
         }
 
         private void CustomCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _drawingHandler.OnMouseRightButtonDown(sender, e);
+            DrawingHandler.Instance.OnMouseRightButtonDown(sender, e);
         }
 
     }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:Paintc.View.UserControls"
         mc:Ignorable="d"
-        Title="Paintc2.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen">
+        Title="Paintc2.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen"
+        >
 
     <!---->
     <Grid x:Name="WindowLayout">
@@ -29,23 +30,23 @@
         <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Width="Auto">
             <!--Columns definition-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" MinWidth="240" MaxWidth="300"/>
+                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300"/>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" MinWidth="240" MaxWidth="300"/>
+                <ColumnDefinition Width="Auto" MinWidth="260" MaxWidth="300"/>
             </Grid.ColumnDefinitions>
             
             <!--Left panel-->
             <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="1" Width="3" ResizeBehavior="PreviousAndNext" Background="{StaticResource GraySecondaryBrush}"/>
+            <GridSplitter Grid.Column="1" Width="3" Style="{StaticResource GridSplitterStyle}"/>
             <!--Center panel-->
             <userControls:DrawingPanel Grid.Column="2" x:Name="ucDrawingPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="3" Width="3" ResizeBehavior="PreviousAndNext" Background="{StaticResource GraySecondaryBrush}"/>
+            <GridSplitter Grid.Column="3" Width="3" Style="{StaticResource GridSplitterStyle}"/>
             <!--Right panel-->
-            <StackPanel Grid.Column="4" Background="{StaticResource BlackBrush}"/>
+            <userControls:DrawingPanelProperties Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
         </Grid>
 
     </Grid>

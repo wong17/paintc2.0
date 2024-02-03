@@ -4,7 +4,7 @@ using System.Windows.Controls;
 namespace Paintc.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for DrawingPanel.xaml
+    /// Interaction logic for _drawingPanel.xaml
     /// </summary>
     public partial class DrawingPanel : UserControl
     {

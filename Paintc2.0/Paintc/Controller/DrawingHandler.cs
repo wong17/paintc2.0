@@ -13,7 +13,24 @@ namespace Paintc.Controller
 {
     public class DrawingHandler
     {
-        private readonly DrawingPanel _drawingPanel;
+        // Singleton
+        private static readonly DrawingHandler instance = new();
+        public static DrawingHandler Instance => instance;
+        private DrawingHandler() { }
+
+        #region PROPERTIES
+
+        private DrawingPanel? _drawingPanel;
+        public DrawingPanel? DrawingPanel
+        {
+            get => _drawingPanel;
+            set
+            {
+                _drawingPanel = value;
+                ToolService.Instance.ToolboxEventHandler += ToolboxEventHandler;
+                ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+            }
+        }
         private readonly List<ShapeBase?> _shapes = [];
         private ShapeBase? _currentShape;
         private Toolbox? _toolbox;
@@ -22,12 +39,9 @@ namespace Paintc.Controller
         private Point _lastMousePosition = new();
         private Point _currentMousePosition = new();
 
-        public DrawingHandler(DrawingPanel drawingPanel)
-        {
-            _drawingPanel = drawingPanel;
-            ToolService.Instance.ToolboxEventHandler += ToolboxEventHandler;
-            ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
-        }
+        #endregion
+
+        #region TOOLSERVICE_EVENT
 
         private void ToolboxEventHandler(object? sender, Toolbox toolbox)
         {
@@ -36,9 +50,13 @@ namespace Paintc.Controller
             _currentShape = null;
         }
 
+        #endregion
+
+        #region DRAWINGPANEL_EVENTS
+
         public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_toolbox is null || _state == DrawingState.Drawing) return;
+            if (_toolbox is null || _drawingPanel is null || _state == DrawingState.Drawing) return;
 
             // Si se utiliza la herramienta de filler
             if (_toolbox.CurrentTool == ToolType.FillerTool)
@@ -88,6 +106,8 @@ namespace Paintc.Controller
 
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
+            if (_drawingPanel is null) return;
+
             if (_toolbox?.CurrentTool == ToolType.FillerTool)
                 return;
 
@@ -110,5 +130,6 @@ namespace Paintc.Controller
             }
         }
 
+        #endregion
     }
 }

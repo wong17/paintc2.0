@@ -3,7 +3,7 @@ using System.Windows.Shapes;
 
 namespace Paintc.Core
 {
-    public abstract class ShapeBase
+    public abstract class ShapeBase : ObservableObject
     {
         protected Point LastMousePosition { get; set; }
         protected Point CurrentMousePosition { get; set; }

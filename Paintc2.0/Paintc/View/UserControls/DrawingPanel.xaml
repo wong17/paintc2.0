@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="720" d:DesignWidth="1280">
+             d:DesignHeight="480" d:DesignWidth="640">
     <Grid Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <ScrollViewer x:Name="MainScrollViewer" Grid.Row="0" Background="White" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Canvas x:Name="CustomCanvas" Background="Transparent" Width="1280" Height="720" >
+            <Canvas x:Name="CustomCanvas" Background="Transparent" Width="640" Height="480" >
                 <Border BorderBrush="Black" BorderThickness="1" Height="{Binding ElementName=CustomCanvas, Path=ActualHeight}" Width="{Binding ElementName=CustomCanvas, Path=ActualWidth}" />
             </Canvas>
         </ScrollViewer>

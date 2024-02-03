@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Paintc.View.UserControls.DrawingPanelProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="300">
+    <Grid Background="{StaticResource BlackBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!---->
+        <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Properties"></Label>
+        <!---->
+        <StackPanel Grid.Row="1" Width="Auto" Height="Auto">
+            <Label Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Graphic mode resolution:"></Label>
+            <ComboBox x:Name="GraphicsModeCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
+        </StackPanel>
+    </Grid>
+</UserControl>
