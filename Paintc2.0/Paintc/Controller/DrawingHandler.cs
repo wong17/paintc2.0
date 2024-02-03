@@ -5,6 +5,7 @@ using Paintc.Model;
 using Paintc.Service;
 using Paintc.Shapes;
 using Paintc.View.UserControls;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -31,7 +32,7 @@ namespace Paintc.Controller
                 ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             }
         }
-        private readonly List<ShapeBase?> _shapes = [];
+        private readonly ObservableCollection<ShapeBase?> _shapes = [];
         public int NumberOfShapes
         {
             get => _shapes.Count;

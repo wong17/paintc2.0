@@ -11,7 +11,6 @@ namespace Paintc.Service
                 new GraphicMode("VGA", "VGAHI", 2, 640, 480),
                 new GraphicMode("HERC", "HERCMONOHI", 0, 720, 348),
                 new GraphicMode("HERC", "PC3270HI", 0, 720, 350),
-                new GraphicMode("HERC", "IBM8514LO", 0, 640, 480),
                 new GraphicMode("HERC", "IBM8514HI", 1, 1024, 768)
             ];
         }

@@ -86,12 +86,16 @@ namespace Paintc.Controller.UserControls
                 var result =  MessageBox.Show("Are you sure you want to resize the drawing area? Any unsaved progress will be lost.", "Warning", 
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
+                {
+                    CanvasResizerService.Instance.UpdateGraphicModeSelection(false);
                     return;
+                }
 
                 DrawingHandler.Instance.ClearDrawingPanel();
             }
             _drawingPanel.CustomCanvas.Width = _graphicMode.Width;
             _drawingPanel.CustomCanvas.Height = _graphicMode.Height;
+            CanvasResizerService.Instance.UpdateGraphicModeSelection(true);
         }
 
         #endregion
