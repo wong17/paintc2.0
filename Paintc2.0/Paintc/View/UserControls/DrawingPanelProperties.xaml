@@ -16,9 +16,18 @@
         <!---->
         <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Properties"></Label>
         <!---->
-        <StackPanel Grid.Row="1" Width="Auto" Height="Auto">
-            <Label Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Graphic mode resolution:"></Label>
-            <ComboBox x:Name="GraphicsModeCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!---->
+            <Label Grid.Row="0" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Graphic mode resolution:"></Label>
+            <ComboBox Grid.Row="1" x:Name="GraphicsModeCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
+            <!---->
+        </Grid>
     </Grid>
 </UserControl>
