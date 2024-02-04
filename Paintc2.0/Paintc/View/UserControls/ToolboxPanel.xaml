@@ -2,15 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:Paintc.Converter" 
+             xmlns:local="clr-namespace:Paintc.Controller.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
+             d:DesignHeight="700" d:DesignWidth="400">
+    <UserControl.Resources>
+        <converter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+    </UserControl.Resources>
+    <!---->
     <Grid Background="{StaticResource BlackBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,41 +24,48 @@
         <!--Title-->
         <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
         <!--Tools-->
-        <Grid Grid.Row="1" Height="150">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <ItemsControl x:Name="ToolItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}" 
+                            Command="{Binding ElementName=ToolItems, Path=DataContext.ToolsButtonsClick}" >
+                        <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--Colors-->
+        <Grid Grid.Row="2" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <!---->
-            <Image x:Name="SelectTool" Grid.Row="0" Grid.Column="0" Source="{StaticResource selectDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Select"></Image>
-            <Image x:Name="RectangleTool" Grid.Row="0" Grid.Column="1" Source="{StaticResource rectangleDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Rectangle"></Image>
-            <Image x:Name="EllipseTool" Grid.Row="0" Grid.Column="2" Source="{StaticResource circleDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Ellipse"></Image>
-            <Image x:Name="PolygonTool" Grid.Row="0" Grid.Column="3" Source="{StaticResource polygonDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Polygon"></Image>
+            <!--Title-->
+            <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Colors"></Label>
+            <!--Color palette-->
+            <ItemsControl x:Name="ColorPaletteItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
+                                CommandParameter="{Binding Cpalette}" 
+                                Command="{Binding ElementName=ColorPaletteItems, Path=DataContext.CGAButtonsClick}"
+                                Style="{StaticResource ButtonCGAColorPalette}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <Image x:Name="FillerTool" Grid.Row="1" Grid.Column="0" Source="{StaticResource fillerDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Filler"></Image>
-            <Image x:Name="EraserTool" Grid.Row="1" Grid.Column="1" Source="{StaticResource eraserDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Eraser"></Image>
-            <Image x:Name="PencilTool" Grid.Row="1" Grid.Column="2" Source="{StaticResource pencilDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Pencil"></Image>
-            <Image x:Name="LineTool" Grid.Row="1" Grid.Column="3" Source="{StaticResource lineDrawingImage}" Style="{StaticResource ImageStyle}" ToolTip="Line"></Image>
         </Grid>
         <!--Shapes explorer-->
-        <Label Grid.Row="2" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
-        <!--<ListView Grid.Row="3" x:Name="ShapesExplorerList" Style="{StaticResource ListViewStyle}">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource ColumnHeaderContainerStyle}">
-                    <GridViewColumn Header="Type" Width="Auto">
-                        
-                    </GridViewColumn>
-                    <GridViewColumn Header="Name" Width="Auto">
-                        
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
+        <Label Grid.Row="4" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
     </Grid>
 </UserControl>

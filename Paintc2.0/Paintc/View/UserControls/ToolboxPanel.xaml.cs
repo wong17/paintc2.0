@@ -11,7 +11,7 @@ namespace Paintc.View.UserControls
         public ToolboxPanel()
         {
             InitializeComponent();
-            _ = new ToolboxPanelController(this);
+            DataContext = new ToolboxPanelController();
         }
     }
 }

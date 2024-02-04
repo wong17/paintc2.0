@@ -1,55 +1,41 @@
-﻿using Paintc.Core;
+﻿using Paintc.Commands;
+using Paintc.Core;
 using Paintc.Enums;
+using Paintc.Model;
 using Paintc.Service;
-using Paintc.View.UserControls;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Paintc.Controller.UserControls
 {
     public class ToolboxPanelController : ControllerBase
     {
-        private readonly ToolboxPanel ToolboxPanel;
+        //private readonly ToolboxPanel ToolboxPanel;
+        public ICommand? ToolsButtonsClick { get; private set; }
+        public ICommand? CGAButtonsClick { get; private set; }
 
-        public ToolboxPanelController(ToolboxPanel toolboxPanel)
+        public List<Tool> ToolItems { get; private set; } = [];
+        public List<CGAColor> ColorPaletteItems { get; private set; } = [];
+
+        public ToolboxPanelController()
         {
-            ToolboxPanel = toolboxPanel;
-            InitController();
+            ToolItems.AddRange(ToolService.GetTools());
+            ColorPaletteItems.AddRange(CGAColorPaletteService.GetColorPalette());
+            ToolsButtonsClick = new RelayCommand((obj) => true, ToolsButtonsClickCommand);
+            CGAButtonsClick = new RelayCommand((obj) => true, CGAButtonsClickCommand);
         }
 
-        private void InitController()
+        private void ToolsButtonsClickCommand(object? sender)
         {
-            ToolboxPanel.SelectTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.RectangleTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.EllipseTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.PolygonTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.FillerTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.EraserTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.PencilTool.MouseEnter += Image_MouseEnter;
-            ToolboxPanel.LineTool.MouseEnter += Image_MouseEnter;
-
-            ToolboxPanel.SelectTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.RectangleTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.EllipseTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.PolygonTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.FillerTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.EraserTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.PencilTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-            ToolboxPanel.LineTool.MouseLeftButtonDown += ImageToolbox_MouseLeftButtonDown;
-        }
-
-        private void Image_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ImageToolbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is not Image tool)
+            if (sender is null)
                 return;
 
-            if (Enum.TryParse(tool.Name, out ToolType selectedTool))
-                ToolService.Instance.UpdateCurrentTool(selectedTool);
+            var toolType = (ToolType)sender;
+            ToolSelectionService.Instance.UpdateCurrentTool(toolType);
+        }
+
+        private void CGAButtonsClickCommand(object? parameter)
+        {
+
         }
     }
 }

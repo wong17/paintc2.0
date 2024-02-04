@@ -28,8 +28,8 @@ namespace Paintc.Controller
             set
             {
                 _drawingPanel = value;
-                ToolService.Instance.ToolboxEventHandler += ToolboxEventHandler;
-                ToolService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+                ToolSelectionService.Instance.ToolboxEventHandler += ToolboxEventHandler;
+                ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             }
         }
         private readonly ObservableCollection<ShapeBase?> _shapes = [];

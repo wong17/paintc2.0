@@ -1,29 +1,43 @@
 ﻿using Paintc.Enums;
 using Paintc.Model;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Paintc.Service
 {
-    public class ToolService
+    public static class ToolService
     {
-        // Singleton
-        private static readonly ToolService instance = new();
-        public static ToolService Instance => instance;
-        private ToolService() { }
+        private static readonly ResourceDictionary? resourceDictionary;
 
-        private readonly Toolbox toolbox = new();
+        private static readonly DrawingImage? SelectImage, RectangleImage, EllipseImage, 
+            PolygonImage, FillerImage, EraserImage, PencilImage, LineImage;
 
-        public void UpdateCurrentTool(ToolType currentTool)
+        static ToolService()
         {
-            if (toolbox.CurrentTool != currentTool)
-            {
-                toolbox.CurrentTool = currentTool;
-                NotifyObservers(toolbox);
-            }
+            resourceDictionary = Application.Current.Resources.MergedDictionaries.ElementAt(3);
+
+            SelectImage = (DrawingImage)resourceDictionary["selectDrawingImage"];
+            RectangleImage = (DrawingImage)resourceDictionary["rectangleDrawingImage"];
+            EllipseImage = (DrawingImage)resourceDictionary["circleDrawingImage"];
+            PolygonImage = (DrawingImage)resourceDictionary["polygonDrawingImage"];
+            FillerImage = (DrawingImage)resourceDictionary["fillerDrawingImage"];
+            EraserImage = (DrawingImage)resourceDictionary["eraserDrawingImage"];
+            PencilImage = (DrawingImage)resourceDictionary["pencilDrawingImage"];
+            LineImage = (DrawingImage)resourceDictionary["lineDrawingImage"];
         }
 
-        // Código a ejecutar cuando se produzca un cambio
-        public event EventHandler<Toolbox>? ToolboxEventHandler;
-        private void NotifyObservers(Toolbox toolbox) => ToolboxEventHandler?.Invoke(this, toolbox);
+        public static List<Tool> GetTools()
+        {
+            return [
+                new Tool(ToolType.SelectTool, "Select", SelectImage),
+                new Tool(ToolType.RectangleTool, "Rectangle", RectangleImage),
+                new Tool(ToolType.EllipseTool, "Ellipse", EllipseImage),
+                new Tool(ToolType.PolygonTool, "Polygon", PolygonImage),
+                new Tool(ToolType.FillerTool, "Filler", FillerImage),
+                new Tool(ToolType.EraserTool, "Eraser", EraserImage),
+                new Tool(ToolType.PencilTool, "Pencil", PencilImage),
+                new Tool(ToolType.LineTool, "Line", LineImage)];
+        }
     }
-
 }
