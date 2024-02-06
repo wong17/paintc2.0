@@ -32,8 +32,8 @@
             <ComboBox Grid.Row="1" x:Name="GraphicsModeCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
             <!--Background color-->
             <Label Grid.Row="2" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Background color:"></Label>
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <ComboBox x:Name="BackgroundColorCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" >
+                <ComboBox x:Name="BackgroundColorCmbbox" Style="{StaticResource ComboboxStyle}" Width="120"></ComboBox>
                 <Border Width="26" Height="26" Background="White">
                     <Rectangle x:Name="BackgroundColorRectangle" Width="25" Height="25" Fill="Black"></Rectangle>
                 </Border>

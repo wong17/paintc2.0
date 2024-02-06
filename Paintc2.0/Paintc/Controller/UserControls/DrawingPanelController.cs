@@ -35,13 +35,10 @@ namespace Paintc.Controller.UserControls
         public DrawingPanelController(DrawingPanel drawingPanel)
         {
             _drawingPanel = drawingPanel;
+
             DrawingHandler.Instance.DrawingPanel = drawingPanel;
             CanvasResizerService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
-            InitController();
-        }
-
-        private void InitController()
-        {
+            CanvasBackgroundColorChangerService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
             _drawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
@@ -124,6 +121,15 @@ namespace Paintc.Controller.UserControls
             _drawingPanel.CustomCanvas.Width = _graphicMode.Width;
             _drawingPanel.CustomCanvas.Height = _graphicMode.Height;
             CanvasResizerService.Instance.UpdateGraphicModeSelection(true);
+        }
+
+        #endregion
+
+        #region CANVASBGCOLOR_EVENT
+
+        public void ChangeBackgroundColorEventHandler(object? sender, CGAColor color)
+        {
+            _drawingPanel.CustomCanvas.Background = new SolidColorBrush(color.Color);
         }
 
         #endregion

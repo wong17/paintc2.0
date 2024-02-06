@@ -29,7 +29,7 @@
         <ItemsControl x:Name="ToolItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4"/>
+                    <UniformGrid Columns="4" Rows="2"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -53,7 +53,7 @@
             <ItemsControl x:Name="ColorPaletteItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4"/>
+                        <UniformGrid Columns="4" Rows="4"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
