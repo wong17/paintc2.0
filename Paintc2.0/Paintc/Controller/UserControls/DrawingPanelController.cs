@@ -16,9 +16,18 @@ namespace Paintc.Controller.UserControls
 
         #region ZOOM
 
+        /// <summary>
+        /// Factor de incremento/decremento de la matriz del canvas
+        /// </summary>
         private const double SCALE_FACTOR = 0.1;
+        /// <summary>
+        /// Maximo y minimo de zoom permitido
+        /// </summary>
         private const double MAX_ZOOM_IN = 5.0;
         private const double MAX_ZOOM_OUT = 0.9;
+        /// <summary>
+        /// Para aplicar escalación de la matriz del canvas centrada en la posición actual del mouse
+        /// </summary>
         private readonly ScaleTransform scaleTransform = new();
 
         #endregion
@@ -44,6 +53,11 @@ namespace Paintc.Controller.UserControls
 
         #region ZOOM
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.Modifiers != ModifierKeys.Control) return;
@@ -62,17 +76,31 @@ namespace Paintc.Controller.UserControls
             _drawingPanel.MainScrollViewer.ScrollToVerticalOffset(_drawingPanel.MainScrollViewer.VerticalOffset + mousePosition.Y * factor);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Delta > 0 && IsMaxZoomInReached()) e.Handled = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private bool IsMaxZoomInReached() => scaleTransform.ScaleX == MAX_ZOOM_IN && scaleTransform.ScaleY == MAX_ZOOM_IN;
 
         #endregion
 
         #region CANVASRESIZER_EVENT
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="graphicMode"></param>
         public void CanvasResizerEventHandler(object? sender, GraphicMode? graphicMode)
         {
             _graphicMode = graphicMode;
@@ -80,7 +108,7 @@ namespace Paintc.Controller.UserControls
             if (_graphicMode is null) return;
 
             // Comprobar si se ha dibujado...
-            if (DrawingHandler.Instance.NumberOfShapes != 0) 
+            if (DrawingHandler.Instance.Shapes.Count != 0) 
             {
                 // Preguntar si desea cambiar el tamaño de la ventana...
                 var result =  MessageBox.Show("Are you sure you want to resize the drawing area? Any unsaved progress will be lost.", "Warning", 

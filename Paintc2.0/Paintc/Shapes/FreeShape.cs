@@ -9,7 +9,7 @@ namespace Paintc.Shapes
     {
         private readonly Polyline _polyLine;
 
-        public FreeShape()
+        public FreeShape(string? name) : base(name)
         {
             _polyLine = new Polyline
             {

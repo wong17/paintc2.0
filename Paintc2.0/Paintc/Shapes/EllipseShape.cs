@@ -10,7 +10,7 @@ namespace Paintc.Shapes
     {
         private readonly Ellipse _ellipse;
 
-        public EllipseShape()
+        public EllipseShape(string? name) : base(name)
         {
             _ellipse = new Ellipse
             {

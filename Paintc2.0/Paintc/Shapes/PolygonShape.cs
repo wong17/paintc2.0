@@ -11,6 +11,11 @@ namespace Paintc.Shapes
         public bool IsPolygonClosed { get; set; } = false;
         private readonly List<Line> _lines = [];
         private Line? _currentLine;
+
+        public PolygonShape(string? name) : base(name)
+        {
+        }
+
         public Line? GetCurrentLine
         {
             get => _currentLine;

@@ -3,18 +3,30 @@ using Paintc.Core;
 using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Paintc.Controller.UserControls
 {
     public class ToolboxPanelController : ControllerBase
     {
-        //private readonly ToolboxPanel ToolboxPanel;
         public ICommand? ToolsButtonsClick { get; private set; }
         public ICommand? CGAButtonsClick { get; private set; }
-
+        public ICommand? RemoveAllShapesClick { get; private set; }
+        public ICommand? RemoveShapeClick { get; private set; }
+        /// <summary>
+        /// Lista de herramientas disponibles para utilizar
+        /// </summary>
         public List<Tool> ToolItems { get; private set; } = [];
+        /// <summary>
+        /// Lista de colores disponibles para utilizar
+        /// </summary>
         public List<CGAColor> ColorPaletteItems { get; private set; } = [];
+        /// <summary>
+        /// Lista de formas que se muestran en el explorador de formas
+        /// </summary>
+        public ObservableCollection<ShapeBase?> ShapesList { get; private set; } = DrawingHandler.Instance.Shapes;
 
         public ToolboxPanelController()
         {
@@ -22,8 +34,30 @@ namespace Paintc.Controller.UserControls
             ColorPaletteItems.AddRange(CGAColorPaletteService.GetColorPalette());
             ToolsButtonsClick = new RelayCommand((obj) => true, ToolsButtonsClickCommand);
             CGAButtonsClick = new RelayCommand((obj) => true, CGAButtonsClickCommand);
+            RemoveAllShapesClick = new RelayCommand((obj) => true, RemoveAllShapesClickCommand);
+            RemoveShapeClick = new RelayCommand((obj) => true, RemoveShapeClickCommand);
         }
 
+        /// <summary>
+        /// Elimina la forma seleccionada del canvas y explorador de formas
+        /// </summary>
+        /// <param name="shapeName"></param>
+        private void RemoveShapeClickCommand(object? shapeName)
+        {
+            if (shapeName is null)
+                return;
+
+            var result = MessageBox.Show($"Are you sure you want to remove {shapeName} from the drawing area?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.No)
+                return;
+            // Elimina figura/forma del canvas
+            DrawingHandler.Instance.RemoveShape(shapeName.ToString());
+        }
+
+        /// <summary>
+        /// Notifica cada vez que se selecciona una herramienta diferente
+        /// </summary>
+        /// <param name="sender"></param>
         private void ToolsButtonsClickCommand(object? sender)
         {
             if (sender is null)
@@ -36,6 +70,23 @@ namespace Paintc.Controller.UserControls
         private void CGAButtonsClickCommand(object? parameter)
         {
 
+        }
+
+        /// <summary>
+        /// Elimina todas las formas del canvas
+        /// </summary>
+        /// <param name="parameter"></param>
+        private void RemoveAllShapesClickCommand(object? parameter)
+        {
+            if (DrawingHandler.Instance.Shapes.Count == 0) return;
+
+            var result = MessageBox.Show("Are you sure you want to remove all from the drawing area? Any unsaved progress will be lost.", "Warning",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                DrawingHandler.Instance.ClearDrawingPanel();
+            }
+            
         }
     }
 }

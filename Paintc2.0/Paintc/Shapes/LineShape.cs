@@ -8,10 +8,9 @@ namespace Paintc.Shapes
     public class LineShape : ShapeBase
     {
         public Line Line { get; }
-
-        public LineShape()
+        public LineShape(string? name) : base(name)
         {
-            Line = new Line() 
+            Line = new Line()
             {
                 StrokeThickness = 2,
                 Stroke = Brushes.Black

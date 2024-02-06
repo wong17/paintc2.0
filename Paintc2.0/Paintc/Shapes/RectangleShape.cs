@@ -10,7 +10,7 @@ namespace Paintc.Shapes
     {
         private readonly Rectangle _rectangle;
 
-        public RectangleShape()
+        public RectangleShape(string? name) : base(name)
         {
             _rectangle = new Rectangle
             {

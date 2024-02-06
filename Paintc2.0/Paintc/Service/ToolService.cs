@@ -1,6 +1,5 @@
 ﻿using Paintc.Enums;
 using Paintc.Model;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
 
@@ -15,6 +14,7 @@ namespace Paintc.Service
 
         static ToolService()
         {
+            // Resource in App.xaml
             resourceDictionary = Application.Current.Resources.MergedDictionaries.ElementAt(3);
 
             SelectImage = (DrawingImage)resourceDictionary["selectDrawingImage"];
