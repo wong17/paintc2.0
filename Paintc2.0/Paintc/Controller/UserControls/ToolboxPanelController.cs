@@ -67,6 +67,10 @@ namespace Paintc.Controller.UserControls
             ToolSelectionService.Instance.UpdateCurrentTool(toolType);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
         private void CGAButtonsClickCommand(object? parameter)
         {
 

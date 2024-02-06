@@ -1,4 +1,4 @@
-﻿using Paintc.Controller;
+﻿using Paintc.Controller.UserControls;
 using System.Windows.Controls;
 
 namespace Paintc.View.UserControls

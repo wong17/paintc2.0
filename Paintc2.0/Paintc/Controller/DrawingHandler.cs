@@ -60,51 +60,6 @@ namespace Paintc.Controller
 
         #endregion
 
-        /// <summary>
-        /// Limpia el canvas, lista de formas y contador
-        /// </summary>
-        public void ClearDrawingPanel()
-        {
-            if (_drawingPanel is null) return;
-            // Eliminar elementos del canvas y de la lista de formas
-            var canvasChildrens = _drawingPanel.CustomCanvas.Children;
-            foreach (var shape in Shapes)
-            {
-                if (canvasChildrens.Contains(shape?.GetShape()))
-                    canvasChildrens.Remove(shape?.GetShape());
-            }
-            Shapes.Clear();
-            // Reiniciar contador de figuras
-            _globalShapeCounter = 0;
-        }
-
-        /// <summary>
-        /// Elimina una figura/forma del canvas y explorador de figuras
-        /// </summary>
-        /// <param name="shapeName"></param>
-        public void RemoveShape(string? shapeName)
-        {
-            if (_drawingPanel is null || shapeName is null)
-                return;
-
-            ShapeBase? shape = Shapes.Where(s => s is not null && s.Name is not null && s.Name.Equals(shapeName)).FirstOrDefault();
-            if (shape is null)
-            {
-                MessageBox.Show($"An error ocurred, {shapeName} was not found in shape explorer.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (!_drawingPanel.CustomCanvas.Children.Contains(shape.GetShape()))
-            {
-                MessageBox.Show($"An error ocurred, {shapeName} was not found in the drawing area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // Elimina forma del canvas y de la lista de formas
-            _drawingPanel.CustomCanvas.Children.Remove(shape.GetShape());
-            Shapes.Remove(shape);
-        }
-
         #region TOOLSERVICE_EVENT
 
         /// <summary>
@@ -122,13 +77,6 @@ namespace Paintc.Controller
         #endregion
 
         #region DRAWINGPANEL_EVENTS
-
-        /// <summary>
-        /// Genera un el nombre de la nueva figura/forma dibujada en el canvas
-        /// </summary>
-        /// <param name="tool"></param>
-        /// <returns></returns>
-        private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}-{++_globalShapeCounter}";
 
         /// <summary>
         /// 
@@ -222,5 +170,57 @@ namespace Paintc.Controller
         }
 
         #endregion
+
+        /// <summary>
+        /// Limpia el canvas, lista de formas y contador
+        /// </summary>
+        public void ClearDrawingPanel()
+        {
+            if (_drawingPanel is null) return;
+            // Eliminar elementos del canvas y de la lista de formas
+            var canvasChildrens = _drawingPanel.CustomCanvas.Children;
+            foreach (var shape in Shapes)
+            {
+                if (canvasChildrens.Contains(shape?.GetShape()))
+                    canvasChildrens.Remove(shape?.GetShape());
+            }
+            Shapes.Clear();
+            // Reiniciar contador de figuras
+            _globalShapeCounter = 0;
+        }
+
+        /// <summary>
+        /// Elimina una figura/forma del canvas y explorador de figuras
+        /// </summary>
+        /// <param name="shapeName"></param>
+        public void RemoveShape(string? shapeName)
+        {
+            if (_drawingPanel is null || shapeName is null)
+                return;
+
+            ShapeBase? shape = Shapes.Where(s => s is not null && s.Name is not null && s.Name.Equals(shapeName)).FirstOrDefault();
+            if (shape is null)
+            {
+                MessageBox.Show($"An error ocurred, {shapeName} was not found in shape explorer.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!_drawingPanel.CustomCanvas.Children.Contains(shape.GetShape()))
+            {
+                MessageBox.Show($"An error ocurred, {shapeName} was not found in the drawing area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Elimina forma del canvas y de la lista de formas
+            _drawingPanel.CustomCanvas.Children.Remove(shape.GetShape());
+            Shapes.Remove(shape);
+        }
+
+        /// <summary>
+        /// Genera un el nombre de la nueva figura/forma dibujada en el canvas
+        /// </summary>
+        /// <param name="tool"></param>
+        /// <returns></returns>
+        private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}-{++_globalShapeCounter}";
     }
 }

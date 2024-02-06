@@ -87,6 +87,7 @@
                         <!---->
                         <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium"></TextBox>
                         <Button Grid.Column="1" Content="X" Style="{StaticResource RemoveShapeBtn}">
+                            <!--Click Event-->
                             <behavior:Interaction.Triggers>
                                 <behavior:EventTrigger EventName="Click">
                                     <behavior:InvokeCommandAction Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
