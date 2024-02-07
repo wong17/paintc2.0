@@ -30,8 +30,10 @@ namespace Paintc.Controller
                 _drawingPanel = value;
                 ToolSelectionService.Instance.ToolboxEventHandler += ToolboxEventHandler;
                 ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+                SelectedColorService.Instance.UpdateSelectedColorEventHandler += UpdateSelectedColorEventHandler;
             }
         }
+
         /// <summary>
         /// Contiene todos los elementos que hay sobre el canvas
         /// </summary>
@@ -57,6 +59,10 @@ namespace Paintc.Controller
         /// Contador de figuras/formas dibujadas
         /// </summary>
         private int _globalShapeCounter = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        private CGAColorPalette? _currentColor;
 
         #endregion
 
@@ -72,6 +78,24 @@ namespace Paintc.Controller
             _toolbox = toolbox;
             _state = DrawingState.Finished;
             _currentShape = null;
+        }
+
+        #endregion
+
+        #region SELECTEDCOLOR_EVENT
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void UpdateSelectedColorEventHandler(object? sender, CGAColorPalette color)
+        {
+            if (_currentColor == color)
+                return;
+
+            _currentColor = color;
         }
 
         #endregion
@@ -217,7 +241,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// Genera un el nombre de la nueva figura/forma dibujada en el canvas
+        /// Genera el nombre de la nueva figura/forma dibujada en el canvas
         /// </summary>
         /// <param name="tool"></param>
         /// <returns></returns>

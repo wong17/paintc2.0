@@ -72,6 +72,7 @@
         <Setter Property="Margin" Value="5"></Setter>
         <Setter Property="Height" Value="60"></Setter>
     </Style>
+
     <Style x:Key="ButtonTool" TargetType="Button">
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="Margin" Value="5"></Setter>
@@ -99,6 +100,19 @@
                     <GeometryDrawing Geometry="M0,0 L1,0 1,0.1, 0,0.1Z" Brush="White" />
                     <GeometryDrawing Geometry="M0,0 L0,1 0.1,1, 0.1,0Z" Brush="White" />
                 </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="GrayGridBrush2" Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="White">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,1,1" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="{StaticResource BlackBrush}" Geometry="M 0,0 L 0,1 0.1,1 0.1,0.1 1,0.1 1,0 Z" />
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>

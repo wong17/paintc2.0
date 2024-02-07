@@ -74,7 +74,11 @@ namespace Paintc.Controller.UserControls
         /// <param name="parameter"></param>
         private void CGAButtonsClickCommand(object? parameter)
         {
+            if (parameter is null)
+                return;
 
+            var color = (CGAColorPalette)parameter;
+            SelectedColorService.Instance.UpdateSelectedColor(color);
         }
 
         /// <summary>
