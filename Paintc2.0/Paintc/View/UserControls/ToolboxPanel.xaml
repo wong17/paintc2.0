@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:Paintc.Converter"
-             xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls" d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
     <UserControl.Resources>
@@ -26,7 +27,7 @@
         <!--Title-->
         <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
         <!--Tools-->
-        <ItemsControl x:Name="ToolItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
+        <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" Rows="2"/>
@@ -35,7 +36,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}" 
-                            Command="{Binding ElementName=ToolItems, Path=DataContext.ToolsButtonsClick}" >
+                            Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}" >
                         <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}"/>
                     </Button>
                 </DataTemplate>
@@ -50,7 +51,7 @@
             <!--Title-->
             <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Colors"></Label>
             <!--Color palette-->
-            <ItemsControl x:Name="ColorPaletteItems" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
+            <ItemsControl x:Name="ColorPaletteItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Rows="4"/>
@@ -60,12 +61,11 @@
                     <DataTemplate>
                         <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
                                 CommandParameter="{Binding Cpalette}" 
-                                Command="{Binding ElementName=ColorPaletteItems, Path=DataContext.CGAButtonsClick}"
+                                Command="{Binding ElementName=ColorPaletteItemsControl, Path=DataContext.CGAButtonsClick}"
                                 Style="{StaticResource ButtonCGAColorPalette}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
         </Grid>
         <!--Shapes explorer-->
         <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>

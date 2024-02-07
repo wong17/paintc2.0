@@ -2,6 +2,7 @@
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.View.UserControls;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -13,7 +14,7 @@ namespace Paintc.Controller.UserControls
         private readonly List<GraphicMode> _graphicModes;
         private GraphicMode? _currentGraphiceMode;
 
-        private readonly List<CGAColor> _colors;
+        private readonly ObservableCollection<CGAColor> _colors;
         private CGAColor _currentColor;
 
         /// <summary>
@@ -23,15 +24,16 @@ namespace Paintc.Controller.UserControls
         public DrawingPanelPropertiesController(DrawingPanelProperties drawingPanelProperties)
         {
             _drawingPanelProperties = drawingPanelProperties;
+            // Events
             _drawingPanelProperties.GraphicsModeCmbbox.SelectionChanged += GraphicsModeCmbbox_SelectionChanged;
             _drawingPanelProperties.BackgroundColorCmbbox.SelectionChanged += BackgroundColorCmbbox_SelectionChanged;
-
+            // Canvas background colors, default: White
             _colors = CGAColorPaletteService.GetColorPalette();
             _currentColor = _colors.First();
-
+            // Canvas sizes, graphics mode
             _graphicModes = GraphicModeService.GetGraphicModes();
             _currentGraphiceMode = _graphicModes[0];
-
+            
             _drawingPanelProperties.BackgroundColorCmbbox.ItemsSource = _colors;
             _drawingPanelProperties.BackgroundColorCmbbox.DisplayMemberPath = "Cpalette";
             _drawingPanelProperties.BackgroundColorCmbbox.SelectedItem = _currentColor;
@@ -46,7 +48,8 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        /// Actualiza el item seleccionado en el combobox que contiene los modos gráficos cuando el usuario decide no cambiar la resolución actual
+        /// sin disparar el evento SelectionChanged del combobox.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="flag"></param>
@@ -64,7 +67,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        /// Notifica que se debe de cambiar el tamaño del canvas cuando se selecciona una resolución diferente desde el panel de propiedades
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,7 +82,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        /// Notifica que se debe de cambiar el color del canvas cuando se selecciona un color desde el panel de propiedades
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

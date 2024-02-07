@@ -1,5 +1,6 @@
 ﻿using Paintc.Enums;
 using Paintc.Model;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
 
@@ -7,7 +8,7 @@ namespace Paintc.Service
 {
     public static class ToolService
     {
-        private static readonly ResourceDictionary? resourceDictionary;
+        private static readonly ResourceDictionary? imagesResource;
 
         private static readonly DrawingImage? SelectImage, RectangleImage, EllipseImage, 
             PolygonImage, FillerImage, EraserImage, PencilImage, LineImage;
@@ -15,19 +16,24 @@ namespace Paintc.Service
         static ToolService()
         {
             // Resource in App.xaml
-            resourceDictionary = Application.Current.Resources.MergedDictionaries.ElementAt(3);
+            //resourceDictionary = Application.Current.Resources.MergedDictionaries.ElementAt(3);
 
-            SelectImage = (DrawingImage)resourceDictionary["selectDrawingImage"];
-            RectangleImage = (DrawingImage)resourceDictionary["rectangleDrawingImage"];
-            EllipseImage = (DrawingImage)resourceDictionary["circleDrawingImage"];
-            PolygonImage = (DrawingImage)resourceDictionary["polygonDrawingImage"];
-            FillerImage = (DrawingImage)resourceDictionary["fillerDrawingImage"];
-            EraserImage = (DrawingImage)resourceDictionary["eraserDrawingImage"];
-            PencilImage = (DrawingImage)resourceDictionary["pencilDrawingImage"];
-            LineImage = (DrawingImage)resourceDictionary["lineDrawingImage"];
+            imagesResource = new ResourceDictionary
+            {
+                Source = new Uri("/Paintc;component/Resources/Images/Images.xaml", UriKind.RelativeOrAbsolute)
+            };
+
+            SelectImage = (DrawingImage)imagesResource["selectDrawingImage"];
+            RectangleImage = (DrawingImage)imagesResource["rectangleDrawingImage"];
+            EllipseImage = (DrawingImage)imagesResource["circleDrawingImage"];
+            PolygonImage = (DrawingImage)imagesResource["polygonDrawingImage"];
+            FillerImage = (DrawingImage)imagesResource["fillerDrawingImage"];
+            EraserImage = (DrawingImage)imagesResource["eraserDrawingImage"];
+            PencilImage = (DrawingImage)imagesResource["pencilDrawingImage"];
+            LineImage = (DrawingImage)imagesResource["lineDrawingImage"];
         }
 
-        public static List<Tool> GetTools()
+        public static ObservableCollection<Tool> GetTools()
         {
             return [
                 new Tool(ToolType.SelectTool, "Select", SelectImage),

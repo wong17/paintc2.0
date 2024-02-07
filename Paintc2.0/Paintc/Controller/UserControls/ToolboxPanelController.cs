@@ -18,11 +18,11 @@ namespace Paintc.Controller.UserControls
         /// <summary>
         /// Lista de herramientas disponibles para utilizar
         /// </summary>
-        public List<Tool> ToolItems { get; private set; } = [];
+        public ObservableCollection<Tool> ToolItems { get; private set; } = [];
         /// <summary>
         /// Lista de colores disponibles para utilizar
         /// </summary>
-        public List<CGAColor> ColorPaletteItems { get; private set; } = [];
+        public ObservableCollection<CGAColor> ColorPaletteItems { get; private set; }
         /// <summary>
         /// Lista de formas que se muestran en el explorador de formas
         /// </summary>
@@ -30,8 +30,9 @@ namespace Paintc.Controller.UserControls
 
         public ToolboxPanelController()
         {
-            ToolItems.AddRange(ToolService.GetTools());
-            ColorPaletteItems.AddRange(CGAColorPaletteService.GetColorPalette());
+            ToolItems = new ObservableCollection<Tool>(ToolService.GetTools());
+            ColorPaletteItems = new ObservableCollection<CGAColor>(CGAColorPaletteService.GetColorPalette());
+            
             ToolsButtonsClick = new RelayCommand((obj) => true, ToolsButtonsClickCommand);
             CGAButtonsClick = new RelayCommand((obj) => true, CGAButtonsClickCommand);
             RemoveAllShapesClick = new RelayCommand((obj) => true, RemoveAllShapesClickCommand);

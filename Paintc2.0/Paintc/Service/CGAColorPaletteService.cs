@@ -1,12 +1,13 @@
 ﻿using Paintc.Enums;
 using Paintc.Model;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace Paintc.Service
 {
     public static class CGAColorPaletteService
     {
-        public static List<CGAColor> GetColorPalette()
+        public static ObservableCollection<CGAColor> GetColorPalette()
         {
             return [
                 new CGAColor(CGAColorPalette.White, Colors.White),

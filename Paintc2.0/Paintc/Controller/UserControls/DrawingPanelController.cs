@@ -127,6 +127,11 @@ namespace Paintc.Controller.UserControls
 
         #region CANVASBGCOLOR_EVENT
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="color"></param>
         public void ChangeBackgroundColorEventHandler(object? sender, CGAColor color)
         {
             _drawingPanel.CustomCanvas.Background = new SolidColorBrush(color.Color);
