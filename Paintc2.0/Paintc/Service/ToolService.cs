@@ -15,7 +15,10 @@ namespace Paintc.Service
 
         static ToolService()
         {
-            // Resource in App.xaml
+            /* Resource in App.xaml (se obtienen en tiempo de ejecución, en modo de diseño xaml da un error de
+               Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index') 
+               aunque funciona al ejecutar.
+             */
             //imagesResource = Application.Current.Resources.MergedDictionaries.ElementAt(3);
 
             imagesResource = new ResourceDictionary
