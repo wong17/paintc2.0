@@ -7,7 +7,7 @@
              xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors" 
              xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls" d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="400">
+             d:DesignHeight="700" d:DesignWidth="260">
     <UserControl.Resources>
         <converter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
     </UserControl.Resources>

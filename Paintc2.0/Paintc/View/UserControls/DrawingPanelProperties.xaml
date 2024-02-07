@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="260">
     <Grid Background="{StaticResource BlackBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,12 +32,16 @@
             <ComboBox Grid.Row="1" x:Name="GraphicsModeCmbbox" Style="{StaticResource ComboboxStyle}"></ComboBox>
             <!--Background color-->
             <Label Grid.Row="2" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Background color:"></Label>
-            <StackPanel Grid.Row="3" Orientation="Horizontal" >
-                <ComboBox x:Name="BackgroundColorCmbbox" Style="{StaticResource ComboboxStyle}" Width="120"></ComboBox>
-                <Border Width="26" Height="26" Background="White">
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="BackgroundColorCmbbox" Grid.Column="0" Style="{StaticResource ComboboxStyle}" ></ComboBox>
+                <Border Grid.Column="1" Width="26" Height="26" Background="White" Margin="0,0,5,0">
                     <Rectangle x:Name="BackgroundColorRectangle" Width="25" Height="25" Fill="Black"></Rectangle>
                 </Border>
-            </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

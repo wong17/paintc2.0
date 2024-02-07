@@ -29,24 +29,23 @@
         <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Width="Auto">
             <!--Columns definition-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="258.719" MaxWidth="300"/>
-                <ColumnDefinition Width="1.281"/>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" MinWidth="260" MaxWidth="300"/>
+                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300"/>
             </Grid.ColumnDefinitions>
 
             <!--Left panel-->
-            <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel" Grid.ColumnSpan="2"/>
+            <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="2" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="1" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Center panel-->
-            <userControls:DrawingPanel Grid.Column="3" x:Name="ucDrawingPanel"/>
+            <userControls:DrawingPanel Grid.Column="2" x:Name="ucDrawingPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="4" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="3" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Right panel-->
-            <userControls:DrawingPanelProperties Grid.Column="5" x:Name="ucDrawingPanelProperties"/>
+            <userControls:DrawingPanelProperties Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
         </Grid>
 
     </Grid>
