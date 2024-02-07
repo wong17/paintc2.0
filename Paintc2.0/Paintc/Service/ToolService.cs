@@ -16,7 +16,7 @@ namespace Paintc.Service
         static ToolService()
         {
             // Resource in App.xaml
-            //resourceDictionary = Application.Current.Resources.MergedDictionaries.ElementAt(3);
+            //imagesResource = Application.Current.Resources.MergedDictionaries.ElementAt(3);
 
             imagesResource = new ResourceDictionary
             {
