@@ -9,12 +9,12 @@ namespace Paintc.Shapes
     {
         private readonly Polyline _polyLine;
 
-        public FreeShape(string? name) : base(name)
+        public FreeShape(string? name, Color color) : base(name, color)
         {
             _polyLine = new Polyline
             {
-                StrokeThickness = 2,
-                Stroke = Brushes.Black
+                Stroke = new SolidColorBrush(color),
+                StrokeThickness = 2
             };
         }
 

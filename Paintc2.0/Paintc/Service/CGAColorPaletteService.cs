@@ -27,5 +27,13 @@ namespace Paintc.Service
                 new CGAColor(CGAColorPalette.Yellow, Color.FromRgb(0xFF, 0xFF, 0x55)), 
                 new CGAColor(CGAColorPalette.Black, Colors.Black)];
         }
+
+        public static Color GetColor(CGAColorPalette? color)
+        {
+            if (color == null)
+                return GetColorPalette().Last().Color;
+
+            return GetColorPalette().Where(c => c.Cpalette == color).First().Color;
+        }
     }
 }

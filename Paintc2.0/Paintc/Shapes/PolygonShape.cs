@@ -12,7 +12,7 @@ namespace Paintc.Shapes
         private readonly List<Line> _lines = [];
         private Line? _currentLine;
 
-        public PolygonShape(string? name) : base(name)
+        public PolygonShape(string? name, Color color) : base(name, color)
         {
         }
 

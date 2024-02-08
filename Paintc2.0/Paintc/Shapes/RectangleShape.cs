@@ -10,11 +10,11 @@ namespace Paintc.Shapes
     {
         private readonly Rectangle _rectangle;
 
-        public RectangleShape(string? name) : base(name)
+        public RectangleShape(string? name, Color color) : base(name, color)
         {
             _rectangle = new Rectangle
             {
-                Stroke = Brushes.Black,
+                Stroke = new SolidColorBrush(color),
                 StrokeThickness = 2
             };
         }

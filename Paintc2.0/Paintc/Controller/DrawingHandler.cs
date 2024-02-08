@@ -110,7 +110,7 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_toolbox is null || _drawingPanel is null || _state == DrawingState.Drawing) return;
+            if (_toolbox is null || _drawingPanel is null || _currentColor is null || _state == DrawingState.Drawing) return;
 
             // Si se utiliza la herramienta de filler
             if (_toolbox.CurrentTool == ToolType.FillerTool)
@@ -121,7 +121,7 @@ namespace Paintc.Controller
                 return;
             }
 
-            _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool));
+            _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool), CGAColorPaletteService.GetColor(_currentColor));
             if (_currentShape is null)
                 return;
 

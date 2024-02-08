@@ -10,11 +10,11 @@ namespace Paintc.Shapes
     {
         private readonly Ellipse _ellipse;
 
-        public EllipseShape(string? name) : base(name)
+        public EllipseShape(string? name, Color color) : base(name, color)
         {
             _ellipse = new Ellipse
             {
-                Stroke = Brushes.Black,
+                Stroke = new SolidColorBrush(color),
                 StrokeThickness = 2
             };
         }
