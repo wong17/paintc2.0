@@ -41,7 +41,15 @@
             <!--GridSplitter-->
             <GridSplitter Grid.Column="1" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Center panel-->
-            <userControls:DrawingPanel Grid.Column="2" x:Name="ucDrawingPanel"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Drawing panel-->
+                <userControls:DrawingPanel Grid.Row="0" x:Name="ucDrawingPanel"/>
+                <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
+            </Grid>
             <!--GridSplitter-->
             <GridSplitter Grid.Column="3" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Right panel-->

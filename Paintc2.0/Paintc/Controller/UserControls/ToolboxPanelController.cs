@@ -66,6 +66,7 @@ namespace Paintc.Controller.UserControls
 
             var toolType = (ToolType)sender;
             ToolSelectionService.Instance.UpdateCurrentTool(toolType);
+            StatusBarPanelService.Instance.UpdateCurrentTool(toolType);
         }
 
         /// <summary>
@@ -79,6 +80,7 @@ namespace Paintc.Controller.UserControls
 
             var color = (CGAColorPalette)parameter;
             SelectedColorService.Instance.UpdateSelectedColor(color);
+            StatusBarPanelService.Instance.UpdateCurrentColor(color);
         }
 
         /// <summary>

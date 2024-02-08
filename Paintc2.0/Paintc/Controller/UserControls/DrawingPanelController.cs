@@ -2,7 +2,6 @@
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.View.UserControls;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -39,6 +38,7 @@ namespace Paintc.Controller.UserControls
             DrawingHandler.Instance.DrawingPanel = drawingPanel;
             CanvasResizerService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
             CanvasBackgroundColorChangerService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
+
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
             _drawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
@@ -142,6 +142,7 @@ namespace Paintc.Controller.UserControls
         private void CustomCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             DrawingHandler.Instance.OnMouseMove(sender, e);
+            StatusBarPanelService.Instance.UpdateMousePosition(e.GetPosition(_drawingPanel.CustomCanvas));
         }
 
         private void CustomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

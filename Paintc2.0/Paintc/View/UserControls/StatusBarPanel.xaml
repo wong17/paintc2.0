@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Paintc.View.UserControls.StatusBarPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="47" d:DesignWidth="720">
+    <Grid Background="{StaticResource BlackBrush}" Height="47" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <!---->
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label x:Name="MousePositionLabel" Content="Mouse position: (0,0)" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+        </StackPanel>
+        <!---->
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label x:Name="SelectedToolLabel" Content="Current tool:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+        </StackPanel>
+        <!---->
+        <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label x:Name="SelectedColorLabel" Content="Current color:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Border Width="26" Height="26" Background="White" Margin="0,0,5,0">
+                <Rectangle x:Name="SelectedColorRectangle" Width="25" Height="25" Fill="Black"></Rectangle>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>
