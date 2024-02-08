@@ -69,7 +69,8 @@
         </Grid>
         <!--Shapes explorer-->
         <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
-        <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top">
+        <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <!--Layout-->
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -85,8 +86,8 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <!---->
-                        <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium"></TextBox>
-                        <Button Grid.Column="1" Content="X" Style="{StaticResource RemoveShapeBtn}">
+                        <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium" Width="160"></TextBox>
+                        <Button Grid.Column="1" Content="X" Style="{StaticResource RemoveShapeBtn}" ToolTip="Remove">
                             <!--Click Event-->
                             <behavior:Interaction.Triggers>
                                 <behavior:EventTrigger EventName="Click">
