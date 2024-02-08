@@ -11,7 +11,7 @@ namespace Paintc.Views
         public MainWindow()
         {
             InitializeComponent();
-            _ = new MainWindowController(this);
+            DataContext = new MainWindowController();
         }
     }
 }

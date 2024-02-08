@@ -1,43 +1,38 @@
-﻿using Paintc.Core;
+﻿using Paintc.Commands;
+using Paintc.Core;
+using Paintc.Service;
 using Paintc.View;
-using Paintc.Views;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Paintc.Controller
 {
     public class MainWindowController : ControllerBase
     {
-        private readonly MainWindow MainWindow;
+        public ICommand SaveMenuItemClick { get; private set; }
+        public ICommand ExitMenuItemClick { get; private set; }
+        public ICommand AboutMenuItemClick { get; private set; }
 
-        public MainWindowController(MainWindow mainWindow)
+        public MainWindowController()
         {
-            MainWindow = mainWindow;
-            InitController();
+            SaveMenuItemClick = new RelayCommand((obj) => true, SaveMenuItemClickCommand);
+            ExitMenuItemClick = new RelayCommand((obj) => true, ExitMenuItemClickCommand);
+            AboutMenuItemClick = new RelayCommand((obj) => true, AboutMenuItemClickCommand);
         }
 
-        private void InitController()
+        private void AboutMenuItemClickCommand(object? obj)
         {
-            MainWindow.AboutMenuItem.Click += MenuItem_Click;
-            MainWindow.ExitMenuItem.Click += MenuItem_Click;
+            DialogService.OpenDialog<AboutWindow>(Application.Current.MainWindow, new AboutWindowController());
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void ExitMenuItemClickCommand(object? obj)
         {
-            if (sender is not MenuItem menuItem)
-                return;
+            Application.Current.Shutdown();
+        }
 
-            switch(menuItem.Name)
-            {
-                case "ExitMenuItem":
-                    Application.Current.Shutdown();
-                    break;
-                case "AboutMenuItem":
-
-                    break;
-                default: 
-                    break;
-            }
+        private void SaveMenuItemClickCommand(object? obj)
+        {
+            
         }
 
     }

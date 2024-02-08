@@ -17,11 +17,12 @@
 
         <!--Menu-->
         <Menu Grid.Row="0" Style="{StaticResource MenuStyle}">
-            <MenuItem Header="{StaticResource FileMenu}" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="ExitMenuItem" Header="{StaticResource ExitMenuItem}" />
+            <MenuItem Header="File" Style="{StaticResource MenuItemStyle}">
+                <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}"/>
+                <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}"/>
             </MenuItem>
-            <MenuItem Header="{StaticResource HelpMenu}" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="AboutMenuItem" Header="{StaticResource AboutMenuItem}" />
+            <MenuItem Header="Help" Style="{StaticResource MenuItemStyle}">
+                <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}"/>
             </MenuItem>
         </Menu>
 
