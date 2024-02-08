@@ -1,5 +1,6 @@
 ﻿using Paintc.Enums;
 using Paintc.Service;
+using Paintc.Service.Collections;
 using Paintc.View.UserControls;
 using System.Windows;
 using System.Windows.Media;

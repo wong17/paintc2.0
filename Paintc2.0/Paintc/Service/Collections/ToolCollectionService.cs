@@ -4,16 +4,16 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Paintc.Service
+namespace Paintc.Service.Collections
 {
-    public static class ToolService
+    public static class ToolCollectionService
     {
         private static readonly ResourceDictionary? imagesResource;
 
-        private static readonly DrawingImage? SelectImage, RectangleImage, EllipseImage, 
+        private static readonly DrawingImage? SelectImage, RectangleImage, EllipseImage,
             PolygonImage, FillerImage, EraserImage, PencilImage, LineImage;
 
-        static ToolService()
+        static ToolCollectionService()
         {
             /* Resource in App.xaml (se obtienen en tiempo de ejecución, en modo de diseño xaml da un error de
                Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index') 

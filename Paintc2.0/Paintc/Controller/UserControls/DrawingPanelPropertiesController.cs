@@ -1,6 +1,7 @@
 ﻿using Paintc.Core;
 using Paintc.Model;
 using Paintc.Service;
+using Paintc.Service.Collections;
 using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -31,7 +32,7 @@ namespace Paintc.Controller.UserControls
             _colors = CGAColorPaletteService.GetColorPalette();
             _currentColor = _colors.First();
             // Canvas sizes, graphics mode
-            _graphicModes = GraphicModeService.GetGraphicModes();
+            _graphicModes = GraphicModeCollectionService.GetGraphicModes();
             _currentGraphiceMode = _graphicModes[0];
             
             _drawingPanelProperties.BackgroundColorCmbbox.ItemsSource = _colors;

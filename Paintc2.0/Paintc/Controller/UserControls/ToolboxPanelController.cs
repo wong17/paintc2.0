@@ -3,6 +3,7 @@ using Paintc.Core;
 using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
+using Paintc.Service.Collections;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -30,7 +31,7 @@ namespace Paintc.Controller.UserControls
 
         public ToolboxPanelController()
         {
-            ToolItems = new ObservableCollection<Tool>(ToolService.GetTools());
+            ToolItems = new ObservableCollection<Tool>(ToolCollectionService.GetTools());
             ColorPaletteItems = new ObservableCollection<CGAColor>(CGAColorPaletteService.GetColorPalette());
             
             ToolsButtonsClick = new RelayCommand((obj) => true, ToolsButtonsClickCommand);

@@ -1,8 +1,8 @@
 ﻿using Paintc.Model;
 
-namespace Paintc.Service
+namespace Paintc.Service.Collections
 {
-    public static class GraphicModeService
+    public static class GraphicModeCollectionService
     {
         public static List<GraphicMode> GetGraphicModes()
         {
