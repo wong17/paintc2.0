@@ -15,7 +15,8 @@ namespace Paintc.Shapes
             _ellipse = new Ellipse
             {
                 Stroke = new SolidColorBrush(color),
-                StrokeThickness = 2
+                StrokeThickness = 1,
+                Fill = new SolidColorBrush(color)
             };
         }
 

@@ -15,7 +15,8 @@ namespace Paintc.Shapes
             _rectangle = new Rectangle
             {
                 Stroke = new SolidColorBrush(color),
-                StrokeThickness = 2
+                StrokeThickness = 1,
+                Fill = new SolidColorBrush(color)
             };
         }
 

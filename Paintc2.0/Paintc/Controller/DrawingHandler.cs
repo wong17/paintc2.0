@@ -7,9 +7,9 @@ using Paintc.Service.Collections;
 using Paintc.Shapes;
 using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace Paintc.Controller
 {
@@ -44,6 +44,10 @@ namespace Paintc.Controller
         /// Referencia de la figura/forma que se esta dibujando
         /// </summary>
         private ShapeBase? _currentShape;
+        /// <summary>
+        /// Referencia de la figura/forma que se selecciono de ultimo con la herramienta SelectTool (la figura que tiene el adorner)
+        /// </summary>
+        private ShapeBase? _selectedShape;
         /// <summary>
         /// Referencia de la herramienta que se esta utilizando
         /// </summary>
@@ -113,11 +117,16 @@ namespace Paintc.Controller
         {
             if (_toolbox is null || _drawingPanel is null || _currentColor is null || _state == DrawingState.Drawing) return;
 
-            // Si se utiliza la herramienta de filler
             if (_toolbox.CurrentTool == ToolType.FillerTool)
             {
-                // cambiar fondo del canvas...
+                FillerToolLeftButtonDown(sender, e);
+                _state = DrawingState.Finished;
+                return;
+            }
 
+            if (_toolbox.CurrentTool == ToolType.SelectTool)
+            {
+                SelectToolLeftButtonDown(sender, e);
                 _state = DrawingState.Finished;
                 return;
             }
@@ -248,5 +257,67 @@ namespace Paintc.Controller
         /// <param name="tool"></param>
         /// <returns></returns>
         private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}-{++_globalShapeCounter}";
+
+        #region TOOL_LEFTMOUSEDOWN
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FillerToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Si se hace click en el canvas quitar adorno de la figura anteriormente seleccionada
+            if (e.OriginalSource == _drawingPanel?.CustomCanvas && _selectedShape is not null)
+            {
+                ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
+                ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+                return;
+            }
+
+            // Mostrar adorno de cada figura que se haga click...
+            if (e.OriginalSource is Rectangle rectangle)
+            {
+                // Si ya hay un rectangulo seleccionado...
+                if (_selectedShape is not null)
+                {
+                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
+                    ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                    _selectedShape = null;
+                }
+                _selectedShape = Shapes.Where(s => s is RectangleShape r && r.GetShape().Equals(rectangle)).First();
+            }
+
+            if (e.OriginalSource is Ellipse ellipse)
+            {
+                // Si ya hay una ellipse seleccionada...
+                if (_selectedShape is not null)
+                {
+                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
+                    ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                    _selectedShape = null;
+                }
+                _selectedShape = Shapes.Where(s => s is EllipseShape e && e.GetShape().Equals(ellipse)).First();
+            }
+
+            if (_selectedShape is null)
+                return;
+
+            ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), true);
+            ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), true);
+        }
+
+        #endregion
     }
 }

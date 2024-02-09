@@ -14,7 +14,7 @@ namespace Paintc.Shapes
             _polyLine = new Polyline
             {
                 Stroke = new SolidColorBrush(color),
-                StrokeThickness = 2
+                StrokeThickness = 1
             };
         }
 

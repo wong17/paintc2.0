@@ -13,7 +13,7 @@ namespace Paintc.Shapes
             Line = new Line()
             {
                 Stroke = new SolidColorBrush(color),
-                StrokeThickness = 2
+                StrokeThickness = 1
             };
         }
 
