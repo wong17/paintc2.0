@@ -29,10 +29,23 @@ namespace Paintc.Shapes
             CurrentMousePosition = currentPosition;
             double width = currentPosition.X - LastMousePosition.X;
             double height = currentPosition.Y - LastMousePosition.Y;
-            Canvas.SetLeft(_rectangle, width < 0 ? currentPosition.X : LastMousePosition.X);
-            Canvas.SetTop(_rectangle, height < 0 ? currentPosition.Y : LastMousePosition.Y);
-            _rectangle.Width = Math.Abs(width);
-            _rectangle.Height = Math.Abs(height);
+            double left = width < 0 ? currentPosition.X : LastMousePosition.X;
+            double top = height < 0 ? currentPosition.Y : LastMousePosition.Y;
+            double rectWidth = Math.Abs(width);
+            double rectHeight = Math.Abs(height);
+            double right = Math.Round(left + rectWidth);
+            double bottom = Math.Round(top + rectHeight);
+
+            if (_rectangle.Parent is not Canvas canvas)
+                return;
+
+            Canvas.SetLeft(_rectangle, left);
+            Canvas.SetTop(_rectangle, top);
+            _rectangle.Width = rectWidth;
+            _rectangle.Height = rectHeight;
+
+            Canvas.SetRight(_rectangle, right > canvas.ActualWidth ? canvas.ActualWidth : right);
+            Canvas.SetBottom(_rectangle, bottom > canvas.ActualHeight ? canvas.ActualHeight : bottom);
         }
 
         public override void SetLastMousePosition(Point lastPosition)

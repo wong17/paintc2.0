@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Paintc.View.UserControls;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -119,7 +120,7 @@ namespace Paintc.Adorners
                 return;
 
             /* Coordenada 'y' de la figura sobre el canvas (esquina superior izquierda) */
-            double canvasTop = Canvas.GetTop(adornedElement);
+            double yCanvasTop = Canvas.GetTop(adornedElement);
 
             /* Desplazamiento del thumb sobre el eje y */
             double deltaY = e.VerticalChange;
@@ -128,7 +129,7 @@ namespace Paintc.Adorners
              * Si el desplazamiento del thumb es negativo (hacia arriba) y la figura ya esta tocando la parte
              * superior del canvas, salir y no cambiar tamaño.
              */
-            if (deltaY < 0 && canvasTop == 0)
+            if (deltaY < 0 && yCanvasTop == 0)
                 return;
 
             /* 
@@ -162,7 +163,7 @@ namespace Paintc.Adorners
              * La nueva coordenada 'y' de la figura sera la anterior más la nueva, si esta es menor que 0, es decir que 
              * se sale del canvas entonces establecemos como coordenada 'y' de la figura 0.
              */
-            double newCanvasTop = canvasTop + topOffset;
+            double newCanvasTop = yCanvasTop + topOffset;
             if (newCanvasTop < 0)
                 newCanvasTop = 0;
 
@@ -202,6 +203,32 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double yCanvasBottom = Canvas.GetBottom(adornedElement);
+            double deltaY = e.VerticalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            if (deltaY > 0 && yCanvasBottom == parentCanvas.ActualHeight)
+                return;
+
+            double deltaH = adornedElement.ActualHeight + deltaY;
+            double topOffset = deltaY;
+
+            if (deltaH < adornedElement.MinHeight)
+            {
+                deltaH = adornedElement.MinHeight;
+                topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+
+            double newCanvasBottom = yCanvasBottom + topOffset;
+            if (newCanvasBottom > parentCanvas.ActualHeight)
+                newCanvasBottom = parentCanvas.ActualHeight;
+
+            /* Actualizar alto de la figura y nueva coordenada 'y' de la figura sobre el canvas. */
+            adornedElement.Height = deltaH;
+            Canvas.SetBottom(adornedElement, newCanvasBottom);
         }
 
         /// <summary>
