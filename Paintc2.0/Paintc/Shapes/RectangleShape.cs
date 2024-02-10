@@ -16,7 +16,9 @@ namespace Paintc.Shapes
             {
                 Stroke = new SolidColorBrush(color),
                 StrokeThickness = 1,
-                Fill = new SolidColorBrush(color)
+                Fill = new SolidColorBrush(color),
+                MinHeight = 10,
+                MinWidth = 10,
             };
         }
 

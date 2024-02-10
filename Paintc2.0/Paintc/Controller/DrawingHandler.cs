@@ -292,8 +292,8 @@ namespace Paintc.Controller
                 // Si ya hay un rectangulo seleccionado...
                 if (_selectedShape is not null)
                 {
-                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
                     ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
                     _selectedShape = null;
                 }
                 _selectedShape = Shapes.Where(s => s is RectangleShape r && r.GetShape().Equals(rectangle)).First();
@@ -304,8 +304,8 @@ namespace Paintc.Controller
                 // Si ya hay una ellipse seleccionada...
                 if (_selectedShape is not null)
                 {
-                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
                     ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
                     _selectedShape = null;
                 }
                 _selectedShape = Shapes.Where(s => s is EllipseShape e && e.GetShape().Equals(ellipse)).First();
@@ -314,8 +314,8 @@ namespace Paintc.Controller
             if (_selectedShape is null)
                 return;
 
-            ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), true);
             ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), true);
+            ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), true);
         }
 
         #endregion

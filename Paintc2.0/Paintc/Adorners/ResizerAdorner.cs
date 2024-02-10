@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -21,6 +23,15 @@ namespace Paintc.Adorners
             _middleLeft = Create();
             _middleRight = Create();
 
+            _topLeft.DragDelta += TopLeftDragDelta;
+            _topCenter.DragDelta += TopCenterDragDelta;
+            _topRight.DragDelta += TopRightDragDelta;
+            _bottomLeft.DragDelta += BottomLeftDragDelta;
+            _bottomCenter.DragDelta += BottomCenterDragDelta;
+            _bottomRight.DragDelta += BottomRightDragDelta;
+            _middleLeft.DragDelta += MiddleLeftDragDelta;
+            _middleRight.DragDelta += MiddleRightDragDelta;
+
             _visuals = new VisualCollection(this)
             {
                 _topLeft,
@@ -38,14 +49,13 @@ namespace Paintc.Adorners
         /// Create a new thumb
         /// </summary>
         /// <returns></returns>
-        private Thumb Create()
+        private static Thumb Create()
         {
             var thumb = new Thumb() { 
                 Background = Brushes.DodgerBlue, 
                 Width = 10, Height = 10, 
                 BorderBrush = new SolidColorBrush(Colors.DodgerBlue)
             };
-            thumb.DragDelta += ThumbDragDelta;
             return thumb;
         }
 
@@ -91,9 +101,140 @@ namespace Paintc.Adorners
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ThumbDragDelta(object sender, DragDeltaEventArgs e)
+        private void TopLeftDragDelta(object sender, DragDeltaEventArgs e)
         {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement) 
+                return;
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TopCenterDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+
+            /* Coordenada 'y' de la figura sobre el canvas (esquina superior izquierda) */
+            double canvasTop = Canvas.GetTop(adornedElement);
+
+            /* Desplazamiento del thumb sobre el eje y */
+            double deltaY = e.VerticalChange;
+
+            /*
+             * Si el desplazamiento del thumb es negativo (hacia arriba) y la figura ya esta tocando la parte
+             * superior del canvas, salir y no cambiar tamaño.
+             */
+            if (deltaY < 0 && canvasTop == 0)
+                return;
+
+            /* 
+             * Cambio en la altura de la figura. 
+             * 
+             * Se trabaja con el eje 'y' del lado positivo para hacer el cálculo, por lo que el desplazamiento 
+             * 'deltaH' inicial parte desde la posición inicial del thumb como origen. 
+             */
+            double deltaH = adornedElement.ActualHeight - deltaY;
+            /* 
+             * Desplazamiento de la coordenada y (esquina superior izquierda) de la figura sobre el canvas,
+             * como valor inicial se asigna el desplazamiento en 'y' del thumb. Ya que ambos puntos estan al mismo nivel 
+             * en el canvas pero su coordenada 'y' relativa a la figura es 0, por lo que sirve para medir el desplazamiento
+             * en 'y' de la figura sobre el canvas.
+             */
+            double topOffset = deltaY;
+            /* 
+             * Si el desplazamiento del thumb es positivo (hacia abajo) y la nueva altura de la figura es menor que 
+             * la altura minima permitada...
+             */
+            if (deltaH < adornedElement.MinHeight)
+            {
+                /* 
+                 * Se asigna como nueva altura la minima permitada y el cambio en el desplazamiento superior de la figura 
+                 * sobre el canvas será igual a la diferencia entre la altura actual y la minima de la figura.
+                 */
+                deltaH = adornedElement.MinHeight;
+                topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+            /*
+             * La nueva coordenada 'y' de la figura sera la anterior más la nueva, si esta es menor que 0, es decir que 
+             * se sale del canvas entonces establecemos como coordenada 'y' de la figura 0.
+             */
+            double newCanvasTop = canvasTop + topOffset;
+            if (newCanvasTop < 0)
+                newCanvasTop = 0;
+
+            /* Actualizar alto de la figura y nueva coordenada 'y' de la figura sobre el canvas. */
+            adornedElement.Height = deltaH;
+            Canvas.SetTop(adornedElement, newCanvasTop);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TopRightDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BottomLeftDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BottomCenterDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BottomRightDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiddleLeftDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiddleRightDragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
+                return;
         }
     }
 }
