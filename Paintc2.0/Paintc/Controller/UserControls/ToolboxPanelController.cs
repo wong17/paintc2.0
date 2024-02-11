@@ -6,7 +6,6 @@ using Paintc.Service;
 using Paintc.Service.Collections;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Paintc.Controller.UserControls

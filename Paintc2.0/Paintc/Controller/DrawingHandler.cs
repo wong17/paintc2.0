@@ -246,6 +246,10 @@ namespace Paintc.Controller
                 return;
             }
 
+            // Si la figura a eliminar es la que esta actualmente seleccionada...
+            if (_selectedShape is not null && shape.Equals(_selectedShape))
+                _selectedShape = null;
+
             // Elimina forma del canvas y de la lista de formas
             _drawingPanel.CustomCanvas.Children.Remove(shape.GetShape());
             Shapes.Remove(shape);
