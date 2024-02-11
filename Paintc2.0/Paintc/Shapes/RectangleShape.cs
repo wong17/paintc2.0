@@ -18,7 +18,7 @@ namespace Paintc.Shapes
                 StrokeThickness = 1,
                 Fill = new SolidColorBrush(color),
                 MinHeight = 10,
-                MinWidth = 10,
+                MinWidth = 10
             };
         }
 
@@ -33,8 +33,8 @@ namespace Paintc.Shapes
             double top = height < 0 ? currentPosition.Y : LastMousePosition.Y;
             double rectWidth = Math.Abs(width);
             double rectHeight = Math.Abs(height);
-            double right = Math.Round(left + rectWidth);
-            double bottom = Math.Round(top + rectHeight);
+            double right = left + rectWidth;
+            double bottom = top + rectHeight;
 
             if (_rectangle.Parent is not Canvas canvas)
                 return;

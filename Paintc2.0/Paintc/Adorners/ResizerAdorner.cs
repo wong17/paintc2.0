@@ -1,9 +1,8 @@
-﻿using Paintc.View.UserControls;
-using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Paintc.Adorners
@@ -107,6 +106,57 @@ namespace Paintc.Adorners
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement) 
                 return;
 
+            double yCanvasTop = Canvas.GetTop(adornedElement);
+            double xCanvasLeft = Canvas.GetLeft(adornedElement);
+            double deltaY = e.VerticalChange;
+            double deltaX = e.HorizontalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            var mousePosition = Mouse.GetPosition(parentCanvas);
+            if (mousePosition.X < 0 || mousePosition.Y < 0)
+                return;
+
+            if (deltaY < 0 && yCanvasTop == 0 || deltaX < 0 && xCanvasLeft == 0)
+                return;
+
+            double deltaH = adornedElement.ActualHeight - deltaY;
+            double deltaW = adornedElement.ActualWidth - deltaX;
+
+            double topOffset = deltaY;
+            double leftOffset = deltaX;
+
+            if (deltaH < adornedElement.MinHeight)
+            {
+                deltaH = adornedElement.MinHeight;
+                topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                leftOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasTop = yCanvasTop + topOffset;
+            if (newCanvasTop < 0)
+                newCanvasTop = 0;
+
+            double newCanvasLeft = xCanvasLeft + leftOffset;
+            if (newCanvasLeft < 0)
+                newCanvasLeft = 0;
+
+            adornedElement.Height = deltaH;
+            Canvas.SetTop(adornedElement, newCanvasTop);
+            adornedElement.Width = deltaW;
+            Canvas.SetLeft(adornedElement, newCanvasLeft);
         }
 
         /// <summary>
@@ -124,6 +174,10 @@ namespace Paintc.Adorners
 
             /* Desplazamiento del thumb sobre el eje y */
             double deltaY = e.VerticalChange;
+
+            /* Referencia del canvas para conocer altura máxima que puede tomar la figura. */
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
 
             /*
              * Si el desplazamiento del thumb es negativo (hacia arriba) y la figura ya esta tocando la parte
@@ -159,6 +213,10 @@ namespace Paintc.Adorners
                 deltaH = adornedElement.MinHeight;
                 topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
             }
+            /* Se asigna como máxima altura de la figura el alto del canvas */
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
             /*
              * La nueva coordenada 'y' de la figura sera la anterior más la nueva, si esta es menor que 0, es decir que 
              * se sale del canvas entonces establecemos como coordenada 'y' de la figura 0.
@@ -181,6 +239,59 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double yCanvasTop = Canvas.GetTop(adornedElement);
+            double xCanvasRight = Canvas.GetRight(adornedElement);
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            var mousePosition = Mouse.GetPosition(parentCanvas);
+            if (mousePosition.X > parentCanvas.ActualWidth || mousePosition.Y < 0)
+                return;
+
+            double deltaY = e.VerticalChange;
+            double deltaX = e.HorizontalChange;
+
+            if (deltaY < 0 && yCanvasTop == 0 || deltaX > 0 && xCanvasRight == parentCanvas.ActualWidth)
+                return;
+
+            double deltaH = adornedElement.ActualHeight - deltaY;
+            double deltaW = adornedElement.ActualWidth + deltaX;
+
+            double topOffset = deltaY;
+            double rightOffset = deltaX;
+
+            if (deltaH < adornedElement.MinHeight)
+            {
+                deltaH = adornedElement.MinHeight;
+                topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                rightOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasTop = yCanvasTop + topOffset;
+            if (newCanvasTop < 0)
+                newCanvasTop = 0;
+
+            double newCanvasRight = xCanvasRight + rightOffset;
+            if (newCanvasRight > parentCanvas.ActualWidth)
+                newCanvasRight = parentCanvas.ActualWidth;
+
+            adornedElement.Height = deltaH;
+            adornedElement.Width = deltaW;
+            Canvas.SetTop(adornedElement, newCanvasTop);
+            Canvas.SetRight(adornedElement, newCanvasRight);
         }
 
         /// <summary>
@@ -192,6 +303,59 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double yCanvasBottom = Canvas.GetBottom(adornedElement);
+            double xCanvasLeft = Canvas.GetLeft(adornedElement);
+
+            double deltaY = e.VerticalChange;
+            double deltaX = e.HorizontalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            var mousePosition = Mouse.GetPosition(parentCanvas);
+            if (mousePosition.X < 0 || mousePosition.Y > parentCanvas.ActualHeight)
+                return;
+
+            if (deltaY > 0 && yCanvasBottom == parentCanvas.ActualHeight || deltaX < 0 && xCanvasLeft == 0)
+                return;
+
+            double deltaH = adornedElement.ActualHeight + deltaY;
+            double deltaW = adornedElement.ActualWidth - deltaX;
+
+            double bottomOffset = deltaY;
+            double leftOffset = deltaX;
+
+            if (deltaH < adornedElement.MinHeight)
+            {
+                deltaH = adornedElement.MinHeight;
+                bottomOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                leftOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasBottom = yCanvasBottom + bottomOffset;
+            if (newCanvasBottom > parentCanvas.ActualHeight)
+                newCanvasBottom = parentCanvas.ActualHeight;
+
+            double newCanvasLeft = xCanvasLeft + leftOffset;
+            if (newCanvasLeft < 0)
+                newCanvasLeft = 0;
+
+            adornedElement.Height = deltaH;
+            Canvas.SetBottom(adornedElement, newCanvasBottom);
+            adornedElement.Width = deltaW;
+            Canvas.SetLeft(adornedElement, newCanvasLeft);
         }
 
         /// <summary>
@@ -214,15 +378,18 @@ namespace Paintc.Adorners
                 return;
 
             double deltaH = adornedElement.ActualHeight + deltaY;
-            double topOffset = deltaY;
+            double bottomOffset = deltaY;
 
             if (deltaH < adornedElement.MinHeight)
             {
                 deltaH = adornedElement.MinHeight;
-                topOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+                bottomOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
             }
 
-            double newCanvasBottom = yCanvasBottom + topOffset;
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
+            double newCanvasBottom = yCanvasBottom + bottomOffset;
             if (newCanvasBottom > parentCanvas.ActualHeight)
                 newCanvasBottom = parentCanvas.ActualHeight;
 
@@ -240,6 +407,59 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double yCanvasBottom = Canvas.GetBottom(adornedElement);
+            double xCanvasRight = Canvas.GetRight(adornedElement);
+
+            double deltaY = e.VerticalChange;
+            double deltaX = e.HorizontalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            var mousePosition = Mouse.GetPosition(parentCanvas);
+            if (mousePosition.X > parentCanvas.ActualWidth || mousePosition.Y > parentCanvas.ActualHeight)
+                return;
+
+            if (deltaY > 0 && yCanvasBottom == parentCanvas.ActualHeight || deltaX > 0 && xCanvasRight == parentCanvas.ActualWidth)
+                return;
+
+            double deltaH = adornedElement.ActualHeight + deltaY;
+            double deltaW = adornedElement.ActualWidth + deltaX;
+
+            double bottomOffset = deltaY;
+            double rightOffset = deltaX;
+
+            if (deltaH < adornedElement.MinHeight)
+            {
+                deltaH = adornedElement.MinHeight;
+                bottomOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
+            }
+
+            if (deltaH > parentCanvas.ActualHeight)
+                deltaH = parentCanvas.ActualHeight;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                rightOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasBottom = yCanvasBottom + bottomOffset;
+            if (newCanvasBottom > parentCanvas.ActualHeight)
+                newCanvasBottom = parentCanvas.ActualHeight;
+
+            double newCanvasRight = xCanvasRight + rightOffset;
+            if (newCanvasRight > parentCanvas.ActualWidth)
+                newCanvasRight = parentCanvas.ActualWidth;
+
+            adornedElement.Height = deltaH;
+            adornedElement.Width = deltaW;
+            Canvas.SetBottom(adornedElement, newCanvasBottom);
+            Canvas.SetRight(adornedElement, newCanvasRight);
         }
 
         /// <summary>
@@ -251,6 +471,34 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double xCanvasLeft = Canvas.GetLeft(adornedElement);
+            double deltaX = e.HorizontalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            if (deltaX < 0 && xCanvasLeft == 0)
+                return;
+
+            double deltaW = adornedElement.ActualWidth - deltaX;
+            double leftOffset = deltaX;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                leftOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasLeft = xCanvasLeft + leftOffset;
+            if (newCanvasLeft < 0)
+                newCanvasLeft = 0;
+
+            adornedElement.Width = deltaW;
+            Canvas.SetLeft(adornedElement, newCanvasLeft);
         }
 
         /// <summary>
@@ -262,6 +510,34 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
+
+            double xCanvasRight = Canvas.GetRight(adornedElement);
+            double deltaX = e.HorizontalChange;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            if (deltaX > 0 && xCanvasRight == parentCanvas.ActualWidth)
+                return;
+
+            double deltaW = adornedElement.ActualWidth + deltaX;
+            double rightOffset = deltaX;
+
+            if (deltaW < adornedElement.MinWidth)
+            {
+                deltaW = adornedElement.MinWidth;
+                rightOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
+            }
+            if (deltaW > parentCanvas.ActualWidth)
+                deltaW = parentCanvas.ActualWidth;
+
+            double newCanvasRight = xCanvasRight + rightOffset;
+            if (newCanvasRight > parentCanvas.ActualWidth)
+                newCanvasRight = parentCanvas.ActualWidth;
+
+            adornedElement.Width = deltaW;
+            Canvas.SetRight(adornedElement, newCanvasRight);
+
         }
     }
 }

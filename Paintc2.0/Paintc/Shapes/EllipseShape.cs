@@ -36,10 +36,23 @@ namespace Paintc.Shapes
             CurrentMousePosition = currentPosition;
             double width = currentPosition.X - LastMousePosition.X;
             double height = currentPosition.Y - LastMousePosition.Y;
-            Canvas.SetLeft(_ellipse, width < 0 ? currentPosition.X : LastMousePosition.X);
-            Canvas.SetTop(_ellipse, height < 0 ? currentPosition.Y : LastMousePosition.Y);
-            _ellipse.Width = Math.Abs(width);
-            _ellipse.Height = Math.Abs(height);
+            double left = width < 0 ? currentPosition.X : LastMousePosition.X;
+            double top = height < 0 ? currentPosition.Y : LastMousePosition.Y;
+            double ellipseWidth = Math.Abs(width);
+            double ellipseHeight = Math.Abs(height);
+            double right = Math.Round(left + ellipseWidth);
+            double bottom = Math.Round(top + ellipseHeight);
+
+            if (_ellipse.Parent is not Canvas canvas)
+                return;
+
+            Canvas.SetLeft(_ellipse, left);
+            Canvas.SetTop(_ellipse, top);
+            _ellipse.Width = Math.Abs(ellipseWidth);
+            _ellipse.Height = Math.Abs(ellipseHeight);
+
+            Canvas.SetRight(_ellipse, right > canvas.ActualWidth ? canvas.ActualWidth : right);
+            Canvas.SetBottom(_ellipse, bottom > canvas.ActualHeight ? canvas.ActualHeight : bottom);
         }
 
         public override Shape GetShape() => _ellipse;
