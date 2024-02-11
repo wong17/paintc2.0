@@ -280,44 +280,81 @@ namespace Paintc.Controller
             // Si se hace click en el canvas quitar adorno de la figura anteriormente seleccionada
             if (e.OriginalSource == _drawingPanel?.CustomCanvas && _selectedShape is not null)
             {
-                ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
-                ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
+                SetAdorners(_selectedShape.GetShape(), false);
                 _selectedShape = null;
                 return;
             }
 
             // Mostrar adorno de cada figura que se haga click...
             if (e.OriginalSource is Rectangle rectangle)
-            {
-                // Si ya hay un rectangulo seleccionado...
-                if (_selectedShape is not null)
-                {
-                    ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
-                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
-                    _selectedShape = null;
-                }
-                _selectedShape = Shapes.Where(s => s is RectangleShape r && r.GetShape().Equals(rectangle)).First();
-            }
+                ShowAdornersToRectangle(rectangle);
 
             if (e.OriginalSource is Ellipse ellipse)
-            {
-                // Si ya hay una ellipse seleccionada...
-                if (_selectedShape is not null)
-                {
-                    ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), false);
-                    ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), false);
-                    _selectedShape = null;
-                }
-                _selectedShape = Shapes.Where(s => s is EllipseShape e && e.GetShape().Equals(ellipse)).First();
-            }
+                ShowAdornersToEllipse(ellipse);
 
             if (_selectedShape is null)
                 return;
 
-            ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), true);
-            ShapeBase.SetShowResizeAdorner(_selectedShape.GetShape(), true);
+            SetAdorners(_selectedShape.GetShape(), true);
         }
 
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="show"></param>
+        private static void SetAdorners(Shape shape, bool show)
+        {
+            ShapeBase.SetShowSelectionAdorner(shape, show);
+            ShapeBase.SetShowResizeAdorner(shape, show);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void ShowAdorners(Shape shape)
+        {
+            if (shape is Rectangle rectangle)
+                ShowAdornersToRectangle(rectangle);
+
+            if (shape is Ellipse ellipse)
+                ShowAdornersToEllipse(ellipse);
+
+            if (_selectedShape is null)
+                return;
+
+            SetAdorners(_selectedShape.GetShape(), true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rectangle"></param>
+        private void ShowAdornersToRectangle(Rectangle rectangle)
+        {
+            if (_selectedShape is not null)
+            {
+                SetAdorners(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+            }
+            _selectedShape = Shapes.Where(s => s is RectangleShape r && r.GetShape().Equals(rectangle)).First();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ellipse"></param>
+        private void ShowAdornersToEllipse(Ellipse ellipse)
+        {
+            if (_selectedShape is not null)
+            {
+                SetAdorners(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+            }
+            _selectedShape = Shapes.Where(s => s is EllipseShape e && e.GetShape().Equals(ellipse)).First();
+        }
     }
 }

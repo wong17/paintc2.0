@@ -6,6 +6,7 @@ using Paintc.Service;
 using Paintc.Service.Collections;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Paintc.Controller.UserControls
@@ -16,6 +17,7 @@ namespace Paintc.Controller.UserControls
         public ICommand? CGAButtonsClick { get; private set; }
         public ICommand? RemoveAllShapesClick { get; private set; }
         public ICommand? RemoveShapeClick { get; private set; }
+        public ICommand? ListViewSelectedItem { get; private set; }
         /// <summary>
         /// Lista de herramientas disponibles para utilizar
         /// </summary>
@@ -38,6 +40,28 @@ namespace Paintc.Controller.UserControls
             CGAButtonsClick = new RelayCommand((obj) => true, CGAButtonsClickCommand);
             RemoveAllShapesClick = new RelayCommand((obj) => true, RemoveAllShapesClickCommand);
             RemoveShapeClick = new RelayCommand((obj) => true, RemoveShapeClickCommand);
+            ListViewSelectedItem = new RelayCommand((obj) => true, ListViewSelectedItemCommand);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ListViewSelectedItemCommand(object? shapeName)
+        {
+            if (shapeName is null)
+                return;
+
+            var shape = DrawingHandler.Instance.Shapes
+                .Where(s => s is not null)
+                .First(s => s?.Name is not null && s.Equals(shapeName));
+
+            if (shape is null)
+                return;
+
+            DrawingHandler.Instance.ShowAdorners(shape.GetShape());
+            ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+            StatusBarPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
         }
 
         /// <summary>

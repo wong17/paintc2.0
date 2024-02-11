@@ -70,7 +70,7 @@
         <!--Shapes explorer-->
         <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
         <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single">
             <!--Layout-->
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -99,6 +99,13 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <!-- Evento SelectionChanged del ListView -->
+            <behavior:Interaction.Triggers>
+                <behavior:EventTrigger EventName="SelectionChanged">
+                    <behavior:InvokeCommandAction Command="{Binding ListViewSelectedItem}" 
+                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
+                </behavior:EventTrigger>
+            </behavior:Interaction.Triggers>
         </ListView>
         <!---->
         <Button Grid.Row="5" Content="Remove all" Style="{StaticResource RemoveAllShapesBtn}" Command="{Binding RemoveAllShapesClick}"/>
