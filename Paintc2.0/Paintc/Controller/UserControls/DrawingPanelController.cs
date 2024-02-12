@@ -1,4 +1,5 @@
 ﻿using Paintc.Core;
+using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.View.UserControls;
@@ -42,10 +43,33 @@ namespace Paintc.Controller.UserControls
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
             _drawingPanel.MainScrollViewer.PreviewMouseWheel += MainScrollViewer_PreviewMouseWheel;
+            _drawingPanel.MainScrollViewer.PreviewMouseMove += MainScrollViewer_PreviewMouseMove;
             _drawingPanel.CustomCanvas.MouseWheel += CustomCanvas_MouseWheel;
             _drawingPanel.CustomCanvas.MouseLeftButtonDown += CustomCanvas_MouseLeftButtonDown;
             _drawingPanel.CustomCanvas.MouseRightButtonDown += CustomCanvas_MouseRightButtonDown;
             _drawingPanel.CustomCanvas.MouseMove += CustomCanvas_MouseMove;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainScrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (DrawingHandler.Instance.State == DrawingState.Finished)
+                return;
+
+            if (DrawingHandler.Instance.Toolbox is null)
+                return;
+
+            /* Para terminar y agregar figura al explorador cuando se esta dibujando y se suelta el click izquierdo fuera del canvas. */
+            var currentTool = DrawingHandler.Instance.Toolbox.CurrentTool;
+            if (e.LeftButton == MouseButtonState.Released && (currentTool != ToolType.SelectTool || currentTool != ToolType.FillerTool || currentTool != ToolType.EraserTool))
+            {
+                DrawingHandler.Instance.FinishAndAddShape();
+                e.Handled = true;
+            }
         }
 
         #region ZOOM
@@ -139,6 +163,8 @@ namespace Paintc.Controller.UserControls
 
         #endregion
 
+        #region CUSTOMCANVAS_EVENTS
+
         private void CustomCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             DrawingHandler.Instance.OnMouseMove(sender, e);
@@ -154,6 +180,8 @@ namespace Paintc.Controller.UserControls
         {
             DrawingHandler.Instance.OnMouseRightButtonDown(sender, e);
         }
+
+        #endregion
 
     }
 }

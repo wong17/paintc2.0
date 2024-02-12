@@ -52,10 +52,12 @@ namespace Paintc.Controller
         /// Referencia de la herramienta que se esta utilizando
         /// </summary>
         private Toolbox? _toolbox;
+        public Toolbox? Toolbox { get => _toolbox; }
         /// <summary>
         /// 
         /// </summary>
         private DrawingState _state = DrawingState.Finished;
+        public DrawingState State { get => _state; }
         /// <summary>
         /// 
         /// </summary>
@@ -199,12 +201,21 @@ namespace Paintc.Controller
             }
             else if (e.LeftButton == MouseButtonState.Released && _state == DrawingState.Drawing)
             {
-                _state = DrawingState.Finished;
-                Shapes.Add(_currentShape);
+                FinishAndAddShape();
             }
         }
 
         #endregion
+
+        /// <summary>
+        /// Se invoca desde el evento MouseMove de esta clase cuando se esta dibujando una figura y se suelta el click izquierdo sobre el canvas,
+        /// se invoca desde el evento PreviewMouseMove del ScrollViewer cuando se esta dibujando la figura y se suelta el click izquierdo fuera del canvas
+        /// </summary>
+        public void FinishAndAddShape()
+        {
+            _state = DrawingState.Finished;
+            Shapes.Add(_currentShape);
+        }
 
         /// <summary>
         /// Limpia el canvas, lista de formas y contador
@@ -248,7 +259,10 @@ namespace Paintc.Controller
 
             // Si la figura a eliminar es la que esta actualmente seleccionada...
             if (_selectedShape is not null && shape.Equals(_selectedShape))
+            {
+                SetAdorners(_selectedShape.GetShape(), false);
                 _selectedShape = null;
+            }
 
             // Elimina forma del canvas y de la lista de formas
             _drawingPanel.CustomCanvas.Children.Remove(shape.GetShape());
