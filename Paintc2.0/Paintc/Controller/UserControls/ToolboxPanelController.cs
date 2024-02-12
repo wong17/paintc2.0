@@ -58,7 +58,7 @@ namespace Paintc.Controller.UserControls
             if (shape is null)
                 return;
 
-            DrawingHandler.Instance.ShowAdorners(shape.GetShape());
+            DrawingHandler.Instance.ShowSelectedShapeAdorners(shape.GetShape());
             ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             StatusBarPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
         }

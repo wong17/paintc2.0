@@ -45,58 +45,32 @@ namespace Paintc.Core
         /// <param name="e"></param>
         private static void OnShowResizeAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            bool showAdorner = (bool)e.NewValue;
-            if (showAdorner)
+            if (d is not Shape shape)
+                return;
+
+            bool showAdorner = Convert.ToBoolean(e.NewValue);
+            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
+            // Si es la herramienta de PencilTool
+            if (showAdorner && shape is Polyline)
             {
-                if (d is Rectangle rectangle)
-                {
-                    var adornerLayer = AdornerLayer.GetAdornerLayer(rectangle);
-                    adornerLayer?.Add(new ResizerAdorner(rectangle));
-                }
-
-                if (d is Ellipse ellipse)
-                {
-                    var adornerLayer = AdornerLayer.GetAdornerLayer(ellipse);
-                    adornerLayer?.Add(new ResizerAdorner(ellipse));
-                }
-
+                adornerLayer?.Add(new PolylineResizerAdorner(shape));
                 return;
             }
-
-            // Ocultar el adorno
-            if (d is Rectangle rect)
+            // Si es otra herramienta...
+            if (showAdorner && shape is not Polyline)
             {
-                var adornerLayer = AdornerLayer.GetAdornerLayer(rect);
-                if (adornerLayer is null)
-                    return;
-
-                var adorners = adornerLayer.GetAdorners(rect);
-                foreach (var adorner in adorners)
-                {
-                    if (adorner is null)
-                        continue;
-
-                    if (adorner is ResizerAdorner)
-                        adornerLayer.Remove(adorner);
-                }
+                adornerLayer?.Add(new ResizerAdorner(shape));
+                return;
             }
-
-            if (d is Ellipse ellip)
+            
+            // Ocultar el adorno si es la herramienta de PencilTool
+            if (!showAdorner && shape is Polyline)
             {
-                var adornerLayer = AdornerLayer.GetAdornerLayer(ellip);
-                if (adornerLayer is null)
-                    return;
-
-                var adorners = adornerLayer.GetAdorners(ellip);
-                foreach (var adorner in adorners)
-                {
-                    if (adorner is null)
-                        continue;
-
-                    if (adorner is ResizerAdorner)
-                        adornerLayer.Remove(adorner);
-                }
+                RemoveAdorner<PolylineResizerAdorner>(shape);
+                return;
             }
+            // Ocultar el adorno si es otra herramienta...
+            RemoveAdorner<ResizerAdorner>(shape);
         }
 
         /// <summary>
@@ -106,57 +80,56 @@ namespace Paintc.Core
         /// <param name="e"></param>
         private static void OnShowSelectionAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            bool showAdorner = (bool)e.NewValue;
-            if (showAdorner)
+            if (d is not Shape shape)
+                return;
+
+            bool showAdorner = Convert.ToBoolean(e.NewValue);
+            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
+            // Si es la herramienta de PencilTool
+            if (showAdorner && shape is Polyline)
             {
-                if (d is Rectangle rectangle)
-                {
-                    var adornerLayer = AdornerLayer.GetAdornerLayer(rectangle);
-                    adornerLayer?.Add(new SelectionAdorner(rectangle));
-                }
-
-                if (d is Ellipse ellipse)
-                {
-                    var adornerLayer = AdornerLayer.GetAdornerLayer(ellipse);
-                    adornerLayer?.Add(new SelectionAdorner(ellipse));
-                }
-
+                adornerLayer?.Add(new PolylineSelectionAdorner(shape));
+                return;
+            }
+            // Si es otra herramienta...
+            if (showAdorner && shape is not Polyline)
+            {
+                adornerLayer?.Add(new SelectionAdorner(shape));
                 return;
             }
 
-            // Ocultar el adorno
-            if (d is Rectangle rect)
+            // Ocultar el adorno si es la herramienta de PencilTool
+            if (!showAdorner && shape is Polyline)
             {
-                var adornerLayer = AdornerLayer.GetAdornerLayer(rect);
-                if (adornerLayer is null)
-                    return;
-
-                var adorners = adornerLayer.GetAdorners(rect);
-                foreach (var adorner in adorners)
-                {
-                    if (adorner is null)
-                        continue;
-
-                    if (adorner is SelectionAdorner)
-                        adornerLayer.Remove(adorner);
-                }
+                RemoveAdorner<PolylineSelectionAdorner>(shape);
+                return;
             }
+            // Ocultar el adorno si es otra herramienta...
+            RemoveAdorner<SelectionAdorner>(shape);
+        }
 
-            if (d is Ellipse ellip)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="shape"></param>
+        private static void RemoveAdorner<T>(Shape shape) where T : Adorner
+        {
+            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
+            if (adornerLayer is null)
+                return;
+
+            var adorners = adornerLayer.GetAdorners(shape);
+            if (adorners is null)
+                return;
+
+            foreach (var adorner in adorners)
             {
-                var adornerLayer = AdornerLayer.GetAdornerLayer(ellip);
-                if (adornerLayer is null)
-                    return;
+                if (adorner is null)
+                    continue;
 
-                var adorners = adornerLayer.GetAdorners(ellip);
-                foreach (var adorner in adorners)
-                {
-                    if (adorner is null)
-                        continue;
-
-                    if (adorner is SelectionAdorner)
-                        adornerLayer.Remove(adorner);
-                }
+                if (adorner is T)
+                    adornerLayer.Remove(adorner);
             }
         }
     }
