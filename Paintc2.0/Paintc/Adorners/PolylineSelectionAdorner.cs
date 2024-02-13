@@ -6,24 +6,20 @@ using System.Windows.Shapes;
 
 namespace Paintc.Adorners
 {
-    public class PolylineSelectionAdorner : Adorner
+    public class PolylineSelectionAdorner(UIElement adornedElement) : Adorner(adornedElement)
     {
-        private readonly Rect rect;
-        private readonly Pen _renderPen;
-        private readonly DoubleAnimation _dashOffsetAnimation;
-
-        public PolylineSelectionAdorner(UIElement adornedElement) : base(adornedElement)
+        protected override void OnRender(DrawingContext drawingContext)
         {
-            var polyline = (Polyline) adornedElement;
+            var polyline = (Polyline)AdornedElement;
             // Rectángulo final que rodea la figura
-            rect = polyline.RenderedGeometry.Bounds;
+            Rect rect = polyline.RenderedGeometry.Bounds;
             // Crear trazo de lineas discontinuas para usar como borde de la figura/forma
-            _renderPen = new(Brushes.DodgerBlue, 2)
+            Pen renderPen = new(Brushes.DodgerBlue, 2)
             {
                 DashStyle = new DashStyle(new double[] { 4, 4 }, 0)
             };
             // Crea la animación de desplazamiento del trazo de lineas discontinuas
-            _dashOffsetAnimation = new()
+            DoubleAnimation dashOffsetAnimation = new()
             {
                 From = 0,
                 To = 15,
@@ -32,13 +28,9 @@ namespace Paintc.Adorners
                 SpeedRatio = 1
             };
             // Aplicamos la animación al DashOffset del DashStyle del Pen
-            _renderPen.DashStyle.BeginAnimation(DashStyle.OffsetProperty, _dashOffsetAnimation);
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
+            renderPen.DashStyle.BeginAnimation(DashStyle.OffsetProperty, dashOffsetAnimation);
             // Dibujamos el rectángulo con el trazo animado
-            drawingContext.DrawRectangle(Brushes.Transparent, _renderPen, rect);
+            drawingContext.DrawRectangle(Brushes.Transparent, renderPen, rect);
         }
     }
 }
