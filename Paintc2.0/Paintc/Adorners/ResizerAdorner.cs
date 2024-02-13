@@ -14,14 +14,14 @@ namespace Paintc.Adorners
 
         public ResizerAdorner(UIElement adornedElement) : base(adornedElement)
         {
-            _topLeft = Create();
-            _topCenter = Create();
-            _topRight = Create();
-            _bottomLeft = Create();
-            _bottomCenter = Create();
-            _bottomRight = Create();
-            _middleLeft = Create();
-            _middleRight = Create();
+            _topLeft = Create(Cursors.SizeNWSE);
+            _topCenter = Create(Cursors.SizeNS);
+            _topRight = Create(Cursors.SizeNESW);
+            _bottomLeft = Create(Cursors.SizeNESW);
+            _bottomCenter = Create(Cursors.SizeNS);
+            _bottomRight = Create(Cursors.SizeNWSE);
+            _middleLeft = Create(Cursors.SizeWE);
+            _middleRight = Create(Cursors.SizeWE);
 
             _topLeft.DragDelta += TopLeftDragDelta;
             _topCenter.DragDelta += TopCenterDragDelta;
@@ -49,12 +49,13 @@ namespace Paintc.Adorners
         /// Create a new thumb
         /// </summary>
         /// <returns></returns>
-        private static Thumb Create()
+        private static Thumb Create(Cursor cursor)
         {
             var thumb = new Thumb() { 
                 Background = Brushes.DodgerBlue, 
                 Width = 10, Height = 10, 
-                BorderBrush = new SolidColorBrush(Colors.DodgerBlue)
+                BorderBrush = new SolidColorBrush(Colors.DodgerBlue),
+                Cursor = cursor
             };
             return thumb;
         }
