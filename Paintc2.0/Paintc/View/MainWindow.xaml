@@ -18,11 +18,11 @@
         <!--Menu-->
         <Menu Grid.Row="0" Style="{StaticResource MenuStyle}">
             <MenuItem Header="File" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}"/>
-                <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}"/>
+                <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
+                <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
             <MenuItem Header="Help" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}"/>
+                <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
         </Menu>
 

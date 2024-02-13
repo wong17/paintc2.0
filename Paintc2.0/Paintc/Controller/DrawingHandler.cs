@@ -9,6 +9,7 @@ using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Paintc.Controller
@@ -274,41 +275,7 @@ namespace Paintc.Controller
         /// </summary>
         /// <param name="tool"></param>
         /// <returns></returns>
-        private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}-{++_globalShapeCounter}";
-
-        #region TOOL_LEFTMOUSEDOWN
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FillerToolLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectToolLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Si se hace click en el canvas quitar adorno de la figura anteriormente seleccionada
-            if (e.OriginalSource == _drawingPanel?.CustomCanvas && _selectedShape is not null)
-            {
-                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
-                _selectedShape = null;
-                return;
-            }
-
-            // Mostrar adorno de la figura que se haga click...
-            if (e.OriginalSource is Shape shape)
-                ShowSelectedShapeAdorners(shape);
-        }
-
-        #endregion
+        private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}{++_globalShapeCounter}";
 
         /// <summary>
         /// Mostrar u ocultar el adorno de cada figura por medio de sus attached properties
@@ -341,5 +308,46 @@ namespace Paintc.Controller
             SetShowAdornersAttachedProperties(_selectedShape.GetShape(), true);
         }
 
+        #region TOOL_LEFTMOUSEDOWN
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FillerToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Si se hace click en una figura...
+            if (e.OriginalSource is Shape shape)
+            {
+                var selectedShape = Shapes.FirstOrDefault(s => s is not null && s.GetShape().Equals(shape));
+                if (selectedShape is null)
+                    return;
+
+                selectedShape.GetShape().Fill = new SolidColorBrush(CGAColorPaletteService.GetColor(_currentColor));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Si se hace click en el canvas quitar adorno de la figura anteriormente seleccionada
+            if (e.OriginalSource == _drawingPanel?.CustomCanvas && _selectedShape is not null)
+            {
+                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+                return;
+            }
+
+            // Mostrar adorno de la figura que se haga click...
+            if (e.OriginalSource is Shape shape)
+                ShowSelectedShapeAdorners(shape);
+        }
+
+        #endregion
     }
 }
