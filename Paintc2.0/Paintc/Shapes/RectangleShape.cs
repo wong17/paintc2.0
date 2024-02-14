@@ -51,8 +51,6 @@ namespace Paintc.Shapes
         public override void SetLastMousePosition(Point lastPosition)
         {
             LastMousePosition = lastPosition;
-            _rectangle.Width = 0;
-            _rectangle.Height = 0;
             Canvas.SetLeft(_rectangle, lastPosition.X);
             Canvas.SetTop(_rectangle, lastPosition.Y);
         }
