@@ -36,6 +36,12 @@ namespace Paintc.Core
         public static bool GetShowSelectionAdorner(UIElement element) => (bool)element.GetValue(ShowSelectionAdornerProperty);
         public static void SetShowSelectionAdorner(UIElement element, bool value) => element.SetValue(ShowSelectionAdornerProperty, value);
 
+
+        public static readonly DependencyProperty ShowDragAdornerProperty =
+            DependencyProperty.RegisterAttached("ShowDragAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowDragAdornerChanged));
+        public static bool GetShowDragAdorner(UIElement element) => (bool)element.GetValue(ShowDragAdornerProperty);
+        public static void SetShowDragAdorner(UIElement element, bool value) => element.SetValue(ShowDragAdornerProperty, value);
+
         #endregion
 
         /// <summary>
@@ -56,8 +62,15 @@ namespace Paintc.Core
                 adornerLayer?.Add(new PolylineResizerAdorner(shape));
                 return;
             }
+            // Si es la herramienta de LineTool
+            if (showAdorner && shape is Line)
+            {
+                
+                return;
+            }
+
             // Si es otra herramienta...
-            if (showAdorner && shape is not Polyline)
+            if (showAdorner && (shape is Rectangle || shape is Ellipse))
             {
                 adornerLayer?.Add(new ResizerAdorner(shape));
                 return;
@@ -69,6 +82,13 @@ namespace Paintc.Core
                 RemoveAdorner<PolylineResizerAdorner>(shape);
                 return;
             }
+            // Ocultar el adorno si es la herramienta de LineTool
+            if (!showAdorner && shape is Line)
+            {
+                
+                return;
+            }
+
             // Ocultar el adorno si es otra herramienta...
             RemoveAdorner<ResizerAdorner>(shape);
         }
@@ -91,8 +111,14 @@ namespace Paintc.Core
                 adornerLayer?.Add(new PolylineSelectionAdorner(shape));
                 return;
             }
+            // Si es la herramienta de LineTool
+            if (showAdorner && shape is Line)
+            {
+
+                return;
+            }
             // Si es otra herramienta...
-            if (showAdorner && shape is not Polyline)
+            if (showAdorner && (shape is Rectangle || shape is Ellipse))
             {
                 adornerLayer?.Add(new SelectionAdorner(shape));
                 return;
@@ -104,8 +130,62 @@ namespace Paintc.Core
                 RemoveAdorner<PolylineSelectionAdorner>(shape);
                 return;
             }
+            // Ocultar el adorno si es la herramienta de LineTool
+            if (!showAdorner && shape is Line)
+            {
+
+                return;
+            }
             // Ocultar el adorno si es otra herramienta...
             RemoveAdorner<SelectionAdorner>(shape);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnShowDragAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Shape shape)
+                return;
+
+            bool showAdorner = Convert.ToBoolean(e.NewValue);
+            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
+            // Si es la herramienta de PencilTool
+            if (showAdorner && shape is Polyline)
+            {
+                
+                return;
+            }
+            // Si es la herramienta de LineTool
+            if (showAdorner && shape is Line)
+            {
+
+                return;
+            }
+
+            // Si es otra herramienta...
+            if (showAdorner && (shape is Rectangle || shape is Ellipse))
+            {
+                adornerLayer?.Add(new DragAdorner(shape));
+                return;
+            }
+
+            // Ocultar el adorno si es la herramienta de PencilTool
+            if (!showAdorner && shape is Polyline)
+            {
+                
+                return;
+            }
+            // Ocultar el adorno si es la herramienta de LineTool
+            if (!showAdorner && shape is Line)
+            {
+
+                return;
+            }
+
+            RemoveAdorner<DragAdorner>(shape);
         }
 
         /// <summary>

@@ -286,6 +286,7 @@ namespace Paintc.Controller
         {
             ShapeBase.SetShowSelectionAdorner(shape, show);
             ShapeBase.SetShowResizeAdorner(shape, show);
+            ShapeBase.SetShowDragAdorner(shape, show);
         }
 
         /// <summary>
