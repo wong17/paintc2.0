@@ -97,9 +97,16 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="IsChecked" Value="False"></Setter>
         <Setter Property="IsEnabled" Value="False"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="White"></Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="LightGray"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     <!--TabItem-->
