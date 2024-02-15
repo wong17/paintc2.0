@@ -59,7 +59,7 @@ namespace Paintc.Controller.UserControls
                 return;
 
             DrawingHandler.Instance.ShowSelectedShapeAdorners(shape.GetShape());
-            ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+            ToolboxPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             StatusBarPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
         }
 
@@ -89,7 +89,7 @@ namespace Paintc.Controller.UserControls
                 return;
 
             var toolType = (ToolType)sender;
-            ToolSelectionService.Instance.UpdateCurrentTool(toolType);
+            ToolboxPanelService.Instance.UpdateCurrentTool(toolType);
             StatusBarPanelService.Instance.UpdateCurrentTool(toolType);
         }
 
@@ -103,7 +103,7 @@ namespace Paintc.Controller.UserControls
                 return;
 
             var color = (CGAColorPalette)parameter;
-            SelectedColorService.Instance.UpdateSelectedColor(color);
+            ToolboxPanelService.Instance.UpdateSelectedColor(color);
             StatusBarPanelService.Instance.UpdateCurrentColor(color);
         }
 

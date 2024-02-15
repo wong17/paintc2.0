@@ -30,10 +30,10 @@ namespace Paintc.Controller
             set
             {
                 _drawingPanel = value;
-                ToolSelectionService.Instance.ToolboxEventHandler += ToolboxEventHandler;
-                ToolSelectionService.Instance.UpdateCurrentTool(ToolType.SelectTool);
-                
-                SelectedColorService.Instance.UpdateSelectedColorEventHandler += UpdateSelectedColorEventHandler;
+                ToolboxPanelService.Instance.ToolboxEventHandler += ToolboxEventHandler;
+                ToolboxPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
+
+                ToolboxPanelService.Instance.UpdateSelectedColorEventHandler += UpdateSelectedColorEventHandler;
             }
         }
 

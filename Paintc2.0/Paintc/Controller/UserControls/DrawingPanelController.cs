@@ -37,8 +37,8 @@ namespace Paintc.Controller.UserControls
             _drawingPanel = drawingPanel;
 
             DrawingHandler.Instance.DrawingPanel = drawingPanel;
-            CanvasResizerService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
-            CanvasBackgroundColorChangerService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
+            DrawingPanelPropertiesService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
+            DrawingPanelPropertiesService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
 
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
@@ -136,7 +136,7 @@ namespace Paintc.Controller.UserControls
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
                 {
-                    CanvasResizerService.Instance.UpdateGraphicModeSelection(false);
+                    DrawingPanelPropertiesService.Instance.UpdateGraphicModeSelection(false);
                     return;
                 }
 
@@ -144,7 +144,7 @@ namespace Paintc.Controller.UserControls
             }
             _drawingPanel.CustomCanvas.Width = _graphicMode.Width;
             _drawingPanel.CustomCanvas.Height = _graphicMode.Height;
-            CanvasResizerService.Instance.UpdateGraphicModeSelection(true);
+            DrawingPanelPropertiesService.Instance.UpdateGraphicModeSelection(true);
         }
 
         #endregion

@@ -43,8 +43,8 @@ namespace Paintc.Controller.UserControls
             _drawingPanelProperties.GraphicsModeCmbbox.DisplayMemberPath = "DisplayName";
             _drawingPanelProperties.GraphicsModeCmbbox.SelectedItem = _currentGraphiceMode;
 
-            CanvasResizerService.Instance.UpdateGraphicModeSelectionEventHandler += UpdateGraphicModeSelection;
-            CanvasBackgroundColorChangerService.Instance.ChangeBackgroundColor(_currentColor);
+            DrawingPanelPropertiesService.Instance.UpdateGraphicModeSelectionEventHandler += UpdateGraphicModeSelection;
+            DrawingPanelPropertiesService.Instance.ChangeBackgroundColor(_currentColor);
             _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
         }
 
@@ -79,7 +79,7 @@ namespace Paintc.Controller.UserControls
 
             // Notificar solo cuando se seleccione una resolución distinta
             if (!selectedGraphicMode.DisplayName.Equals(_currentGraphiceMode))
-                CanvasResizerService.Instance.UpdateGraphicMode(selectedGraphicMode);
+                DrawingPanelPropertiesService.Instance.UpdateGraphicMode(selectedGraphicMode);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Paintc.Controller.UserControls
                 // Actualizar nuevo color...
                 _currentColor = color;
                 // Cambiar color del fondo
-                CanvasBackgroundColorChangerService.Instance.ChangeBackgroundColor(_currentColor);
+                DrawingPanelPropertiesService.Instance.ChangeBackgroundColor(_currentColor);
                 _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
             }
         }

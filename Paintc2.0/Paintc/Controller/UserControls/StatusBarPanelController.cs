@@ -20,7 +20,7 @@ namespace Paintc.Controller.UserControls
             // Herramienta inicial: Selection, Color inicial: Black
             StatusBarPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
             StatusBarPanelService.Instance.UpdateCurrentColor(CGAColorPalette.Black);
-            SelectedColorService.Instance.UpdateSelectedColor(CGAColorPalette.Black);
+            ToolboxPanelService.Instance.UpdateSelectedColor(CGAColorPalette.Black);
         }
         /// <summary>
         /// Actualiza la posición del mouse sobre el canvas en la barra de estado
