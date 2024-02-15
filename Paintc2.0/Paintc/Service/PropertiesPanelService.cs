@@ -1,12 +1,13 @@
-﻿using Paintc.Model;
+﻿using Paintc.Core;
+using Paintc.Model;
 
 namespace Paintc.Service
 {
-    public class DrawingPanelPropertiesService
+    public class PropertiesPanelService
     {
-        private static readonly DrawingPanelPropertiesService _instance = new();
-        public static DrawingPanelPropertiesService Instance => _instance;
-        private DrawingPanelPropertiesService() { }
+        private static readonly PropertiesPanelService _instance = new();
+        public static PropertiesPanelService Instance => _instance;
+        private PropertiesPanelService() { }
 
         // Cuando se seleccione una resolución en el combobox
         public event EventHandler<GraphicMode?>? CanvasResizerEventHandler;
@@ -22,5 +23,10 @@ namespace Paintc.Service
         public event EventHandler<CGAColor>? ChangeBackgroundColorEventHandler;
         public void ChangeBackgroundColor(CGAColor color) => NotifyObservers(color);
         private void NotifyObservers(CGAColor color) => ChangeBackgroundColorEventHandler?.Invoke(this, color);
+
+        // Notifica cuando hay una forma/figura seleccionada para habilitar o deshabilitar opciones
+        public event EventHandler<ShapeBase?>? SetEnableShapeOptionsEventHandler;
+        public void SetEnableShapeOptions(ShapeBase? selecteShape) => NotifyObservers(selecteShape);
+        private void NotifyObservers(ShapeBase? selecteShape) => SetEnableShapeOptionsEventHandler?.Invoke(this, selecteShape);
     }
 }

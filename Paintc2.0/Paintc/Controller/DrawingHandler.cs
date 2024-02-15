@@ -278,7 +278,7 @@ namespace Paintc.Controller
         private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}{++_globalShapeCounter}";
 
         /// <summary>
-        /// Mostrar u ocultar el adorno de cada figura por medio de sus attached properties
+        /// Mostrar u ocultar todos los adornos de cada figura por medio de sus attached properties
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="show"></param>
@@ -286,6 +286,28 @@ namespace Paintc.Controller
         {
             ShapeBase.SetShowSelectionAdorner(shape, show);
             ShapeBase.SetShowResizeAdorner(shape, show);
+            ShapeBase.SetShowDragAdorner(shape, show);
+        }
+
+        /// <summary>
+        /// Mostrar adorno de selección y de cambio de tamaño de la figura
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="show"></param>
+        private static void SetResizerAdornerAttachedProperty(Shape shape, bool show)
+        {
+            ShapeBase.SetShowSelectionAdorner(shape, show);
+            ShapeBase.SetShowResizeAdorner(shape, show);
+        }
+
+        /// <summary>
+        /// Muestra adorno de selección y arrastrable de la figura
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="show"></param>
+        private static void SetDraggableAdornerAttachedProperty(Shape shape, bool show)
+        {
+            ShapeBase.SetShowSelectionAdorner(shape, show);
             ShapeBase.SetShowDragAdorner(shape, show);
         }
 
@@ -306,7 +328,46 @@ namespace Paintc.Controller
             if (_selectedShape is null)
                 return;
 
-            SetShowAdornersAttachedProperties(_selectedShape.GetShape(), true);
+            // Sino se puede arrastrar ni cambiar de tamaño
+            if (!_selectedShape.IsResizableProperty && !_selectedShape.IsDraggableProperty)
+            {
+                ShapeBase.SetShowSelectionAdorner(_selectedShape.GetShape(), true);
+                return;
+            }
+
+            // Si se puede cambiar de tamaño pero no arrastrar
+            if (_selectedShape.IsResizableProperty && !_selectedShape.IsDraggableProperty)
+                SetResizerAdornerAttachedProperty(_selectedShape.GetShape(), true);
+            // Si se puede arrastrar pero no cambiar el tamaño
+            else if (_selectedShape.IsDraggableProperty && !_selectedShape.IsResizableProperty)
+                SetDraggableAdornerAttachedProperty(_selectedShape.GetShape(), true);
+            // Si se puede arrastrar y cambiar el tamaño
+            else
+                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isDraggable"></param>
+        public void SetIsDraggableSelectedShape(bool isDraggable)
+        {
+            if (_selectedShape is null)
+                return;
+
+            _selectedShape.IsDraggableProperty = isDraggable;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isResizable"></param>
+        public void SetIsResizableSelectedShape(bool isResizable)
+        {
+            if (_selectedShape is null)
+                return;
+
+            _selectedShape.IsResizableProperty = isResizable;
         }
 
         #region TOOL_LEFTMOUSEDOWN
@@ -341,12 +402,16 @@ namespace Paintc.Controller
             {
                 SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
                 _selectedShape = null;
+                PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
                 return;
             }
 
             // Mostrar adorno de la figura que se haga click...
             if (e.OriginalSource is Shape shape)
+            {
                 ShowSelectedShapeAdorners(shape);
+                PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
+            }
         }
 
         #endregion

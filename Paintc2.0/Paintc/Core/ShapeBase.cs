@@ -6,24 +6,70 @@ using System.Windows.Shapes;
 
 namespace Paintc.Core
 {
-    public abstract class ShapeBase : ObservableObject
+    public abstract class ShapeBase(string? name, Color color) : DependencyObject
     {
-        public string? Name { get; set; }
-        protected readonly Color Color;
-
-        protected ShapeBase(string? name, Color color)
-        {
-            Name = name;
-            Color = color;
-        }
-
+        public string? Name { get; set; } = name;
+        protected readonly Color Color = color;
         protected Point LastMousePosition { get; set; }
         protected Point CurrentMousePosition { get; set; }
+
         public abstract void SetLastMousePosition(Point lastPosition);
         public abstract void SetCurrentMousePosition(Point currentPosition);
         public abstract Shape GetShape();
 
-        #region DEPENDENCY_PROPERTIES
+        #region DEPENDENCY_PROPERTY
+
+        public bool IsDraggableProperty
+        {
+            get { return (bool)GetValue(IsDraggablePropertyProperty); }
+            set { SetValue(IsDraggablePropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsDraggableProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsDraggablePropertyProperty =
+            DependencyProperty.Register("IsDraggableProperty", typeof(bool), typeof(ShapeBase), new PropertyMetadata(true, IsDraggablePropertyChanged));
+
+        public bool IsResizableProperty
+        {
+            get { return (bool)GetValue(IsResizablePropertyProperty); }
+            set { SetValue(IsResizablePropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsResizableProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsResizablePropertyProperty =
+            DependencyProperty.Register("IsResizableProperty", typeof(bool), typeof(ShapeBase), new PropertyMetadata(true, IsResizablePropertyChanged));
+
+        #endregion
+
+        /// <summary>
+        /// Muestra u oculta el adorno de arrastrar a la figura seleccionada
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void IsDraggablePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not ShapeBase shapeBase)
+                return;
+
+            bool newValue = (bool)e.NewValue;
+            SetShowDragAdorner(shapeBase.GetShape(), newValue);
+        }
+
+        /// <summary>
+        /// Muestra u oculta el adorno de cambiar de tamaño a la figura seleccionada
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void IsResizablePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not ShapeBase shapeBase)
+                return;
+
+            bool newValue = (bool)e.NewValue;
+            SetShowResizeAdorner(shapeBase.GetShape(), newValue);
+        }
+
+        #region ATTACHED_PROPERTIES
 
         public static readonly DependencyProperty ShowResizeAdornerProperty =
             DependencyProperty.RegisterAttached("ShowResizeAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowResizeAdornerChanged));
@@ -41,11 +87,11 @@ namespace Paintc.Core
             DependencyProperty.RegisterAttached("ShowDragAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowDragAdornerChanged));
         public static bool GetShowDragAdorner(UIElement element) => (bool)element.GetValue(ShowDragAdornerProperty);
         public static void SetShowDragAdorner(UIElement element, bool value) => element.SetValue(ShowDragAdornerProperty, value);
-
+        
         #endregion
 
         /// <summary>
-        /// 
+        /// Muestra el adorno de cambiar de tamaño
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
@@ -94,7 +140,7 @@ namespace Paintc.Core
         }
 
         /// <summary>
-        /// 
+        /// Muestra el adorno de selección
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
@@ -141,7 +187,7 @@ namespace Paintc.Core
         }
 
         /// <summary>
-        /// 
+        /// Muestra el adorno de arrastrar
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
@@ -189,7 +235,7 @@ namespace Paintc.Core
         }
 
         /// <summary>
-        /// 
+        /// Elimina/oculta el adorno <T> especificado de la figura
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="shape"></param>
