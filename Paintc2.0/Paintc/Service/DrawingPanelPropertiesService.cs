@@ -2,11 +2,11 @@
 
 namespace Paintc.Service
 {
-    public class CanvasResizerService
+    public class DrawingPanelPropertiesService
     {
-        private static CanvasResizerService _instance = new();
-        public static CanvasResizerService Instance => _instance;
-        private CanvasResizerService() { }
+        private static readonly DrawingPanelPropertiesService _instance = new();
+        public static DrawingPanelPropertiesService Instance => _instance;
+        private DrawingPanelPropertiesService() { }
 
         // Cuando se seleccione una resolución en el combobox
         public event EventHandler<GraphicMode?>? CanvasResizerEventHandler;
@@ -17,5 +17,10 @@ namespace Paintc.Service
         public event EventHandler<bool>? UpdateGraphicModeSelectionEventHandler;
         public void UpdateGraphicModeSelection(bool flag) => NotifyObservers(flag);
         private void NotifyObservers(bool flag) => UpdateGraphicModeSelectionEventHandler?.Invoke(this, flag);
+
+        // Notifica cuando se selecciona un color de fondo diferente para el canvas
+        public event EventHandler<CGAColor>? ChangeBackgroundColorEventHandler;
+        public void ChangeBackgroundColor(CGAColor color) => NotifyObservers(color);
+        private void NotifyObservers(CGAColor color) => ChangeBackgroundColorEventHandler?.Invoke(this, color);
     }
 }
