@@ -98,6 +98,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="IsChecked" Value="True"></Setter>
     </Style>
     
     <!--TabItem-->
