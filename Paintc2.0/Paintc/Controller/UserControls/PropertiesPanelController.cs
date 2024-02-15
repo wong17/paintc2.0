@@ -11,7 +11,7 @@ namespace Paintc.Controller.UserControls
 {
     public class DrawingPanelPropertiesController : ControllerBase
     {
-        private readonly DrawingPanelProperties _drawingPanelProperties;
+        private readonly PropertiesPanel _drawingPanelProperties;
         private readonly List<GraphicMode> _graphicModes;
         private GraphicMode? _currentGraphiceMode;
 
@@ -22,7 +22,7 @@ namespace Paintc.Controller.UserControls
         /// 
         /// </summary>
         /// <param name="drawingPanelProperties"></param>
-        public DrawingPanelPropertiesController(DrawingPanelProperties drawingPanelProperties)
+        public DrawingPanelPropertiesController(PropertiesPanel drawingPanelProperties)
         {
             _drawingPanelProperties = drawingPanelProperties;
             // Events

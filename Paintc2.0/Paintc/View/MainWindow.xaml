@@ -62,7 +62,7 @@
             <!--GridSplitter-->
             <GridSplitter Grid.Column="3" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Right panel-->
-            <userControls:DrawingPanelProperties Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
+            <userControls:PropertiesPanel Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
         </Grid>
 
     </Grid>

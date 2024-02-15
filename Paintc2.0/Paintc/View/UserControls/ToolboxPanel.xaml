@@ -97,7 +97,8 @@
                             <!--Click Event-->
                             <behavior:Interaction.Triggers>
                                 <behavior:EventTrigger EventName="Click">
-                                    <behavior:InvokeCommandAction Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    <behavior:InvokeCommandAction 
+                                        Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                                    CommandParameter="{Binding Name}"/>
                                 </behavior:EventTrigger>
                             </behavior:Interaction.Triggers>

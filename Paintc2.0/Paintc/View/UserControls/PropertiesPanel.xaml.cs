@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace Paintc.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for DrawingPanelProperties.xaml
+    /// Interaction logic for PropertiesPanel.xaml
     /// </summary>
-    public partial class DrawingPanelProperties : UserControl
+    public partial class PropertiesPanel : UserControl
     {
-        public DrawingPanelProperties()
+        public PropertiesPanel()
         {
             InitializeComponent();
             _ = new DrawingPanelPropertiesController(this);
