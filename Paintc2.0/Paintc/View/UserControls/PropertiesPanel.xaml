@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <!--Current/selected shape options-->
-                <RowDefinition Height="*"/>
+                <!--<RowDefinition Height="*"/>-->
             </Grid.RowDefinitions>
             
             <!--Graphic mode resolution-->
@@ -72,9 +72,9 @@
             </Grid>
 
             <!--Current/selected shape options-->
-            <ContentControl Grid.Row="6" x:Name="ShapeContentControl" HorizontalAlignment="Center" VerticalAlignment="Top" 
+            <!--<ContentControl Grid.Row="6" x:Name="ShapeContentControl" HorizontalAlignment="Center" VerticalAlignment="Top" 
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Top" ClipToBounds="True">
-            </ContentControl>
+            </ContentControl>-->
         </Grid>
     </Grid>
 </UserControl>

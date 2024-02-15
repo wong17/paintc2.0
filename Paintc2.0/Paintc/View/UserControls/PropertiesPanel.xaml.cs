@@ -11,7 +11,7 @@ namespace Paintc.View.UserControls
         public PropertiesPanel()
         {
             InitializeComponent();
-            _ = new DrawingPanelPropertiesController(this);
+            _ = new PropertiesPanelController(this);
         }
     }
 }

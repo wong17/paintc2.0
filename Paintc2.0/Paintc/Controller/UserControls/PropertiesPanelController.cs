@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace Paintc.Controller.UserControls
 {
-    public class DrawingPanelPropertiesController : ControllerBase
+    public class PropertiesPanelController : ControllerBase
     {
         private readonly PropertiesPanel _drawingPanelProperties;
         private readonly List<GraphicMode> _graphicModes;
@@ -22,12 +22,14 @@ namespace Paintc.Controller.UserControls
         /// 
         /// </summary>
         /// <param name="drawingPanelProperties"></param>
-        public DrawingPanelPropertiesController(PropertiesPanel drawingPanelProperties)
+        public PropertiesPanelController(PropertiesPanel drawingPanelProperties)
         {
             _drawingPanelProperties = drawingPanelProperties;
             // Events
             _drawingPanelProperties.GraphicsModeCmbbox.SelectionChanged += GraphicsModeCmbbox_SelectionChanged;
             _drawingPanelProperties.BackgroundColorCmbbox.SelectionChanged += BackgroundColorCmbbox_SelectionChanged;
+            _drawingPanelProperties.IsDraggableCheckbox.Checked += IsDraggableCheckbox_Checked;
+            _drawingPanelProperties.IsResizableCheckbox.Checked += IsResizableCheckbox_Checked;
             // Canvas background colors, default: White
             _colors = CGAColorPaletteService.GetColorPalette();
             _currentColor = _colors.First();
@@ -100,6 +102,26 @@ namespace Paintc.Controller.UserControls
                 DrawingPanelPropertiesService.Instance.ChangeBackgroundColor(_currentColor);
                 _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void IsResizableCheckbox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void IsDraggableCheckbox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }
