@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:Paintc.Converter"
              xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors" 
-             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls" d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
+             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls" 
+             d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="260">
     <UserControl.Resources>
@@ -17,16 +18,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <!--Tools-->
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <!--Colors-->
             <RowDefinition Height="Auto"/>
+            <!--Shapes explorer-->
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!--Title-->
-        <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
+        
         <!--Tools-->
+        <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
         <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -42,6 +46,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        
         <!--Colors-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -67,6 +72,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
+        
         <!--Shapes explorer-->
         <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
         <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"

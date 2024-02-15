@@ -40,19 +40,27 @@
             <!--Left panel-->
             <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel"/>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="1" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="1" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Center panel-->
-            <Grid Grid.Column="2">
+            <Grid Grid.Column="2" Background="{StaticResource BlackBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <!--Drawing panel-->
-                <userControls:DrawingPanel Grid.Row="0" x:Name="ucDrawingPanel"/>
+                <TabControl Grid.Row="0">
+                    <!--Drawing panel-->
+                    <TabItem Header="Design" Style="{StaticResource TabItemStyle}">
+                        <userControls:DrawingPanel x:Name="ucDrawingPanel"/>
+                    </TabItem>
+                    <!--Detail panel-->
+                    <TabItem Header="Details" Style="{StaticResource TabItemStyle}">
+                        <userControls:DetailPanel x:Name="ucDetailPanel"/>
+                    </TabItem>
+                </TabControl>
                 <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
             </Grid>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="3" Width="3" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="3" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
             <!--Right panel-->
             <userControls:DrawingPanelProperties Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
         </Grid>

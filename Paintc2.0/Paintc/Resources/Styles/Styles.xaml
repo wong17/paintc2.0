@@ -49,7 +49,7 @@
     <!--GridSplitter-->
     <Style x:Key="GridSplitterStyle" TargetType="GridSplitter">
         <Setter Property="ResizeBehavior" Value="PreviousAndNext"></Setter>
-        <Setter Property="Background" Value="{StaticResource GraySecondaryBrush}"></Setter>
+        <Setter Property="Background" Value="{StaticResource BlackBrush}"></Setter>
     </Style>
     
     <!--ListView-->
@@ -87,6 +87,34 @@
     </Style>
     <Style x:Key="RemoveShapeBtn" TargetType="Button">
         <Setter Property="Width" Value="20"></Setter>
+    </Style>
+    
+    <!--TabItem-->
+    <Style x:Key="TabItemStyle" TargetType="TabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid>
+                        <Border x:Name="Border" Margin="0,0,-4,0" Background="{StaticResource GrayBrush}"
+                                BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                              ContentSource="Header" Margin="10,5,10,5" RecognizesAccessKey="True">
+                            </ContentPresenter>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BlueBrush}" />
+                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="DodgerBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
     
     <!---->
