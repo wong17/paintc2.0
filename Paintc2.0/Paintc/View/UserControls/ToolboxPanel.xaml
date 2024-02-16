@@ -1,57 +1,57 @@
 ﻿<UserControl x:Class="Paintc.View.UserControls.ToolboxPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls"
              xmlns:converter="clr-namespace:Paintc.Converter"
-             xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors" 
-             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls" 
              d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="260">
     <UserControl.Resources>
-        <converter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     </UserControl.Resources>
     <!---->
     <Grid Background="{StaticResource BlackBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!--Tools-->
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <!--Colors-->
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <!--Shapes explorer-->
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <!--Tools-->
         <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
         <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" Rows="2"/>
+                    <UniformGrid Columns="4" Rows="2" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}" 
-                            Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}" >
-                        <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}"/>
+                    <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}"
+                            Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}">
+                        <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}" />
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
+
         <!--Colors-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--Title-->
             <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Colors"></Label>
@@ -59,20 +59,20 @@
             <ItemsControl x:Name="ColorPaletteItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4" Rows="4"/>
+                        <UniformGrid Columns="4" Rows="4" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
-                                CommandParameter="{Binding Cpalette}" 
+                        <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
+                                CommandParameter="{Binding Cpalette}"
                                 Command="{Binding ElementName=ColorPaletteItemsControl, Path=DataContext.CGAButtonsClick}"
-                                Style="{StaticResource ButtonCGAColorPalette}"/>
+                                Style="{StaticResource ButtonCGAColorPalette}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        
+
         <!--Shapes explorer-->
         <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
         <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"
@@ -88,8 +88,8 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <!---->
                         <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium" Width="160"></TextBox>
@@ -97,9 +97,9 @@
                             <!--Click Event-->
                             <behavior:Interaction.Triggers>
                                 <behavior:EventTrigger EventName="Click">
-                                    <behavior:InvokeCommandAction 
+                                    <behavior:InvokeCommandAction
                                         Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                                   CommandParameter="{Binding Name}"/>
+                                                   CommandParameter="{Binding Name}" />
                                 </behavior:EventTrigger>
                             </behavior:Interaction.Triggers>
                         </Button>
@@ -109,12 +109,12 @@
             <!-- Evento SelectionChanged del ListView -->
             <behavior:Interaction.Triggers>
                 <behavior:EventTrigger EventName="SelectionChanged">
-                    <behavior:InvokeCommandAction Command="{Binding ListViewSelectedItem}" 
-                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
+                    <behavior:InvokeCommandAction Command="{Binding ListViewSelectedItem}"
+                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" />
                 </behavior:EventTrigger>
             </behavior:Interaction.Triggers>
         </ListView>
         <!---->
-        <Button Grid.Row="5" Content="Remove all" Style="{StaticResource RemoveAllShapesBtn}" Command="{Binding RemoveAllShapesClick}"/>
+        <Button Grid.Row="5" Content="Remove all" Style="{StaticResource RemoveAllShapesBtn}" Command="{Binding RemoveAllShapesClick}" />
     </Grid>
 </UserControl>

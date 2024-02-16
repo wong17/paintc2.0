@@ -1,31 +1,31 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <!--Line-->
     <Geometry x:Key="lineGeometry">F1 M15,15z M0,0z M1.5,0C0.671573,0 0,0.671573 0,1.5 0,2.32843 0.671573,3 1.5,3 1.73157,3 1.95089,2.94752 2.14671,2.85381L12.1462,12.8533C12.0525,13.0491 12,13.2684 12,13.5 12,14.3284 12.6716,15 13.5,15 14.3284,15 15,14.3284 15,13.5 15,12.6716 14.3284,12 13.5,12 13.2684,12 13.0491,12.0525 12.8533,12.1462L2.85381,2.14671C2.94752,1.95089 3,1.73157 3,1.5 3,0.671573 2.32843,0 1.5,0z</Geometry>
     <DrawingGroup x:Key="lineDrawingGroup" ClipGeometry="M0,0 V15 H15 V0 H0 Z">
         <GeometryDrawing Brush="White" Geometry="{StaticResource lineGeometry}" />
-      </DrawingGroup>
+    </DrawingGroup>
     <DrawingImage x:Key="lineDrawingImage" Drawing="{StaticResource lineDrawingGroup}" />
     <!--Eraser-->
     <Geometry x:Key="eraserGeometry1">F1 M24,24z M0,0z M21.0302,22L13.9902,22C13.5702,22 13.2402,21.66 13.2402,21.25 13.2402,20.84 13.5802,20.5 13.9902,20.5L21.0302,20.5C21.4502,20.5 21.7802,20.84 21.7802,21.25 21.7802,21.66 21.4502,22 21.0302,22z</Geometry>
     <Geometry x:Key="eraserGeometry2">F1 M24,24z M0,0z M13.64,16.6894C14.03,17.0794,14.03,17.7094,13.64,18.1094L10.66,21.0894C9.55,22.1994 7.77,22.2594 6.59,21.2694 6.52,21.2094 6.46,21.1494 6.4,21.0894L5.53,20.2194 3.74,18.4294 2.88,17.5694C2.81,17.4994 2.75,17.4294 2.69,17.3594 1.71,16.1794 1.78,14.4194 2.88,13.3194L5.86,10.3394C6.25,9.94938,6.88,9.94938,7.27,10.3394L13.64,16.6894z</Geometry>
     <Geometry x:Key="eraserGeometry3">F1 M24,24z M0,0z M21.1194,10.6414L16.1194,15.6414C15.7294,16.0314,15.0994,16.0314,14.7094,15.6414L8.33937,9.29141C7.94938,8.90141,7.94938,8.27141,8.33937,7.87141L13.3394,2.88141C14.5094,1.71141,16.4294,1.71141,17.5994,2.88141L21.1194,6.39141C22.2894,7.56141,22.2894,9.47141,21.1194,10.6414z</Geometry>
-      <DrawingGroup x:Key="eraserDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+    <DrawingGroup x:Key="eraserDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
         <GeometryDrawing Brush="White" Geometry="{StaticResource eraserGeometry1}" />
         <GeometryDrawing Brush="White" Geometry="{StaticResource eraserGeometry2}" />
         <GeometryDrawing Brush="White" Geometry="{StaticResource eraserGeometry3}" />
-      </DrawingGroup>
+    </DrawingGroup>
     <DrawingImage x:Key="eraserDrawingImage" Drawing="{StaticResource eraserDrawingGroup}" />
     <!--Selection-->
     <Geometry x:Key="selectGeometry">F0 M512,512z M0,0z M0,0L0,0 364.4403,103.2064 276.3784,189.9169 369.0257,282.5591 282.4789,369.1084 189.8609,276.4662 103.107,364.5397z</Geometry>
-      <DrawingGroup x:Key="selectDrawingGroup" ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+    <DrawingGroup x:Key="selectDrawingGroup" ClipGeometry="M0,0 V512 H512 V0 H0 Z">
         <DrawingGroup Opacity="1">
-          <DrawingGroup Opacity="1" Transform="1,0,0,1,62.226343,62.126933">
-            <GeometryDrawing Brush="White" Geometry="{StaticResource selectGeometry}" />
-          </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,62.226343,62.126933">
+                <GeometryDrawing Brush="White" Geometry="{StaticResource selectGeometry}" />
+            </DrawingGroup>
         </DrawingGroup>
-      </DrawingGroup>
+    </DrawingGroup>
     <DrawingImage x:Key="selectDrawingImage" Drawing="{StaticResource selectDrawingGroup}" />
     <!--Rectangle-->
     <Geometry x:Key="rectangleGeometry1">F1 M24,24z M0,0z M1,3L1,21 23,21 23,3z M22,20L2,20 2,4 22,4z</Geometry>
@@ -48,24 +48,24 @@
     <!--Circle-->
     <Geometry x:Key="circleGeometry1">F1 M24,24z M0,0z M12.5,2.2A10.3,10.3,0,1,0,22.8,12.5A10.299,10.299,0,0,0,12.5,2.2z M12.5,21.8A9.3,9.3,0,1,1,21.8,12.5A9.31,9.31,0,0,1,12.5,21.8z</Geometry>
     <Geometry x:Key="circleGeometry2">F1 M24,24z M0,0z M12.5,3.2A9.3,9.3,0,1,0,12.5,21.8A9.3,9.3,0,1,0,12.5,3.2z</Geometry>
-        <DrawingGroup x:Key="circleDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
-            <GeometryDrawing Brush="White" Geometry="{StaticResource circleGeometry1}" />
-            <GeometryDrawing Geometry="{StaticResource circleGeometry2}">
-                <GeometryDrawing.Brush>
-                    <SolidColorBrush Color="White" Opacity="0.25" />
-                </GeometryDrawing.Brush>
-            </GeometryDrawing>
-        </DrawingGroup>
+    <DrawingGroup x:Key="circleDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+        <GeometryDrawing Brush="White" Geometry="{StaticResource circleGeometry1}" />
+        <GeometryDrawing Geometry="{StaticResource circleGeometry2}">
+            <GeometryDrawing.Brush>
+                <SolidColorBrush Color="White" Opacity="0.25" />
+            </GeometryDrawing.Brush>
+        </GeometryDrawing>
+    </DrawingGroup>
     <DrawingImage x:Key="circleDrawingImage" Drawing="{StaticResource circleDrawingGroup}" />
     <!--Filler-->
     <Geometry x:Key="fillerGeometry1">F1 M24,24z M0,0z M17.0408,10.6406L9.69083,3.29062 8.82083,2.42063C8.53083,2.13063 8.05083,2.13063 7.76083,2.42063 7.47083,2.71062 7.47083,3.19062 7.76083,3.48062L8.63083,4.35062 3.00083,9.98062C2.36083,10.6206 2.02083,11.2706 2.00083,11.9206 1.98083,12.6106 2.32083,13.3006 3.00083,13.9906L7.01083,18.0006C8.35083,19.3306,9.69083,19.3306,11.0208,18.0006L17.0408,11.9806C17.2408,11.7806 17.3308,11.5106 17.3108,11.2506 17.3008,11.0306 17.2008,10.8006 17.0408,10.6406z</Geometry>
     <Geometry x:Key="fillerGeometry2">F1 M24,24z M0,0z M16,22.75L3,22.75C2.59,22.75 2.25,22.41 2.25,22 2.25,21.59 2.59,21.25 3,21.25L16,21.25C16.41,21.25 16.75,21.59 16.75,22 16.75,22.41 16.41,22.75 16,22.75z</Geometry>
     <Geometry x:Key="fillerGeometry3">F1 M24,24z M0,0z M19.35,14.7803C19.09,14.5003 18.61,14.5003 18.35,14.7803 18.04,15.1203 16.5,16.8503 16.5,18.1703 16.5,19.4703 17.55,20.5203 18.85,20.5203 20.15,20.5203 21.2,19.4703 21.2,18.1703 21.2,16.8603 19.66,15.1203 19.35,14.7803z</Geometry>
-        <DrawingGroup x:Key="fillerDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
-            <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry1}" />
-            <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry2}" />
-            <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry3}" />
-        </DrawingGroup>
+    <DrawingGroup x:Key="fillerDrawingGroup" ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+        <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry1}" />
+        <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry2}" />
+        <GeometryDrawing Brush="White" Geometry="{StaticResource fillerGeometry3}" />
+    </DrawingGroup>
     <DrawingImage x:Key="fillerDrawingImage" Drawing="{StaticResource fillerDrawingGroup}" />
     <!--Pencil-->
     <Geometry x:Key="pencilGeometry1">F1 M24,24z M0,0z M17.0671,2.27157C17.5,2.09228 17.9639,2 18.4324,2 18.9009,2 19.3648,2.09228 19.7977,2.27157 20.2305,2.45086 20.6238,2.71365 20.9551,3.04493 21.2864,3.37621 21.5492,3.7695 21.7285,4.20235 21.9077,4.63519 22,5.09911 22,5.56761 22,6.03611 21.9077,6.50003 21.7285,6.93288 21.5492,7.36572 21.2864,7.75901 20.9551,8.09029L20.4369,8.60845 15.3916,3.56308 15.9097,3.04493C16.241,2.71365,16.6343,2.45086,17.0671,2.27157z</Geometry>
@@ -75,5 +75,4 @@
         <GeometryDrawing Brush="White" Geometry="{StaticResource pencilGeometry2}" />
     </DrawingGroup>
     <DrawingImage x:Key="pencilDrawingImage" Drawing="{StaticResource pencilDrawingGroup}" />
-    
 </ResourceDictionary>

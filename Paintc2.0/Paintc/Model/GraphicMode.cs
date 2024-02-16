@@ -9,7 +9,8 @@
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public GraphicMode() { }
+        public GraphicMode()
+        { }
 
         public GraphicMode(string? device, string? mode, int code, int width, int height)
         {

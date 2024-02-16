@@ -51,9 +51,11 @@ namespace Paintc.Adorners
         /// <returns></returns>
         private static Thumb Create(Cursor cursor)
         {
-            var thumb = new Thumb() { 
-                Background = Brushes.DodgerBlue, 
-                Width = 10, Height = 10, 
+            var thumb = new Thumb()
+            {
+                Background = Brushes.DodgerBlue,
+                Width = 10,
+                Height = 10,
                 BorderBrush = new SolidColorBrush(Colors.DodgerBlue),
                 Cursor = cursor
             };
@@ -73,7 +75,7 @@ namespace Paintc.Adorners
         protected override int VisualChildrenCount => _visuals.Count;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="finalSize"></param>
         /// <returns></returns>
@@ -98,13 +100,13 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TopLeftDragDelta(object sender, DragDeltaEventArgs e)
         {
-            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement) 
+            if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
 
             double yCanvasTop = Canvas.GetTop(adornedElement);
@@ -168,7 +170,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -194,28 +196,28 @@ namespace Paintc.Adorners
             if (deltaY < 0 && yCanvasTop == 0)
                 return;
 
-            /* 
-             * Cambio en la altura de la figura. 
-             * 
-             * Se trabaja con el eje 'y' del lado positivo para hacer el cálculo, por lo que el desplazamiento 
-             * 'deltaH' inicial parte desde la posición inicial del thumb como origen. 
+            /*
+             * Cambio en la altura de la figura.
+             *
+             * Se trabaja con el eje 'y' del lado positivo para hacer el cálculo, por lo que el desplazamiento
+             * 'deltaH' inicial parte desde la posición inicial del thumb como origen.
              */
             double deltaH = adornedElement.ActualHeight - deltaY;
-            /* 
+            /*
              * Desplazamiento de la coordenada y (esquina superior izquierda) de la figura sobre el canvas,
-             * como valor inicial se asigna el desplazamiento en 'y' del thumb. Ya que ambos puntos estan al mismo nivel 
+             * como valor inicial se asigna el desplazamiento en 'y' del thumb. Ya que ambos puntos estan al mismo nivel
              * en el canvas pero su coordenada 'y' relativa a la figura es 0, por lo que sirve para medir el desplazamiento
              * en 'y' de la figura sobre el canvas.
              */
             double topOffset = deltaY;
-            /* 
-             * Si el desplazamiento del thumb es positivo (hacia abajo) y la nueva altura de la figura es menor que 
+            /*
+             * Si el desplazamiento del thumb es positivo (hacia abajo) y la nueva altura de la figura es menor que
              * la altura minima permitada...
              */
             if (deltaH < adornedElement.MinHeight)
             {
-                /* 
-                 * Se asigna como nueva altura la minima permitada y el cambio en el desplazamiento superior de la figura 
+                /*
+                 * Se asigna como nueva altura la minima permitada y el cambio en el desplazamiento superior de la figura
                  * sobre el canvas será igual a la diferencia entre la altura actual y la minima de la figura.
                  */
                 deltaH = adornedElement.MinHeight;
@@ -226,7 +228,7 @@ namespace Paintc.Adorners
                 deltaH = parentCanvas.ActualHeight;
 
             /*
-             * La nueva coordenada 'y' de la figura sera la anterior más la nueva, si esta es menor que 0, es decir que 
+             * La nueva coordenada 'y' de la figura sera la anterior más la nueva, si esta es menor que 0, es decir que
              * se sale del canvas entonces establecemos como coordenada 'y' de la figura 0.
              */
             double newCanvasTop = yCanvasTop + topOffset;
@@ -242,7 +244,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -250,7 +252,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double yCanvasTop = Canvas.GetTop(adornedElement);
             double xCanvasRight = Canvas.GetRight(adornedElement);
 
@@ -313,7 +315,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -321,7 +323,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double yCanvasBottom = Canvas.GetBottom(adornedElement);
             double xCanvasLeft = Canvas.GetLeft(adornedElement);
 
@@ -384,7 +386,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -392,7 +394,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double yCanvasBottom = Canvas.GetBottom(adornedElement);
             double deltaY = e.VerticalChange;
 
@@ -423,12 +425,12 @@ namespace Paintc.Adorners
             /* Actualizar alto de la figura y nueva coordenada 'y' de la figura sobre el canvas. */
             adornedElement.Height = deltaH;
             Canvas.SetBottom(adornedElement, newCanvasBottom);
-            
+
             Canvas.SetTop(adornedElement, newCanvasTop);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -436,7 +438,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double yCanvasBottom = Canvas.GetBottom(adornedElement);
             double xCanvasRight = Canvas.GetRight(adornedElement);
 
@@ -499,7 +501,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -507,7 +509,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double xCanvasLeft = Canvas.GetLeft(adornedElement);
             double deltaX = e.HorizontalChange;
 
@@ -543,7 +545,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -551,7 +553,7 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-            
+
             double xCanvasRight = Canvas.GetRight(adornedElement);
             double deltaX = e.HorizontalChange;
 
@@ -581,7 +583,7 @@ namespace Paintc.Adorners
             adornedElement.Width = deltaW;
 
             Canvas.SetRight(adornedElement, newCanvasRight);
-            
+
             Canvas.SetLeft(adornedElement, newCanvasLeft);
         }
     }

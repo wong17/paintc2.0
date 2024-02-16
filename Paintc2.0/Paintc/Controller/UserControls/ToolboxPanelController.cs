@@ -17,14 +17,17 @@ namespace Paintc.Controller.UserControls
         public ICommand? RemoveAllShapesClick { get; private set; }
         public ICommand? RemoveShapeClick { get; private set; }
         public ICommand? ListViewSelectedItem { get; private set; }
+
         /// <summary>
         /// Lista de herramientas disponibles para utilizar
         /// </summary>
         public ObservableCollection<Tool> ToolItems { get; private set; } = [];
+
         /// <summary>
         /// Lista de colores disponibles para utilizar
         /// </summary>
         public ObservableCollection<CGAColor> ColorPaletteItems { get; private set; }
+
         /// <summary>
         /// Lista de formas que se muestran en el explorador de formas
         /// </summary>
@@ -34,7 +37,7 @@ namespace Paintc.Controller.UserControls
         {
             ToolItems = new ObservableCollection<Tool>(ToolCollectionService.GetTools());
             ColorPaletteItems = new ObservableCollection<CGAColor>(CGAColorPaletteService.GetColorPalette());
-            
+
             ToolsButtonsClick = new RelayCommand((obj) => true, ToolsButtonsClickCommand);
             CGAButtonsClick = new RelayCommand((obj) => true, CGAButtonsClickCommand);
             RemoveAllShapesClick = new RelayCommand((obj) => true, RemoveAllShapesClickCommand);
@@ -43,7 +46,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         private void ListViewSelectedItemCommand(object? shapeName)
@@ -94,7 +97,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameter"></param>
         private void CGAButtonsClickCommand(object? parameter)
@@ -121,7 +124,6 @@ namespace Paintc.Controller.UserControls
             {
                 DrawingHandler.Instance.ClearDrawingPanel();
             }
-            
         }
     }
 }

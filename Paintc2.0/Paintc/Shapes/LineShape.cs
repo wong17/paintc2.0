@@ -8,6 +8,7 @@ namespace Paintc.Shapes
     public class LineShape : ShapeBase
     {
         public Line Line { get; }
+
         public LineShape(string? name, Color color) : base(name, color)
         {
             Line = new Line()

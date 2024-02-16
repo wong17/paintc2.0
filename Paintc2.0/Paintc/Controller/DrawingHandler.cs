@@ -18,12 +18,16 @@ namespace Paintc.Controller
     {
         // Singleton
         private static readonly DrawingHandler instance = new();
+
         public static DrawingHandler Instance => instance;
-        private DrawingHandler() { }
+
+        private DrawingHandler()
+        { }
 
         #region PROPERTIES
 
         private DrawingPanel? _drawingPanel;
+
         public DrawingPanel? DrawingPanel
         {
             get => _drawingPanel;
@@ -41,39 +45,49 @@ namespace Paintc.Controller
         /// Contiene todos los elementos que hay sobre el canvas
         /// </summary>
         public ObservableCollection<ShapeBase?> Shapes { get; } = [];
+
         /// <summary>
         /// Referencia de la figura/forma que se esta dibujando
         /// </summary>
         private ShapeBase? _currentShape;
+
         /// <summary>
         /// Referencia de la figura/forma que se selecciono de ultimo con la herramienta SelectTool (la figura que tiene el adorner)
         /// </summary>
         private ShapeBase? _selectedShape;
+
         /// <summary>
         /// Referencia de la herramienta que se esta utilizando
         /// </summary>
         private Toolbox? _toolbox;
+
         public Toolbox? Toolbox { get => _toolbox; }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private DrawingState _state = DrawingState.Finished;
+
         public DrawingState State { get => _state; }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private Point _lastMousePosition = new();
+
         private Point _currentMousePosition = new();
+
         /// <summary>
         /// Contador de figuras/formas dibujadas
         /// </summary>
         private int _globalShapeCounter = 0;
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private CGAColorPalette? _currentColor;
 
-        #endregion
+        #endregion PROPERTIES
 
         #region TOOLSERVICE_EVENT
 
@@ -89,12 +103,12 @@ namespace Paintc.Controller
             _currentShape = null;
         }
 
-        #endregion
+        #endregion TOOLSERVICE_EVENT
 
         #region SELECTEDCOLOR_EVENT
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -107,12 +121,12 @@ namespace Paintc.Controller
             _currentColor = color;
         }
 
-        #endregion
+        #endregion SELECTEDCOLOR_EVENT
 
         #region DRAWINGPANEL_EVENTS
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -140,14 +154,14 @@ namespace Paintc.Controller
 
             _state = DrawingState.Drawing;
             _lastMousePosition = e.GetPosition(_drawingPanel.CustomCanvas);
-       
+
             // Para las demás herramientas
             _currentShape.SetLastMousePosition(_lastMousePosition);
             _drawingPanel.CustomCanvas.Children.Add(_currentShape.GetShape());
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -173,11 +187,10 @@ namespace Paintc.Controller
                     Shapes.Add(_currentShape);
                 }
             }
-            
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -190,7 +203,6 @@ namespace Paintc.Controller
 
             if (_toolbox?.CurrentTool == ToolType.PolygonTool)
             {
-
                 return;
             }
 
@@ -206,7 +218,7 @@ namespace Paintc.Controller
             }
         }
 
-        #endregion
+        #endregion DRAWINGPANEL_EVENTS
 
         /// <summary>
         /// Se invoca desde el evento MouseMove de esta clase cuando se esta dibujando una figura y se suelta el click izquierdo sobre el canvas,
@@ -347,7 +359,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="isDraggable"></param>
         public void SetIsDraggableSelectedShape(bool isDraggable)
@@ -359,7 +371,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="isResizable"></param>
         public void SetIsResizableSelectedShape(bool isResizable)
@@ -373,7 +385,7 @@ namespace Paintc.Controller
         #region TOOL_LEFTMOUSEDOWN
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -391,7 +403,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -414,6 +426,6 @@ namespace Paintc.Controller
             }
         }
 
-        #endregion
+        #endregion TOOL_LEFTMOUSEDOWN
     }
 }

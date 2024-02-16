@@ -4,6 +4,5 @@ namespace Paintc.Controller
 {
     public class AboutWindowController() : ControllerBase
     {
-        
     }
 }

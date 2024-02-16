@@ -11,18 +11,18 @@
     <Grid x:Name="WindowLayout">
         <!--Rows definition-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--Menu-->
         <Menu Grid.Row="0" Style="{StaticResource MenuStyle}">
             <MenuItem Header="File" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
-                <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
+                <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
+                <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
             </MenuItem>
             <MenuItem Header="Help" Style="{StaticResource MenuItemStyle}">
-                <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}" Style="{StaticResource MenuItemStyle}"/>
+                <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
             </MenuItem>
         </Menu>
 
@@ -30,40 +30,39 @@
         <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Width="Auto">
             <!--Columns definition-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="260" MinWidth="260" MaxWidth="300" />
             </Grid.ColumnDefinitions>
 
             <!--Left panel-->
-            <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel"/>
+            <userControls:ToolboxPanel Grid.Column="0" x:Name="ucToolboxPanel" />
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="1" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="1" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center" />
             <!--Center panel-->
             <Grid Grid.Column="2" Background="{StaticResource BlackBrush}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TabControl Grid.Row="0">
                     <!--Drawing panel-->
                     <TabItem Header="Design" Style="{StaticResource TabItemStyle}">
-                        <userControls:DrawingPanel x:Name="ucDrawingPanel"/>
+                        <userControls:DrawingPanel x:Name="ucDrawingPanel" />
                     </TabItem>
                     <!--Detail panel-->
                     <TabItem Header="Details" Style="{StaticResource TabItemStyle}">
-                        <userControls:DetailPanel x:Name="ucDetailPanel"/>
+                        <userControls:DetailPanel x:Name="ucDetailPanel" />
                     </TabItem>
                 </TabControl>
-                <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
+                <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel" />
             </Grid>
             <!--GridSplitter-->
-            <GridSplitter Grid.Column="3" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center"/>
+            <GridSplitter Grid.Column="3" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center" />
             <!--Right panel-->
-            <userControls:PropertiesPanel Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
+            <userControls:PropertiesPanel Grid.Column="4" x:Name="ucDrawingPanelProperties" />
         </Grid>
-
     </Grid>
 </Window>

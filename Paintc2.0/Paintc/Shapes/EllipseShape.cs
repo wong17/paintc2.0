@@ -57,5 +57,4 @@ namespace Paintc.Shapes
 
         public override Shape GetShape() => _ellipse;
     }
-
 }

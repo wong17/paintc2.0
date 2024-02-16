@@ -10,7 +10,7 @@ namespace Paintc.Service
     public static class CanvasImageSaverService
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static void SaveCanvasContent()
         {
@@ -25,7 +25,7 @@ namespace Paintc.Service
             Transform transform = drawingArea.LayoutTransform;
             // Resetear el estado actual en caso de que este escalada
             drawingArea.LayoutTransform = null;
-            
+
             Size size = new(drawingArea.ActualWidth, drawingArea.ActualHeight);
             // Measure and arrange the surface
             // VERY IMPORTANT

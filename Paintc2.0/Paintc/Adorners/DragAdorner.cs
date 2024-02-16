@@ -27,7 +27,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="finalSize"></param>
         /// <returns></returns>
@@ -42,19 +42,19 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override int VisualChildrenCount => _visuals.Count;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
         protected override Visual GetVisualChild(int index) => _visuals[index];
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

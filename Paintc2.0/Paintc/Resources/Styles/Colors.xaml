@@ -11,6 +11,4 @@
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
     <SolidColorBrush x:Key="BlackSecondaryBrush" Color="{StaticResource BlackSecondary}" />
     <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
-
-
 </ResourceDictionary>

@@ -21,7 +21,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         private void AboutMenuItemClickCommand(object? obj)
@@ -30,7 +30,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         private void ExitMenuItemClickCommand(object? obj)
@@ -49,13 +49,12 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="obj"></param>
         private void SaveMenuItemClickCommand(object? obj)
         {
             CanvasImageSaverService.SaveCanvasContent();
         }
-
     }
 }

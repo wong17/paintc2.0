@@ -14,7 +14,9 @@ namespace Paintc.Core
         protected Point CurrentMousePosition { get; set; }
 
         public abstract void SetLastMousePosition(Point lastPosition);
+
         public abstract void SetCurrentMousePosition(Point currentPosition);
+
         public abstract Shape GetShape();
 
         #region DEPENDENCY_PROPERTY
@@ -39,7 +41,7 @@ namespace Paintc.Core
         public static readonly DependencyProperty IsResizablePropertyProperty =
             DependencyProperty.Register("IsResizableProperty", typeof(bool), typeof(ShapeBase), new PropertyMetadata(true, IsResizablePropertyChanged));
 
-        #endregion
+        #endregion DEPENDENCY_PROPERTY
 
         /// <summary>
         /// Muestra u oculta el adorno de arrastrar a la figura seleccionada
@@ -73,22 +75,26 @@ namespace Paintc.Core
 
         public static readonly DependencyProperty ShowResizeAdornerProperty =
             DependencyProperty.RegisterAttached("ShowResizeAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowResizeAdornerChanged));
-        public static bool GetShowResizeAdorner(UIElement element) => (bool)element.GetValue(ShowResizeAdornerProperty);
-        public static void SetShowResizeAdorner(UIElement element, bool value) => element.SetValue(ShowResizeAdornerProperty, value);
 
+        public static bool GetShowResizeAdorner(UIElement element) => (bool)element.GetValue(ShowResizeAdornerProperty);
+
+        public static void SetShowResizeAdorner(UIElement element, bool value) => element.SetValue(ShowResizeAdornerProperty, value);
 
         public static readonly DependencyProperty ShowSelectionAdornerProperty =
             DependencyProperty.RegisterAttached("ShowSelectionAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowSelectionAdornerChanged));
-        public static bool GetShowSelectionAdorner(UIElement element) => (bool)element.GetValue(ShowSelectionAdornerProperty);
-        public static void SetShowSelectionAdorner(UIElement element, bool value) => element.SetValue(ShowSelectionAdornerProperty, value);
 
+        public static bool GetShowSelectionAdorner(UIElement element) => (bool)element.GetValue(ShowSelectionAdornerProperty);
+
+        public static void SetShowSelectionAdorner(UIElement element, bool value) => element.SetValue(ShowSelectionAdornerProperty, value);
 
         public static readonly DependencyProperty ShowDragAdornerProperty =
             DependencyProperty.RegisterAttached("ShowDragAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowDragAdornerChanged));
+
         public static bool GetShowDragAdorner(UIElement element) => (bool)element.GetValue(ShowDragAdornerProperty);
+
         public static void SetShowDragAdorner(UIElement element, bool value) => element.SetValue(ShowDragAdornerProperty, value);
-        
-        #endregion
+
+        #endregion ATTACHED_PROPERTIES
 
         /// <summary>
         /// Muestra el adorno de cambiar de tamaño
@@ -111,7 +117,6 @@ namespace Paintc.Core
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
-                
                 return;
             }
 
@@ -121,7 +126,7 @@ namespace Paintc.Core
                 adornerLayer?.Add(new ResizerAdorner(shape));
                 return;
             }
-            
+
             // Ocultar el adorno si es la herramienta de PencilTool
             if (!showAdorner && shape is Polyline)
             {
@@ -131,7 +136,6 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
-                
                 return;
             }
 
@@ -160,7 +164,6 @@ namespace Paintc.Core
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
-
                 return;
             }
             // Si es otra herramienta...
@@ -179,7 +182,6 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
-
                 return;
             }
             // Ocultar el adorno si es otra herramienta...
@@ -201,13 +203,11 @@ namespace Paintc.Core
             // Si es la herramienta de PencilTool
             if (showAdorner && shape is Polyline)
             {
-                
                 return;
             }
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
-
                 return;
             }
 
@@ -221,13 +221,11 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de PencilTool
             if (!showAdorner && shape is Polyline)
             {
-                
                 return;
             }
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
-
                 return;
             }
 

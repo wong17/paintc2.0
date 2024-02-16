@@ -20,17 +20,20 @@ namespace Paintc.Controller.UserControls
         /// Factor de incremento/decremento de la matriz del canvas
         /// </summary>
         private const double SCALE_FACTOR = 0.1;
+
         /// <summary>
         /// Maximo y minimo de zoom permitido
         /// </summary>
         private const double MAX_ZOOM_IN = 5.0;
+
         private const double MAX_ZOOM_OUT = 0.9;
+
         /// <summary>
         /// Para aplicar escalación de la matriz del canvas centrada en la posición actual del mouse
         /// </summary>
         private readonly ScaleTransform scaleTransform = new();
 
-        #endregion
+        #endregion ZOOM
 
         public DrawingPanelController(DrawingPanel drawingPanel)
         {
@@ -51,7 +54,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -75,7 +78,7 @@ namespace Paintc.Controller.UserControls
         #region ZOOM
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,7 +101,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -108,31 +111,31 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private bool IsMaxZoomInReached() => scaleTransform.ScaleX == MAX_ZOOM_IN && scaleTransform.ScaleY == MAX_ZOOM_IN;
 
-        #endregion
+        #endregion ZOOM
 
         #region CANVASRESIZER_EVENT
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="graphicMode"></param>
         public void CanvasResizerEventHandler(object? sender, GraphicMode? graphicMode)
         {
             _graphicMode = graphicMode;
-            
+
             if (_graphicMode is null) return;
 
             // Comprobar si se ha dibujado...
-            if (DrawingHandler.Instance.Shapes.Count != 0) 
+            if (DrawingHandler.Instance.Shapes.Count != 0)
             {
                 // Preguntar si desea cambiar el tamaño de la ventana...
-                var result =  MessageBox.Show("Are you sure you want to resize the drawing area? Any unsaved progress will be lost.", "Warning", 
+                var result = MessageBox.Show("Are you sure you want to resize the drawing area? Any unsaved progress will be lost.", "Warning",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
                 {
@@ -147,12 +150,12 @@ namespace Paintc.Controller.UserControls
             PropertiesPanelService.Instance.UpdateGraphicModeSelection(true);
         }
 
-        #endregion
+        #endregion CANVASRESIZER_EVENT
 
         #region CANVASBGCOLOR_EVENT
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="color"></param>
@@ -161,7 +164,7 @@ namespace Paintc.Controller.UserControls
             _drawingPanel.CustomCanvas.Background = new SolidColorBrush(color.Color);
         }
 
-        #endregion
+        #endregion CANVASBGCOLOR_EVENT
 
         #region CUSTOMCANVAS_EVENTS
 
@@ -181,7 +184,6 @@ namespace Paintc.Controller.UserControls
             DrawingHandler.Instance.OnMouseRightButtonDown(sender, e);
         }
 
-        #endregion
-
+        #endregion CUSTOMCANVAS_EVENTS
     }
 }

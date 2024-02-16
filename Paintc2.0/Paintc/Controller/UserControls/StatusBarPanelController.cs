@@ -22,6 +22,7 @@ namespace Paintc.Controller.UserControls
             StatusBarPanelService.Instance.UpdateCurrentColor(CGAColorPalette.Black);
             ToolboxPanelService.Instance.UpdateSelectedColor(CGAColorPalette.Black);
         }
+
         /// <summary>
         /// Actualiza la posición del mouse sobre el canvas en la barra de estado
         /// </summary>

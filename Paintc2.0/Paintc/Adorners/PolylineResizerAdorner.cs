@@ -47,7 +47,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="cursor"></param>
         /// <returns></returns>
@@ -77,7 +77,7 @@ namespace Paintc.Adorners
         protected override int VisualChildrenCount => _visuals.Count;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="finalSize"></param>
         /// <returns></returns>
@@ -110,7 +110,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -123,11 +123,10 @@ namespace Paintc.Adorners
                 return;
 
             Polyline polyline = (Polyline)adornedElement;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -135,11 +134,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,11 +145,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -159,11 +156,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -171,11 +167,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -183,11 +178,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -195,11 +189,10 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -207,7 +200,6 @@ namespace Paintc.Adorners
         {
             if (sender is not Thumb || AdornedElement is not FrameworkElement adornedElement)
                 return;
-
         }
     }
 }
