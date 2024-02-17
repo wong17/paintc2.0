@@ -4,7 +4,6 @@ using Paintc.Factory;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Service.Collections;
-using Paintc.Shapes;
 using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -89,7 +88,7 @@ namespace Paintc.Controller
 
         #endregion PROPERTIES
 
-        #region TOOLSERVICE_EVENT
+        #region TOOLBAR_PANEL
 
         /// <summary>
         /// Se ejecuta cada vez que se selecciona una nueva herramienta
@@ -102,10 +101,6 @@ namespace Paintc.Controller
             _state = DrawingState.Finished;
             _currentShape = null;
         }
-
-        #endregion TOOLSERVICE_EVENT
-
-        #region SELECTEDCOLOR_EVENT
 
         /// <summary>
         ///
@@ -121,7 +116,7 @@ namespace Paintc.Controller
             _currentColor = color;
         }
 
-        #endregion SELECTEDCOLOR_EVENT
+        #endregion TOOLBAR_PANEL
 
         #region DRAWINGPANEL_EVENTS
 
@@ -132,7 +127,8 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_toolbox is null || _drawingPanel is null || _currentColor is null || _state == DrawingState.Drawing) return;
+            if (_toolbox is null || _drawingPanel is null || _currentColor is null || _state == DrawingState.Drawing)
+                return;
 
             if (_toolbox.CurrentTool == ToolType.FillerTool)
             {
@@ -167,26 +163,10 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_toolbox is null) return;
+            if (_toolbox is null || _drawingPanel is null) return;
 
-            // Si se pulsa solo Click derecho no cierra el poligono
-            if (_toolbox?.CurrentTool == ToolType.PolygonTool)
-            {
-                if (_currentShape is PolygonShape polygone)
-                {
-                    polygone.LeaveOpenPolygone();
-                    Shapes.Add(_currentShape);
-                }
-            }
-            // Si se pulsa Ctrl + Click derecho cierra el poligono si es posible
-            if (_toolbox?.CurrentTool == ToolType.PolygonTool && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                if (_currentShape is PolygonShape polygone)
-                {
-                    polygone.ClosePolygone();
-                    Shapes.Add(_currentShape);
-                }
-            }
+            if (e.OriginalSource is not Shape shape)
+                return;
         }
 
         /// <summary>
@@ -219,6 +199,8 @@ namespace Paintc.Controller
         }
 
         #endregion DRAWINGPANEL_EVENTS
+
+        #region DRAWING_HANDLER
 
         /// <summary>
         /// Se invoca desde el evento MouseMove de esta clase cuando se esta dibujando una figura y se suelta el click izquierdo sobre el canvas,
@@ -289,6 +271,10 @@ namespace Paintc.Controller
         /// <returns></returns>
         private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}{++_globalShapeCounter}";
 
+        #endregion DRAWING_HANDLER
+
+        #region ADORNERS
+
         /// <summary>
         /// Mostrar u ocultar todos los adornos de cada figura por medio de sus attached properties
         /// </summary>
@@ -358,6 +344,10 @@ namespace Paintc.Controller
                 SetShowAdornersAttachedProperties(_selectedShape.GetShape(), true);
         }
 
+        #endregion ADORNERS
+
+        #region PROPERTIES_PANEL
+
         /// <summary>
         ///
         /// </summary>
@@ -381,6 +371,8 @@ namespace Paintc.Controller
 
             _selectedShape.IsResizableProperty = isResizable;
         }
+
+        #endregion PROPERTIES_PANEL
 
         #region TOOL_LEFTMOUSEDOWN
 
