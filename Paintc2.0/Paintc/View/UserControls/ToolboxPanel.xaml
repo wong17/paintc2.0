@@ -4,14 +4,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:usercontrols="clr-namespace:Paintc.Controller.UserControls"
+             xmlns:controller="clr-namespace:Paintc.Controller.UserControls"
              xmlns:converter="clr-namespace:Paintc.Converter"
-             d:DataContext="{d:DesignInstance Type=usercontrols:ToolboxPanelController}"
              mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="260">
+             d:DesignHeight="1080" d:DesignWidth="260">
+
+    <UserControl.DataContext>
+        <controller:ToolboxPanelController />
+    </UserControl.DataContext>
+    
     <UserControl.Resources>
         <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     </UserControl.Resources>
+    
     <!---->
     <Grid Background="{StaticResource BlackBrush}">
         <Grid.ColumnDefinitions>
@@ -93,7 +98,7 @@
                         </Grid.ColumnDefinitions>
                         <!---->
                         <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium" Width="160"></TextBox>
-                        <Button Grid.Column="1" Content="X" Style="{StaticResource RemoveShapeBtn}" ToolTip="Remove">
+                        <Button Grid.Column="1" Content="X" Style="{StaticResource ListViewItemBtn}" ToolTip="Remove">
                             <!--Click Event-->
                             <behavior:Interaction.Triggers>
                                 <behavior:EventTrigger EventName="Click">

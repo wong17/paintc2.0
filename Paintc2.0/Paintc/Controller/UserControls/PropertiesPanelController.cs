@@ -1,4 +1,5 @@
-﻿using Paintc.Core;
+﻿using Paintc.Controller.UserControls.ShapeProperties.Util;
+using Paintc.Core;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Service.Collections;
@@ -21,6 +22,8 @@ namespace Paintc.Controller.UserControls
         private CGAColor _currentColor;
 
         private bool _shouldInvokeCheckedEvents = false;
+
+        private PropertiesPanelNavigation _panelsNavigation;
 
         /// <summary>
         ///
@@ -55,6 +58,10 @@ namespace Paintc.Controller.UserControls
             PropertiesPanelService.Instance.UpdateGraphicModeSelectionEventHandler += UpdateGraphicModeSelection;
             PropertiesPanelService.Instance.ChangeBackgroundColor(_currentColor);
             _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
+
+            _panelsNavigation = new();
+            _drawingPanelProperties.ShapePropertiesContent.Content = _panelsNavigation.CurrentPropertiesPanel;
+            PropertiesPanelService.Instance.ShowPropertiesPanelEventHandler += ShowPropertiesPanel;
         }
 
         /// <summary>
@@ -175,6 +182,19 @@ namespace Paintc.Controller.UserControls
         private void IsDraggableCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             DrawingHandler.Instance.SetIsDraggableSelectedShape(_drawingPanelProperties.IsDraggableCheckbox.IsChecked ?? false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowPropertiesPanel(object? sender, ShapeBase? shapeBase)
+        {
+            if (shapeBase is null)
+                return;
+
+
         }
     }
 }

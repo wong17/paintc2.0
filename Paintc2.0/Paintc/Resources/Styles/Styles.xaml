@@ -116,7 +116,7 @@
                 <ControlTemplate TargetType="TabItem">
                     <Grid>
                         <Border x:Name="Border" Margin="0,0,-4,0" Background="{StaticResource GrayBrush}"
-                                BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
+                                BorderThickness="1,1,1,1" CornerRadius="0,0,0,0">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"
                                               ContentSource="Header" Margin="10,5,10,5" RecognizesAccessKey="True">
                             </ContentPresenter>

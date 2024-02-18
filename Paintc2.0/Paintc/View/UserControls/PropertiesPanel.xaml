@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="260">
+             d:DesignHeight="1080" d:DesignWidth="260">
     <Grid Background="{StaticResource BlackBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <!--Current/selected shape options-->
-                <!--<RowDefinition Height="*" />-->
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!--Graphic mode resolution-->
@@ -72,9 +72,9 @@
             </Grid>
 
             <!--Current/selected shape options-->
-            <!--<ContentControl Grid.Row="6" x:Name="ShapeContentControl" HorizontalAlignment="Center" VerticalAlignment="Top"
+            <ContentControl Grid.Row="6" x:Name="ShapePropertiesContent" HorizontalAlignment="Center" VerticalAlignment="Top"
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Top" ClipToBounds="True">
-            </ContentControl>-->
+            </ContentControl>
         </Grid>
     </Grid>
 </UserControl>
