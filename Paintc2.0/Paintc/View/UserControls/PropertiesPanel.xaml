@@ -32,7 +32,7 @@
                 <!--More options...-->
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <!--Current/selected shape options-->
+                <!--Current/selected shape properties-->
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -71,7 +71,7 @@
                 </UniformGrid>
             </Grid>
 
-            <!--Current/selected shape options-->
+            <!--Current/selected shape properties-->
             <ContentControl Grid.Row="6" x:Name="ShapePropertiesContent" HorizontalAlignment="Center" VerticalAlignment="Top"
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Top" ClipToBounds="True">
             </ContentControl>

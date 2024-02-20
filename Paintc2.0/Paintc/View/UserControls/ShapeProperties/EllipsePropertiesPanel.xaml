@@ -10,8 +10,7 @@
     <UserControl.DataContext>
         <controller:EllipsePropertiesController />
     </UserControl.DataContext>
-    
-    <Grid>
-            
-    </Grid>
+
+    <UniformGrid Rows="2" Columns="2" Background="Black" Width="260" Height="600">
+    </UniformGrid>
 </UserControl>

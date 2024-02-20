@@ -407,6 +407,7 @@ namespace Paintc.Controller
                 SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
                 _selectedShape = null;
                 PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
+                PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
                 return;
             }
 
@@ -415,6 +416,7 @@ namespace Paintc.Controller
             {
                 ShowSelectedShapeAdorners(shape);
                 PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
+                PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
             }
         }
 
