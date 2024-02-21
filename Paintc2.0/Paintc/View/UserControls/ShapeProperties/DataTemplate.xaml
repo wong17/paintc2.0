@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sp="clr-namespace:Paintc.View.UserControls.ShapeProperties"
+                    xmlns:spcontroller="clr-namespace:Paintc.Controller.UserControls.ShapeProperties">
+
+    <!--El controller pasa a ser automaticamente el DataContext de la vista sin necesidad de establecerlo desde código C# o XAML. -->
+    <DataTemplate DataType="{x:Type spcontroller:RectanglePropertiesController}">
+        <sp:RectanglePropertiesPanel />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type spcontroller:EllipsePropertiesController}">
+        <sp:EllipsePropertiesPanel />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type spcontroller:LinePropertiesController}">
+        <sp:LinePropertiesPanel />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type spcontroller:PencilPropertiesController}">
+        <sp:PencilPropertiesPanel />
+    </DataTemplate>
+</ResourceDictionary>
