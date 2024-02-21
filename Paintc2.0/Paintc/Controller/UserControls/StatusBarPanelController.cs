@@ -1,19 +1,40 @@
-﻿using Paintc.Enums;
+﻿using Paintc.Core;
+using Paintc.Enums;
 using Paintc.Service;
 using Paintc.Service.Collections;
-using Paintc.View.UserControls;
 using System.Windows;
 using System.Windows.Media;
 
 namespace Paintc.Controller.UserControls
 {
-    public class StatusBarPanelController
+    public class StatusBarPanelController : ControllerBase
     {
-        private readonly StatusBarPanel _statusBarPanel;
+        private string? _mousePositionText = "Mouse position: (0,0)";
 
-        public StatusBarPanelController(StatusBarPanel statusBarPanel)
+        public string? MousePositionText 
         {
-            _statusBarPanel = statusBarPanel;
+            get => _mousePositionText; 
+            set => SetField(ref _mousePositionText, value);
+        }
+
+        private string? _selectedToolText = "Current tool: Select";
+
+        public string? SelectedToolText
+        {
+            get => _selectedToolText;
+            set => SetField(ref _selectedToolText, value);
+        }
+
+        private SolidColorBrush? _brush;
+        
+        public SolidColorBrush? Brush
+        {
+            get => _brush;
+            set => SetField(ref _brush, value);
+        }
+
+        public StatusBarPanelController()
+        {
             StatusBarPanelService.Instance.UpdateMousePositionEventHandler += UpdateMousePositionEventHandler;
             StatusBarPanelService.Instance.UpdateCurrentToolEventHandler += UpdateCurrentToolEventHandler;
             StatusBarPanelService.Instance.UpdateCurrentColorEventHandler += UpdateCurrentColorEventHandler;
@@ -30,7 +51,7 @@ namespace Paintc.Controller.UserControls
         /// <param name="point"></param>
         private void UpdateMousePositionEventHandler(object? sender, Point point)
         {
-            _statusBarPanel.MousePositionLabel.Content = $"Mouse position: ({Convert.ToInt32(point.X)},{Convert.ToInt32(point.Y)})";
+            MousePositionText = $"Mouse position: ({Convert.ToInt32(point.X)},{Convert.ToInt32(point.Y)})";
         }
 
         /// <summary>
@@ -40,7 +61,7 @@ namespace Paintc.Controller.UserControls
         /// <param name="tool"></param>
         private void UpdateCurrentToolEventHandler(object? sender, ToolType tool)
         {
-            _statusBarPanel.SelectedToolLabel.Content = $"Current tool: {tool.ToString().Replace("Tool", "")}";
+            SelectedToolText = $"Current tool: {tool.ToString().Replace("Tool", "")}";
         }
 
         /// <summary>
@@ -50,7 +71,7 @@ namespace Paintc.Controller.UserControls
         /// <param name="color"></param>
         private void UpdateCurrentColorEventHandler(object? sender, CGAColorPalette color)
         {
-            _statusBarPanel.SelectedColorRectangle.Fill = new SolidColorBrush(CGAColorPaletteService.GetColor(color));
+            Brush = new SolidColorBrush(CGAColorPaletteService.GetColor(color));
         }
     }
 }
