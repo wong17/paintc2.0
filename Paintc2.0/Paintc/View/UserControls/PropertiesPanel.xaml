@@ -72,8 +72,8 @@
             </Grid>
 
             <!--Current/selected shape properties-->
-            <ContentControl Grid.Row="6" x:Name="ShapePropertiesContent" HorizontalAlignment="Center" VerticalAlignment="Top"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Top" ClipToBounds="True">
+            <ContentControl Grid.Row="6" x:Name="ShapePropertiesContent" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Top" ClipToBounds="True">
             </ContentControl>
         </Grid>
     </Grid>

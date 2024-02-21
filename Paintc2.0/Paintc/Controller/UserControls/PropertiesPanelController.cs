@@ -3,7 +3,6 @@ using Paintc.Core;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Service.Collections;
-using Paintc.Shapes;
 using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -23,6 +22,8 @@ namespace Paintc.Controller.UserControls
         private CGAColor _currentColor;
 
         private bool _shouldInvokeCheckedEvents = false;
+
+        private readonly PropertiesPanelNavigator _panelsNavigator;
 
         /// <summary>
         ///
@@ -58,6 +59,7 @@ namespace Paintc.Controller.UserControls
             PropertiesPanelService.Instance.ChangeBackgroundColor(_currentColor);
             _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
 
+            _panelsNavigator = new();
             PropertiesPanelService.Instance.ShowPropertiesPanelEventHandler += ShowPropertiesPanel;
         }
 
@@ -188,31 +190,7 @@ namespace Paintc.Controller.UserControls
         /// <param name="e"></param>
         private void ShowPropertiesPanel(object? sender, ShapeBase? shapeBase)
         {
-            // Eliminar el contenido del panel de propiedades
-            if (shapeBase is null)
-            {
-                _drawingPanelProperties.ShapePropertiesContent.Content = null;
-                return;
-            }
-
-            if (shapeBase is RectangleShape rectangle)
-            {
-                _drawingPanelProperties.ShapePropertiesContent.Content = new RectanglePropertiesController
-                {
-                    RectangleShape = rectangle
-                };
-                return;
-            }
-
-            if (shapeBase is EllipseShape ellipse)
-            {
-                _drawingPanelProperties.ShapePropertiesContent.Content = new EllipsePropertiesController()
-                {
-                    EllipseShape = ellipse
-                };
-                return;
-            }
-
+            _drawingPanelProperties.ShapePropertiesContent.Content = _panelsNavigator.GetPropertiesPanel(shapeBase);
         }
     }
 }
