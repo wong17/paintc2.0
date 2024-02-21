@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:userControls="clr-namespace:Paintc.View.UserControls"
+        xmlns:userControls="clr-namespace:Paintc.View.UserControls" 
+        xmlns:controller="clr-namespace:Paintc.Controller"
         mc:Ignorable="d"
         Title="Paintc2.0 - Alpha 1.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen">
 
+    <Window.DataContext>
+        <controller:MainWindowController />
+    </Window.DataContext>
+    
     <!---->
     <Grid x:Name="WindowLayout">
         <!--Rows definition-->
@@ -57,12 +62,12 @@
                         <userControls:DetailPanel x:Name="ucDetailPanel" />
                     </TabItem>
                 </TabControl>
-                <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel" />
+                <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
             </Grid>
             <!--GridSplitter-->
             <GridSplitter Grid.Column="3" Width="2" Style="{StaticResource GridSplitterStyle}" HorizontalAlignment="Center" />
             <!--Right panel-->
-            <userControls:PropertiesPanel Grid.Column="4" x:Name="ucDrawingPanelProperties" />
+            <userControls:PropertiesPanel Grid.Column="4" x:Name="ucDrawingPanelProperties"/>
         </Grid>
     </Grid>
 </Window>
