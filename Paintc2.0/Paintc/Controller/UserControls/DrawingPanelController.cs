@@ -60,10 +60,7 @@ namespace Paintc.Controller.UserControls
         /// <param name="e"></param>
         private void MainScrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (DrawingHandler.Instance.State == DrawingState.Finished)
-                return;
-
-            if (DrawingHandler.Instance.Toolbox is null)
+            if (DrawingHandler.Instance.State == DrawingState.Finished || DrawingHandler.Instance.Toolbox is null)
                 return;
 
             /* Para terminar y agregar figura al explorador cuando se esta dibujando y se suelta el click izquierdo fuera del canvas. */
