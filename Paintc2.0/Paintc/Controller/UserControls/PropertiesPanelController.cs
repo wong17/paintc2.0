@@ -61,6 +61,7 @@ namespace Paintc.Controller.UserControls
 
             _panelsNavigator = new();
             PropertiesPanelService.Instance.ShowPropertiesPanelEventHandler += ShowPropertiesPanel;
+            PropertiesPanelService.Instance.UpdatePropertiesPanelEventHandler += UpdatePropertiesPanel;
         }
 
         /// <summary>
@@ -184,13 +185,24 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// 
+        /// Muestra el panel de propiedades de acuerdo a la figura que se selecciono en el canvas
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ShowPropertiesPanel(object? sender, ShapeBase? shapeBase)
         {
             _drawingPanelProperties.ShapePropertiesContent.Content = _panelsNavigator.GetPropertiesPanel(shapeBase);
+        }
+
+        /// <summary>
+        /// Actualiza los valores del panel de propiedades de acuerdo a los cambios que se hagan en la figura (cambiar tamaño o posición)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void UpdatePropertiesPanel(object? sender, object? obj)
+        {
+            _panelsNavigator.UpdatePropertiesPanel();
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using Paintc.Core;
+﻿using Paintc.Controller.UserControls.ShapeProperties.Interface;
+using Paintc.Core;
 using Paintc.Shapes;
 
 namespace Paintc.Controller.UserControls.ShapeProperties
 {
-    public class LinePropertiesController : ControllerBase
+    public class LinePropertiesController : ObservableObject, IPropertiesController
     {
         private LineShape? _lineShape;
 
@@ -13,15 +14,7 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             set 
             {
                 SetField(ref _lineShape, value);
-
-                if (_lineShape is not null)
-                {
-                    StartX = _lineShape.GetPoints()[0].X;
-                    StartY = _lineShape.GetPoints()[0].Y;
-                    EndX = _lineShape.GetPoints()[1].X;
-                    EndY = _lineShape.GetPoints()[1].Y;
-                    Length = Math.Sqrt(Math.Pow(EndX - StartX, 2) + Math.Pow(EndY - StartY, 2));
-                }
+                UpdateProperties();
             }
         }
 
@@ -63,6 +56,21 @@ namespace Paintc.Controller.UserControls.ShapeProperties
         {
             get => _length;
             private set => SetField(ref _length, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateProperties()
+        {
+            if (_lineShape is null)
+                return;
+
+            StartX = _lineShape.GetPoints()[0].X;
+            StartY = _lineShape.GetPoints()[0].Y;
+            EndX = _lineShape.GetPoints()[1].X;
+            EndY = _lineShape.GetPoints()[1].Y;
+            Length = Math.Sqrt(Math.Pow(EndX - StartX, 2) + Math.Pow(EndY - StartY, 2));
         }
     }
 }

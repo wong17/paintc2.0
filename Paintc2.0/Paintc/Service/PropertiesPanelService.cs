@@ -35,5 +35,10 @@ namespace Paintc.Service
         public event EventHandler<ShapeBase?>? ShowPropertiesPanelEventHandler;
 
         public void ShowPropertiesPanel(ShapeBase? selectedShape) => ShowPropertiesPanelEventHandler?.Invoke(this, selectedShape);
+
+        // Actualiza los valores del panel de propiedades mientras esta seleccionada la figura y se esta modificando
+        public event EventHandler<object?>? UpdatePropertiesPanelEventHandler;
+
+        public void UpdatePropertiesPanel(object? obj = null) => UpdatePropertiesPanelEventHandler?.Invoke(this, obj);
     }
 }

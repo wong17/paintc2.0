@@ -1,9 +1,10 @@
-﻿using Paintc.Core;
+﻿using Paintc.Controller.UserControls.ShapeProperties.Interface;
+using Paintc.Core;
 using Paintc.Shapes;
 
 namespace Paintc.Controller.UserControls.ShapeProperties
 {
-    public class PencilPropertiesController : ControllerBase
+    public class PencilPropertiesController : ObservableObject, IPropertiesController
     {
         private FreeShape? _freeShape;
         public FreeShape? FreeShape 
@@ -12,7 +13,16 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             set
             {
                 SetField(ref _freeShape, value);
+                UpdateProperties();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateProperties()
+        {
+            
         }
     }
 }

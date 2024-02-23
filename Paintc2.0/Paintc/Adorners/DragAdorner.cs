@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Paintc.Service;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -27,7 +28,7 @@ namespace Paintc.Adorners
         }
 
         /// <summary>
-        ///
+        /// Dibuja el thumb para arrastrar la figura en el centro de esta
         /// </summary>
         /// <param name="finalSize"></param>
         /// <returns></returns>
@@ -54,7 +55,7 @@ namespace Paintc.Adorners
         protected override Visual GetVisualChild(int index) => _visuals[index];
 
         /// <summary>
-        ///
+        /// Se ejecuta al momento de pulsar y arrastrar el thumb para cambiar de lugar la figura
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -82,6 +83,8 @@ namespace Paintc.Adorners
                 Canvas.SetTop(adornedElement, newTop);
                 Canvas.SetBottom(adornedElement, newBottom);
             }
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
     }
 }

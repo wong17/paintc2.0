@@ -401,7 +401,7 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         private void SelectToolLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // Si se hace click en el canvas quitar adorno de la figura anteriormente seleccionada
+            // Si se hace click en el canvas quitar adorno y ocultar panel de propiedades de la figura anteriormente seleccionada
             if (e.OriginalSource == _drawingPanel?.CustomCanvas && _selectedShape is not null)
             {
                 SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
@@ -411,7 +411,7 @@ namespace Paintc.Controller
                 return;
             }
 
-            // Mostrar adorno de la figura que se haga click...
+            // Mostrar adorno y panel de propiedades de la figura que se haga click...
             if (e.OriginalSource is Shape shape)
             {
                 ShowSelectedShapeAdorners(shape);

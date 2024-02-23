@@ -1,10 +1,11 @@
-﻿using Paintc.Core;
+﻿using Paintc.Controller.UserControls.ShapeProperties.Interface;
+using Paintc.Core;
 using Paintc.Shapes;
 using System.Windows.Controls;
 
 namespace Paintc.Controller.UserControls.ShapeProperties
 {
-    public class RectanglePropertiesController : ControllerBase
+    public class RectanglePropertiesController : ObservableObject, IPropertiesController
     {
         private RectangleShape? _rectangleShape;
 
@@ -14,16 +15,7 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             set
             {
                 SetField(ref _rectangleShape, value);
-
-                if (_rectangleShape is not null)
-                {
-                    TopLeftX = Canvas.GetLeft(_rectangleShape.GetShape());
-                    TopLeftY = Canvas.GetTop(_rectangleShape.GetShape());
-                    BottomRightX = Canvas.GetRight(_rectangleShape.GetShape());
-                    BottomRightY = Canvas.GetBottom(_rectangleShape.GetShape());
-                    Width = _rectangleShape.GetShape().Width;
-                    Height = _rectangleShape.GetShape().Height;
-                }
+                UpdateProperties();
             }
         }
 
@@ -73,6 +65,23 @@ namespace Paintc.Controller.UserControls.ShapeProperties
         {
             get => _height;
             private set => SetField(ref _height, value);
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="panelProperty"></param>
+        public void UpdateProperties()
+        {
+            if (_rectangleShape is null)
+                return;
+
+            TopLeftX = Canvas.GetLeft(_rectangleShape.GetShape());
+            TopLeftY = Canvas.GetTop(_rectangleShape.GetShape());
+            BottomRightX = Canvas.GetRight(_rectangleShape.GetShape());
+            BottomRightY = Canvas.GetBottom(_rectangleShape.GetShape());
+            Width = _rectangleShape.GetShape().Width;
+            Height = _rectangleShape.GetShape().Height;
         }
     }
 }

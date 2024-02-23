@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Paintc.Service;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -167,6 +168,8 @@ namespace Paintc.Adorners
 
             Canvas.SetRight(adornedElement, newCanvasRight);
             Canvas.SetBottom(adornedElement, newCanvasBottom);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -241,6 +244,8 @@ namespace Paintc.Adorners
             adornedElement.Height = deltaH;
             Canvas.SetTop(adornedElement, newCanvasTop);
             Canvas.SetBottom(adornedElement, newCanvasBottom);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -312,6 +317,8 @@ namespace Paintc.Adorners
 
             Canvas.SetLeft(adornedElement, newCanvasLeft);
             Canvas.SetBottom(adornedElement, newCanvasBottom);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -383,6 +390,8 @@ namespace Paintc.Adorners
 
             Canvas.SetTop(adornedElement, newCanvasTop);
             Canvas.SetRight(adornedElement, newCanvasRight);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -427,6 +436,8 @@ namespace Paintc.Adorners
             Canvas.SetBottom(adornedElement, newCanvasBottom);
 
             Canvas.SetTop(adornedElement, newCanvasTop);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -498,6 +509,8 @@ namespace Paintc.Adorners
 
             Canvas.SetTop(adornedElement, newCanvasTop);
             Canvas.SetLeft(adornedElement, newCanvasLeft);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -542,6 +555,8 @@ namespace Paintc.Adorners
             Canvas.SetLeft(adornedElement, newCanvasLeft);
 
             Canvas.SetRight(adornedElement, newCanvasRight);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -585,6 +600,8 @@ namespace Paintc.Adorners
             Canvas.SetRight(adornedElement, newCanvasRight);
 
             Canvas.SetLeft(adornedElement, newCanvasLeft);
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
     }
 }
