@@ -7,8 +7,8 @@ namespace Paintc.Controller.UserControls.ShapeProperties
 {
     public class EllipsePropertiesController : ObservableObject, IPropertiesController
     {
-        private EllipseShape? _ellipseShape;
-        public EllipseShape? EllipseShape 
+        private ShapeBase? _ellipseShape;
+        public ShapeBase? EllipseShape 
         {
             get => _ellipseShape; 
             set
@@ -116,6 +116,15 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             EndAngle = 360;
             Width = _ellipseShape.GetShape().Width;
             Height = _ellipseShape.GetShape().Height;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void SetShape(ShapeBase shape)
+        {
+            EllipseShape = shape;
         }
     }
 }

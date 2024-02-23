@@ -72,5 +72,14 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             EndY = _lineShape.GetPoints()[1].Y;
             Length = Math.Sqrt(Math.Pow(EndX - StartX, 2) + Math.Pow(EndY - StartY, 2));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void SetShape(ShapeBase shape)
+        {
+            LineShape = (LineShape)shape;
+        }
     }
 }

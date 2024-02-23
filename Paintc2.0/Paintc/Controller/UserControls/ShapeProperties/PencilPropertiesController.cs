@@ -17,6 +17,11 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             }
         }
 
+        public void SetShape(ShapeBase shape)
+        {
+            
+        }
+
         /// <summary>
         /// 
         /// </summary>

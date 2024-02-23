@@ -1,15 +1,14 @@
 ﻿using Paintc.Controller.UserControls.ShapeProperties.Interface;
 using Paintc.Core;
-using Paintc.Shapes;
 using System.Windows.Controls;
 
 namespace Paintc.Controller.UserControls.ShapeProperties
 {
     public class RectanglePropertiesController : ObservableObject, IPropertiesController
     {
-        private RectangleShape? _rectangleShape;
+        private ShapeBase? _rectangleShape;
 
-        public RectangleShape? RectangleShape
+        public ShapeBase? RectangleShape
         {
             get => _rectangleShape;
             set
@@ -82,6 +81,15 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             BottomRightY = Canvas.GetBottom(_rectangleShape.GetShape());
             Width = _rectangleShape.GetShape().Width;
             Height = _rectangleShape.GetShape().Height;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void SetShape(ShapeBase shape)
+        {
+            RectangleShape = shape;
         }
     }
 }

@@ -8,17 +8,17 @@ namespace Paintc.Controller.UserControls.ShapeProperties
     {
         private IPropertiesController? _currentPanel;
         private ShapeBase? _currentShape;
-        private readonly RectanglePropertiesController _rectangleProperties;
-        private readonly EllipsePropertiesController _ellipseProperties;
-        private readonly LinePropertiesController _lineProperties;
-        private readonly PencilPropertiesController _pencilProperties;
+        private readonly Dictionary<Type, IPropertiesController> _propertiesControllers;
 
         public PropertiesPanelNavigator()
         {
-            _rectangleProperties = new();
-            _ellipseProperties = new();
-            _lineProperties = new();
-            _pencilProperties = new();
+            _propertiesControllers = new Dictionary<Type, IPropertiesController>
+            {
+                { typeof(RectangleShape), new RectanglePropertiesController() },
+                { typeof(EllipseShape), new EllipsePropertiesController() },
+                { typeof(LineShape), new LinePropertiesController() },
+                { typeof(FreeShape), new PencilPropertiesController() }
+            };
         }
 
         /// <summary>
@@ -26,32 +26,13 @@ namespace Paintc.Controller.UserControls.ShapeProperties
         /// </summary>
         /// <param name="shapeBase"></param>
         /// <returns></returns>
-        public object? GetPropertiesPanel(ShapeBase? shapeBase)
+        public IPropertiesController? GetPropertiesPanel(ShapeBase? shapeBase)
         {
-            if (shapeBase is null) 
+            if (shapeBase is null || !_propertiesControllers.ContainsKey(shapeBase.GetType()))
                 return null;
 
-            if (shapeBase is RectangleShape rectangle)
-            {
-                _rectangleProperties.RectangleShape = rectangle;
-                _currentPanel = _rectangleProperties;
-            }
-            else if (shapeBase is EllipseShape ellipse)
-            {
-                _ellipseProperties.EllipseShape = ellipse;
-                _currentPanel = _ellipseProperties;
-            }
-            else if (shapeBase is LineShape line)
-            {
-                _lineProperties.LineShape = line;
-                _currentPanel = _lineProperties;
-            }
-            else if (shapeBase is FreeShape free)
-            {
-                _pencilProperties.FreeShape = free;
-                _currentPanel = _pencilProperties;
-            }
-
+            _currentPanel = _propertiesControllers[shapeBase.GetType()];
+            _currentPanel.SetShape(shapeBase);
             _currentShape = shapeBase;
             return _currentPanel;
         }

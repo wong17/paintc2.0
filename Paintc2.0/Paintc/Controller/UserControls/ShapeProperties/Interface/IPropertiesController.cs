@@ -1,7 +1,10 @@
-﻿namespace Paintc.Controller.UserControls.ShapeProperties.Interface
+﻿using Paintc.Core;
+
+namespace Paintc.Controller.UserControls.ShapeProperties.Interface
 {
     public interface IPropertiesController 
     {
-        public void UpdateProperties();
+        void SetShape(ShapeBase shape);
+        void UpdateProperties();
     }
 }
