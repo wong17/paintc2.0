@@ -164,6 +164,7 @@ namespace Paintc.Core
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
+                adornerLayer?.Add(new LineSelectionAdorner(shape));
                 return;
             }
             // Si es otra herramienta...
@@ -182,6 +183,7 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
+                RemoveAdorner<LineSelectionAdorner>(shape);
                 return;
             }
             // Ocultar el adorno si es otra herramienta...
