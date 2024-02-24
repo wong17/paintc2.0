@@ -117,6 +117,7 @@ namespace Paintc.Core
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
+                adornerLayer?.Add(new LineResizerAdorner(shape));
                 return;
             }
 
@@ -136,6 +137,7 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
+                RemoveAdorner<LineResizerAdorner>(shape);
                 return;
             }
 
@@ -210,6 +212,7 @@ namespace Paintc.Core
             // Si es la herramienta de LineTool
             if (showAdorner && shape is Line)
             {
+                adornerLayer?.Add(new LineDragAdorner(shape));
                 return;
             }
 
@@ -228,6 +231,7 @@ namespace Paintc.Core
             // Ocultar el adorno si es la herramienta de LineTool
             if (!showAdorner && shape is Line)
             {
+                RemoveAdorner<LineDragAdorner>(shape);
                 return;
             }
 

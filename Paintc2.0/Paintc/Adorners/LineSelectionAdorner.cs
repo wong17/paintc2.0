@@ -41,11 +41,12 @@ namespace Paintc.Adorners
             double rectWidth = 50;
             double rectHeight = 20;
 
-            double midX = ((startPoint.X + endPoint.X) / 2) - (rectWidth / 2);
-            double midY = (startPoint.Y + endPoint.Y) / 2 + 10;
-            double angle = GetInclinationAngle(adornedLine);
+            double startTextRectX = (startPoint.X + endPoint.X) / 2 - (rectWidth / 2); // punto medio en x de la linea - mitad del ancho del rectángulo
+            double startTextRectY = (startPoint.Y + endPoint.Y) / 2 - (rectHeight / 2);// punto medio en y de la linea - mitad del alto del rectángulo
+            double yOffset = 20;
+            double angle = GetInclinationAngle(adornedLine); 
 
-            Rect textRectBounds = new(midX, midY, rectWidth, rectHeight);
+            Rect textRectBounds = new(startTextRectX, startTextRectY + yOffset, rectWidth, rectHeight);
             // Rotamos y dibujamos el rectángulo
             drawingContext.PushTransform(new RotateTransform(angle, textRectBounds.Left + textRectBounds.Width / 2, textRectBounds.Top + textRectBounds.Height / 2));
             drawingContext.DrawRectangle(Brushes.DodgerBlue, new Pen(Brushes.DodgerBlue, 1), textRectBounds);
