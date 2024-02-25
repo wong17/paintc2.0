@@ -74,13 +74,13 @@ namespace Paintc.Controller.UserControls.ShapeProperties
         {
             if (_rectangleShape is null)
                 return;
-
-            TopLeftX = Canvas.GetLeft(_rectangleShape.GetShape());
-            TopLeftY = Canvas.GetTop(_rectangleShape.GetShape());
-            BottomRightX = Canvas.GetRight(_rectangleShape.GetShape());
-            BottomRightY = Canvas.GetBottom(_rectangleShape.GetShape());
-            Width = _rectangleShape.GetShape().Width;
-            Height = _rectangleShape.GetShape().Height;
+            
+            TopLeftX = double.Truncate(Canvas.GetLeft(_rectangleShape.GetShape()) * 100) / 100;
+            TopLeftY = double.Truncate(Canvas.GetTop(_rectangleShape.GetShape()) * 100) / 100;
+            BottomRightX = double.Truncate(Canvas.GetRight(_rectangleShape.GetShape()) * 100) / 100;
+            BottomRightY = double.Truncate(Canvas.GetBottom(_rectangleShape.GetShape()) * 100) / 100;
+            Width = double.Truncate(_rectangleShape.GetShape().Width * 100) / 100;
+            Height = double.Truncate(_rectangleShape.GetShape().Height * 100) / 100;
         }
 
         /// <summary>

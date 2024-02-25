@@ -1,6 +1,5 @@
 ﻿using Paintc.Controller.UserControls.ShapeProperties.Interface;
 using Paintc.Core;
-using Paintc.Shapes;
 using System.Windows.Controls;
 
 namespace Paintc.Controller.UserControls.ShapeProperties
@@ -106,16 +105,16 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             if (_ellipseShape is null)
                 return;
 
-            TopLeftX = Canvas.GetLeft(_ellipseShape.GetShape());
-            TopLeftY = Canvas.GetTop(_ellipseShape.GetShape());
-            BottomRightX = Canvas.GetRight(_ellipseShape.GetShape());
-            BottomRightY = Canvas.GetBottom(_ellipseShape.GetShape());
-            RadiusX = Math.Abs((BottomRightX - TopLeftX) / 2);
-            RadiusY = Math.Abs((BottomRightY - TopLeftY) / 2);
+            TopLeftX = double.Truncate(Canvas.GetLeft(_ellipseShape.GetShape()) * 100) / 100;
+            TopLeftY = double.Truncate(Canvas.GetTop(_ellipseShape.GetShape()) * 100) / 100;
+            BottomRightX = double.Truncate(Canvas.GetRight(_ellipseShape.GetShape()) * 100) / 100;
+            BottomRightY = double.Truncate(Canvas.GetBottom(_ellipseShape.GetShape()) * 100) / 100;
+            RadiusX = double.Truncate(Math.Abs((BottomRightX - TopLeftX) / 2) * 100) / 100;
+            RadiusY = double.Truncate(Math.Abs((BottomRightY - TopLeftY) / 2) * 100) / 100;
             StartAngle = 0;
             EndAngle = 360;
-            Width = _ellipseShape.GetShape().Width;
-            Height = _ellipseShape.GetShape().Height;
+            Width = double.Truncate(_ellipseShape.GetShape().Width * 100) / 100;
+            Height = double.Truncate(_ellipseShape.GetShape().Height * 100) / 100;
         }
 
         /// <summary>

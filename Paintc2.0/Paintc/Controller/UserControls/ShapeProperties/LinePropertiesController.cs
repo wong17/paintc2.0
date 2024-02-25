@@ -66,11 +66,11 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             if (_lineShape is null)
                 return;
 
-            StartX = _lineShape.GetPoints()[0].X;
-            StartY = _lineShape.GetPoints()[0].Y;
-            EndX = _lineShape.GetPoints()[1].X;
-            EndY = _lineShape.GetPoints()[1].Y;
-            Length = Math.Sqrt(Math.Pow(EndX - StartX, 2) + Math.Pow(EndY - StartY, 2));
+            StartX = double.Truncate(_lineShape.GetPoints()[0].X * 100) / 100;
+            StartY = double.Truncate(_lineShape.GetPoints()[0].Y * 100) / 100;
+            EndX = double.Truncate(_lineShape.GetPoints()[1].X * 100) / 100;
+            EndY = double.Truncate(_lineShape.GetPoints()[1].Y * 100) / 100;
+            Length = double.Truncate(Math.Sqrt(Math.Pow(EndX - StartX, 2) + Math.Pow(EndY - StartY, 2)) * 100) / 100;
         }
 
         /// <summary>
