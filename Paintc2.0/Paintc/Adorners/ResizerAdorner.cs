@@ -466,36 +466,46 @@ namespace Paintc.Adorners
             if (deltaY > 0 && yCanvasBottom == parentCanvas.ActualHeight || deltaX > 0 && xCanvasRight == parentCanvas.ActualWidth)
                 return;
 
+            /**/
             double deltaH = adornedElement.ActualHeight + deltaY;
             double deltaW = adornedElement.ActualWidth + deltaX;
 
             double bottomOffset = deltaY;
             double rightOffset = deltaX;
+            bool isNewHeightLessThanMinHeight = deltaH < adornedElement.MinHeight;
+            bool isNewHeightGreatherThanCanvasHeight = deltaH > parentCanvas.ActualHeight;
+            bool isNewWidthLessThanMinWidth = deltaW < adornedElement.MinWidth;
+            bool isNewWidthGreatherThanCanvasWidth = deltaW > parentCanvas.ActualWidth;
 
-            if (deltaH < adornedElement.MinHeight)
+            if (isNewHeightLessThanMinHeight)
             {
                 deltaH = adornedElement.MinHeight;
                 bottomOffset = adornedElement.ActualHeight - adornedElement.MinHeight;
             }
 
-            if (deltaH > parentCanvas.ActualHeight)
+            if (isNewHeightGreatherThanCanvasHeight)
                 deltaH = parentCanvas.ActualHeight;
 
-            if (deltaW < adornedElement.MinWidth)
+            if (isNewWidthLessThanMinWidth)
             {
                 deltaW = adornedElement.MinWidth;
                 rightOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
             }
 
-            if (deltaW > parentCanvas.ActualWidth)
+            if (isNewWidthGreatherThanCanvasWidth)
                 deltaW = parentCanvas.ActualWidth;
 
+            /**/
             double newCanvasBottom = yCanvasBottom + bottomOffset;
-            if (newCanvasBottom > parentCanvas.ActualHeight)
+            bool isNewYRightCoordGreatherThanCanvasHeight = newCanvasBottom > parentCanvas.ActualHeight;
+
+            if (isNewYRightCoordGreatherThanCanvasHeight)
                 newCanvasBottom = parentCanvas.ActualHeight;
 
             double newCanvasRight = xCanvasRight + rightOffset;
-            if (newCanvasRight > parentCanvas.ActualWidth)
+            bool isNewXRightCoordGreatherThanCanvasWidth = newCanvasRight > parentCanvas.ActualWidth;
+
+            if (isNewXRightCoordGreatherThanCanvasWidth)
                 newCanvasRight = parentCanvas.ActualWidth;
 
             double newCanvasTop = Math.Abs(newCanvasBottom - deltaH);
@@ -532,18 +542,22 @@ namespace Paintc.Adorners
             if (deltaX < 0 && xCanvasLeft == 0)
                 return;
 
+            /**/
             double deltaW = adornedElement.ActualWidth - deltaX;
             double leftOffset = deltaX;
+            bool isNewWidthLessThanMinWidth = deltaW < adornedElement.MinWidth;
+            bool isNewWidthGreatherThanCanvasWidth = deltaW > parentCanvas.ActualWidth;
 
-            if (deltaW < adornedElement.MinWidth)
+            if (isNewWidthLessThanMinWidth)
             {
                 deltaW = adornedElement.MinWidth;
                 leftOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
             }
 
-            if (deltaW > parentCanvas.ActualWidth)
+            if (isNewWidthGreatherThanCanvasWidth)
                 deltaW = parentCanvas.ActualWidth;
 
+            /**/
             double newCanvasLeft = xCanvasLeft + leftOffset;
             if (newCanvasLeft < 0)
                 newCanvasLeft = 0;
@@ -553,7 +567,6 @@ namespace Paintc.Adorners
             adornedElement.Width = deltaW;
 
             Canvas.SetLeft(adornedElement, newCanvasLeft);
-
             Canvas.SetRight(adornedElement, newCanvasRight);
 
             PropertiesPanelService.Instance.UpdatePropertiesPanel();
@@ -578,19 +591,25 @@ namespace Paintc.Adorners
             if (deltaX > 0 && xCanvasRight == parentCanvas.ActualWidth)
                 return;
 
+            /**/
             double deltaW = adornedElement.ActualWidth + deltaX;
             double rightOffset = deltaX;
+            bool isNewWidthLessThanMinWidth = deltaW < adornedElement.MinWidth;
+            bool isNewWidthGreatherThanCanvasWidth = deltaW > parentCanvas.ActualWidth;
 
-            if (deltaW < adornedElement.MinWidth)
+            if (isNewWidthLessThanMinWidth)
             {
                 deltaW = adornedElement.MinWidth;
                 rightOffset = adornedElement.ActualWidth - adornedElement.MinWidth;
             }
-            if (deltaW > parentCanvas.ActualWidth)
+            if (isNewWidthGreatherThanCanvasWidth)
                 deltaW = parentCanvas.ActualWidth;
-
+            
+            /**/
             double newCanvasRight = xCanvasRight + rightOffset;
-            if (newCanvasRight > parentCanvas.ActualWidth)
+            bool isNewXRightCoordGreatherThanCanvasWidth = newCanvasRight > parentCanvas.ActualWidth;
+
+            if (isNewXRightCoordGreatherThanCanvasWidth)
                 newCanvasRight = parentCanvas.ActualWidth;
 
             double newCanvasLeft = Math.Abs(newCanvasRight - deltaW);
@@ -598,7 +617,6 @@ namespace Paintc.Adorners
             adornedElement.Width = deltaW;
 
             Canvas.SetRight(adornedElement, newCanvasRight);
-
             Canvas.SetLeft(adornedElement, newCanvasLeft);
 
             PropertiesPanelService.Instance.UpdatePropertiesPanel();
