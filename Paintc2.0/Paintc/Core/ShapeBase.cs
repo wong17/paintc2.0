@@ -123,6 +123,8 @@ namespace Paintc.Core
 
         #endregion ATTACHED_PROPERTIES
 
+        #region ATTACHED_PROPERTIES_CALLBACKS
+
         /// <summary>
         /// Muestra el adorno de cambiar de tamaño
         /// </summary>
@@ -199,5 +201,7 @@ namespace Paintc.Core
                     adornerLayer.Remove(adorner);
             }
         }
+
+        #endregion
     }
 }
