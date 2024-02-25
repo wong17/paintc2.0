@@ -8,6 +8,33 @@ namespace Paintc.Core
 {
     public abstract class ShapeBase(string? name, Color color) : DependencyObject
     {
+        /* Contiene el adorno para cambiar el tamaño de la figura */
+        private static readonly Dictionary<Type, Type> ResizeAdorners = new()
+        {
+            { typeof(Rectangle), typeof(ResizerAdorner) },
+            { typeof(Ellipse), typeof(ResizerAdorner) },
+            { typeof(Line), typeof(LineResizerAdorner) },
+            { typeof(Polyline), typeof(PolylineResizerAdorner) }
+        };
+
+        /* Contiene el adorno para indicar que la figura esta seleccionada */
+        private static readonly Dictionary<Type, Type> SelectionAdorners = new()
+        {
+            { typeof(Rectangle), typeof(SelectionAdorner) },
+            { typeof(Ellipse), typeof(SelectionAdorner) },
+            { typeof(Line), typeof(LineSelectionAdorner) },
+            { typeof(Polyline), typeof(PolylineSelectionAdorner) }
+        };
+
+        /* Contiene el adorno para arrastrar la figura seleccionada */
+        private static readonly Dictionary<Type, Type> DragAdorners = new()
+        {
+            { typeof(Rectangle), typeof(DragAdorner) },
+            { typeof(Ellipse), typeof(DragAdorner) },
+            { typeof(Line), typeof(LineDragAdorner) }
+        };
+
+        /* Nombre para identificarla en el explorador de figuras */
         public string? Name { get; set; } = name;
         protected readonly Color Color = color;
         protected Point LastMousePosition { get; set; }
@@ -101,164 +128,74 @@ namespace Paintc.Core
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void OnShowResizeAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is not Shape shape)
-                return;
-
-            bool showAdorner = Convert.ToBoolean(e.NewValue);
-            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
-            // Si es la herramienta de PencilTool
-            if (showAdorner && shape is Polyline)
-            {
-                adornerLayer?.Add(new PolylineResizerAdorner(shape));
-                return;
-            }
-            // Si es la herramienta de LineTool
-            if (showAdorner && shape is Line)
-            {
-                adornerLayer?.Add(new LineResizerAdorner(shape));
-                return;
-            }
-
-            // Si es otra herramienta...
-            if (showAdorner && (shape is Rectangle || shape is Ellipse))
-            {
-                adornerLayer?.Add(new ResizerAdorner(shape));
-                return;
-            }
-
-            // Ocultar el adorno si es la herramienta de PencilTool
-            if (!showAdorner && shape is Polyline)
-            {
-                RemoveAdorner<PolylineResizerAdorner>(shape);
-                return;
-            }
-            // Ocultar el adorno si es la herramienta de LineTool
-            if (!showAdorner && shape is Line)
-            {
-                RemoveAdorner<LineResizerAdorner>(shape);
-                return;
-            }
-
-            // Ocultar el adorno si es otra herramienta...
-            RemoveAdorner<ResizerAdorner>(shape);
-        }
+        private static void OnShowResizeAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => HandleAdorners(d, e, ResizeAdorners);
 
         /// <summary>
         /// Muestra el adorno de selección
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void OnShowSelectionAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is not Shape shape)
-                return;
-
-            bool showAdorner = Convert.ToBoolean(e.NewValue);
-            var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
-            // Si es la herramienta de PencilTool
-            if (showAdorner && shape is Polyline)
-            {
-                adornerLayer?.Add(new PolylineSelectionAdorner(shape));
-                return;
-            }
-            // Si es la herramienta de LineTool
-            if (showAdorner && shape is Line)
-            {
-                adornerLayer?.Add(new LineSelectionAdorner(shape));
-                return;
-            }
-            // Si es otra herramienta...
-            if (showAdorner && (shape is Rectangle || shape is Ellipse))
-            {
-                adornerLayer?.Add(new SelectionAdorner(shape));
-                return;
-            }
-
-            // Ocultar el adorno si es la herramienta de PencilTool
-            if (!showAdorner && shape is Polyline)
-            {
-                RemoveAdorner<PolylineSelectionAdorner>(shape);
-                return;
-            }
-            // Ocultar el adorno si es la herramienta de LineTool
-            if (!showAdorner && shape is Line)
-            {
-                RemoveAdorner<LineSelectionAdorner>(shape);
-                return;
-            }
-            // Ocultar el adorno si es otra herramienta...
-            RemoveAdorner<SelectionAdorner>(shape);
-        }
+        private static void OnShowSelectionAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => HandleAdorners(d, e, SelectionAdorners);
 
         /// <summary>
         /// Muestra el adorno de arrastrar
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void OnShowDragAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnShowDragAdornerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => HandleAdorners(d, e, DragAdorners);
+
+        /// <summary>
+        /// Contiene la lógica para agregar o eliminar el adorno de una figura.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        /// <param name="adornersDictionary"></param>
+        private static void HandleAdorners(DependencyObject d, DependencyPropertyChangedEventArgs e, Dictionary<Type, Type> adornersDictionary)
         {
             if (d is not Shape shape)
                 return;
 
             bool showAdorner = Convert.ToBoolean(e.NewValue);
+            /* Obtener capa de adornos de la figura */
             var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
-            // Si es la herramienta de PencilTool
-            if (showAdorner && shape is Polyline)
-            {
+            Type shapeType = shape.GetType();
+            /* Si no se pudo obtener el adorno asociado a la figura... */
+            if (!adornersDictionary.TryGetValue(shapeType, out Type? adornerType))
                 return;
-            }
-            // Si es la herramienta de LineTool
-            if (showAdorner && shape is Line)
-            {
-                adornerLayer?.Add(new LineDragAdorner(shape));
+            /* Crea una instancia del adorno pasandole por parámatro la figura */
+            Adorner? adorner = (Adorner?)Activator.CreateInstance(adornerType, shape);
+            if (adorner is null)
                 return;
-            }
 
-            // Si es otra herramienta...
-            if (showAdorner && (shape is Rectangle || shape is Ellipse))
-            {
-                adornerLayer?.Add(new DragAdorner(shape));
-                return;
-            }
-
-            // Ocultar el adorno si es la herramienta de PencilTool
-            if (!showAdorner && shape is Polyline)
-            {
-                return;
-            }
-            // Ocultar el adorno si es la herramienta de LineTool
-            if (!showAdorner && shape is Line)
-            {
-                RemoveAdorner<LineDragAdorner>(shape);
-                return;
-            }
-
-            RemoveAdorner<DragAdorner>(shape);
+            /* Si se obtuvo el adorno y showAdorner es true, se agrega a la figura */
+            if (showAdorner)
+                adornerLayer?.Add(adorner);
+            else
+                RemoveAdorner(adorner, shape);
         }
 
         /// <summary>
         /// Elimina/oculta el adorno <T> especificado de la figura
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="adornerType"></param>
         /// <param name="shape"></param>
-        private static void RemoveAdorner<T>(Shape shape) where T : Adorner
+        private static void RemoveAdorner(Adorner adornerType, Shape shape)
         {
+            /* Obtener capa de adornos de la figura */
             var adornerLayer = AdornerLayer.GetAdornerLayer(shape);
             if (adornerLayer is null)
                 return;
-
+            /* Obtener todos los adornos de la figura */
             var adorners = adornerLayer.GetAdorners(shape);
             if (adorners is null)
                 return;
-
+            /* Eliminar el adorno indicado "adornerType" */
             foreach (var adorner in adorners)
             {
                 if (adorner is null)
                     continue;
 
-                if (adorner is T)
+                if (adorner.GetType() == adornerType.GetType())
                     adornerLayer.Remove(adorner);
             }
         }
