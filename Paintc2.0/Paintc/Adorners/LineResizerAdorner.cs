@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Paintc.Service;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -90,7 +91,39 @@ namespace Paintc.Adorners
             if (adornedLine.Parent is not Canvas parentCanvas)
                 return;
 
+            double deltaX = e.HorizontalChange;
+            double deltaY = e.VerticalChange;
+            double newX2 = adornedLine.X2 + deltaX;
+            double newY2 = adornedLine.Y2 + deltaY;
+            bool isNewX2GreatherThanCanvasWidth = newX2 > parentCanvas.ActualWidth;
+            bool isNewY2GreatherThanCanvasHeight = newY2 > parentCanvas.ActualHeight;
+            bool isNewX2LessThanX1 = newX2 < adornedLine.X1;
+            bool isNewY2LessThanCero = newY2 < 0;
+            bool isNewX2EqualsToCanvasWidth = newX2 == parentCanvas.ActualWidth;
+            bool isNewY2EqualsToCanvasHeight = newY2 == parentCanvas.ActualHeight;
 
+            if (deltaX > 0 && isNewX2EqualsToCanvasWidth)
+                return;
+
+            if (deltaY > 0 && isNewY2EqualsToCanvasHeight)
+                return;
+
+            /**/
+            if (isNewX2GreatherThanCanvasWidth)
+                newX2 = parentCanvas.ActualWidth;
+            else if (isNewX2LessThanX1)
+                newX2 = adornedLine.X1;
+            
+            /**/
+            if (isNewY2GreatherThanCanvasHeight)
+                newY2 = parentCanvas.ActualHeight;
+            else if (isNewY2LessThanCero)
+                newY2 = 0;
+
+            adornedLine.X2 = newX2;
+            adornedLine.Y2 = newY2;
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
@@ -106,7 +139,41 @@ namespace Paintc.Adorners
             if (adornedLine.Parent is not Canvas parentCanvas)
                 return;
 
+            double deltaX = e.HorizontalChange;
+            double deltaY = e.VerticalChange;
+            double newX1 = adornedLine.X1 + deltaX;
+            double newY1 = adornedLine.Y1 + deltaY;
 
+            bool isNewY1GreatherThanCanvasHeight = newY1 > parentCanvas.ActualHeight;
+            bool isNewX1GreatherThanX2 = newX1 > adornedLine.X2;
+            bool isNewX1LessThanCero = newX1 < 0;
+            bool isNewY1LessThanCero = newY1 < 0;
+            bool isNewX1EqualsToCero = newX1 == 0;
+            bool isNewY1EqualsToCero = newY1 == 0;
+
+
+            if (deltaX < 0 && isNewX1EqualsToCero)
+                return;
+
+            if (deltaY < 0 && isNewY1EqualsToCero)
+                return;
+
+            /**/
+            if (isNewX1LessThanCero)
+                newX1 = 0;
+            else if (isNewX1GreatherThanX2)
+                newX1 = adornedLine.X2;
+
+            /**/
+            if (isNewY1LessThanCero)
+                newY1 = 0;
+            else if(isNewY1GreatherThanCanvasHeight)
+                newY1 = parentCanvas.ActualHeight;
+
+            adornedLine.X1 = newX1;
+            adornedLine.Y1 = newY1;
+
+            PropertiesPanelService.Instance.UpdatePropertiesPanel();
         }
 
         /// <summary>
