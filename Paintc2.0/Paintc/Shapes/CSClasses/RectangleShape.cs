@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes
+namespace Paintc.Shapes.CSClasses
 {
     public class RectangleShape : ShapeBase
     {

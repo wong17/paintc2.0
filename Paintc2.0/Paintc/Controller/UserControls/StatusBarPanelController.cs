@@ -40,8 +40,8 @@ namespace Paintc.Controller.UserControls
             StatusBarPanelService.Instance.UpdateCurrentColorEventHandler += UpdateCurrentColorEventHandler;
             // Herramienta inicial: Selection, Color inicial: Black
             StatusBarPanelService.Instance.UpdateCurrentTool(ToolType.SelectTool);
-            StatusBarPanelService.Instance.UpdateCurrentColor(CGAColorPalette.Black);
-            ToolboxPanelService.Instance.UpdateSelectedColor(CGAColorPalette.Black);
+            StatusBarPanelService.Instance.UpdateCurrentColor(CGAColorPalette.White);
+            ToolboxPanelService.Instance.UpdateSelectedColor(CGAColorPalette.White);
         }
 
         /// <summary>

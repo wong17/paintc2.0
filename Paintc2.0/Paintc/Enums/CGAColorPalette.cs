@@ -2,21 +2,21 @@
 {
     public enum CGAColorPalette
     {
-        White,
+        Black,
         Blue,
         Green,
         Cyan,
         Red,
         Magenta,
         Brown,
-        DarkGray,
         LightGray,
+        DarkGray,
         LightBlue,
         LightGreen,
         LightCyan,
         LightRed,
         LightMagenta,
         Yellow,
-        Black
+        White
     }
 }

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes
+namespace Paintc.Shapes.CSClasses
 {
     public class FreeShape : ShapeBase
     {

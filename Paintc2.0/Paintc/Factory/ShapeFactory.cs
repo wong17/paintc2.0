@@ -1,6 +1,6 @@
 ﻿using Paintc.Core;
 using Paintc.Enums;
-using Paintc.Shapes;
+using Paintc.Shapes.CSClasses;
 using System.Windows.Media;
 
 namespace Paintc.Factory
