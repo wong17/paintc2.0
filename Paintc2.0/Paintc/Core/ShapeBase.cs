@@ -36,6 +36,8 @@ namespace Paintc.Core
 
         /* Nombre para identificarla en el explorador de figuras */
         public string? Name { get; set; } = name;
+        
+        /* Color de relleno de la figura */
         protected readonly Color Color = color;
         protected Point LastMousePosition { get; set; }
         protected Point CurrentMousePosition { get; set; }
@@ -44,7 +46,17 @@ namespace Paintc.Core
 
         public abstract void SetCurrentMousePosition(Point currentPosition);
 
+        /// <summary>
+        /// Retorna la figura que se muestra en el canvas
+        /// </summary>
+        /// <returns></returns>
         public abstract Shape GetShape();
+
+        /// <summary>
+        /// Retorna solo los datos necesarios para crear la figura primitiva de graphics.h asociada a esta forma
+        /// </summary>
+        /// <returns></returns>
+        public abstract SimpleShapeBase GetSimpleShape();
 
         #region DEPENDENCY_PROPERTY
 
@@ -69,6 +81,8 @@ namespace Paintc.Core
             DependencyProperty.Register("IsResizableProperty", typeof(bool), typeof(ShapeBase), new PropertyMetadata(true, IsResizablePropertyChanged));
 
         #endregion DEPENDENCY_PROPERTY
+
+        #region DEPENDENCY_PROPERTY_CALLBACKS
 
         /// <summary>
         /// Muestra u oculta el adorno de arrastrar a la figura seleccionada
@@ -97,6 +111,8 @@ namespace Paintc.Core
             bool newValue = (bool)e.NewValue;
             SetShowResizeAdorner(shapeBase.GetShape(), newValue);
         }
+
+        #endregion
 
         #region ATTACHED_PROPERTIES
 

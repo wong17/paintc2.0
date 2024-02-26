@@ -1,4 +1,6 @@
-﻿namespace Paintc.Shapes.CStructs
+﻿using Paintc.Core;
+
+namespace Paintc.Shapes.C
 {
     /* 
      * ellipse (int x, int y, int comienzo_angulo, int final_angulo, int x_radio, int y_radio);
@@ -14,8 +16,17 @@
      * estilo de línea es ignorado por la función ellipse.  
      */
 
-    public struct Ellipse
+    public sealed class CEllipse : SimpleShapeBase
     {
-        public int x, y, startAngle, endAngle, x_radius, y_radius;
+        public required int X { get; set; }
+        public required int Y { get; set; }
+        public required int StartAngle { get; set; }
+        public required int EndAngle { get; set; }
+        public required int XRadius { get; set; }
+        public required int YRadius { get; set; }
+        public int Color { get; set; }
+        public int BorderColor { get; set; }
+        public int Pattern { get; set; }
+        public string? Name { get; set; }
     }
 }

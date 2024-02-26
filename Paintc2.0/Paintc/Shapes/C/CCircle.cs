@@ -1,4 +1,6 @@
-﻿namespace Paintc.Shapes.CStructs
+﻿using Paintc.Core;
+
+namespace Paintc.Shapes.C
 {
     /*
      * circle (int x, int y, int rad);
@@ -8,8 +10,12 @@
      * rellenado pero es dibujado usando el color actual.  
      */
 
-    public struct Circle
+    public class CCircle : SimpleShapeBase
     {
-        public int x, y, radius;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Radius { get; set; }
+        public int BorderColor { get; set; }
+        public int Pattern { get; set; }
     }
 }

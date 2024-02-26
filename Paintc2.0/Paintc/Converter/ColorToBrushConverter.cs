@@ -14,7 +14,8 @@ namespace Paintc.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            var brush = (SolidColorBrush)value;
+            return brush.Color;
         }
     }
 }

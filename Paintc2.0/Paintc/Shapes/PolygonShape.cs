@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes.CSClasses
+namespace Paintc.Shapes
 {
     public class PolygonShape : ShapeBase
     {
@@ -100,6 +100,11 @@ namespace Paintc.Shapes.CSClasses
                 //IsActivePolygon = false;
                 IsPolygonClosed = true;
             }
+        }
+
+        public override SimpleShapeBase GetSimpleShape()
+        {
+            throw new NotImplementedException();
         }
     }
 }

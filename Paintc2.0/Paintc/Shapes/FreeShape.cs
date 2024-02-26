@@ -1,9 +1,12 @@
 ﻿using Paintc.Core;
+using Paintc.Enums;
+using Paintc.Service.Collections;
+using Paintc.Shapes.C;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes.CSClasses
+namespace Paintc.Shapes
 {
     public class FreeShape : ShapeBase
     {
@@ -37,5 +40,34 @@ namespace Paintc.Shapes.CSClasses
         public PointCollection GetPoints() => _polyLine.Points;
 
         public override Shape GetShape() => _polyLine;
+
+        public override SimpleShapeBase GetSimpleShape()
+        {
+            int color = (int)CGAColorPalette.White;
+
+            if (_polyLine.Stroke is SolidColorBrush strokeBrush)
+                color = (int)CGAColorPaletteService.GetCGAColorPalette(strokeBrush.Color);
+
+            List<CPixel> pixels = [];
+            var points = GetPoints();
+            foreach (var point in points)
+            {
+                var pixel = new CPixel
+                {
+                    X = (int)double.Truncate(point.X),
+                    Y = (int)double.Truncate(point.Y),
+                    Color = color
+                };
+                pixels.Add(pixel);
+            }
+
+            CPencil pencil = new()
+            {
+                Name = Name,
+                Pixels = pixels
+            };
+
+            return pencil;
+        }
     }
 }

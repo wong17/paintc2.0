@@ -1,10 +1,12 @@
 ﻿using Paintc.Core;
+using Paintc.Service.Collections;
+using Paintc.Shapes.C;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes.CSClasses
+namespace Paintc.Shapes
 {
     public class EllipseShape : ShapeBase
     {
@@ -56,5 +58,30 @@ namespace Paintc.Shapes.CSClasses
         }
 
         public override Shape GetShape() => _ellipse;
+
+        public override SimpleShapeBase GetSimpleShape()
+        {
+            double middlePointX = (Canvas.GetRight(_ellipse) + Canvas.GetLeft(_ellipse)) / 2;
+            double middlePointY = (Canvas.GetBottom(_ellipse) + Canvas.GetTop(_ellipse)) / 2;
+
+            CEllipse ellipse = new()
+            {
+                X = Convert.ToInt32(double.Truncate(middlePointX)),
+                Y = Convert.ToInt32(double.Truncate(middlePointY)),
+                StartAngle = 0,
+                EndAngle = 360,
+                XRadius = Convert.ToInt32(double.Truncate(_ellipse.Width)) / 2,
+                YRadius = Convert.ToInt32(double.Truncate(_ellipse.Height)) / 2,
+                Name = Name
+            };
+
+            if (GetShape().Fill is SolidColorBrush fillBrush)
+                ellipse.Color = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(fillBrush.Color));
+
+            if (GetShape().Stroke is SolidColorBrush strokeBrush)
+                ellipse.BorderColor = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(strokeBrush.Color));
+
+            return ellipse;
+        }
     }
 }

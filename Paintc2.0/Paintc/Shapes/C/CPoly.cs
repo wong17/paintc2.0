@@ -1,4 +1,6 @@
-﻿namespace Paintc.Shapes.CStructs
+﻿using Paintc.Core;
+
+namespace Paintc.Shapes.C
 {
     /* 
      * drawpoly (int puntos, int *vertice);
@@ -8,9 +10,9 @@
      * fijados por setlinestyle. 
      */
 
-    public struct Poly
+    public sealed class CPoly : SimpleShapeBase
     {
-        public int nPoints;
-        public int[] points;
+        public required int NPoints {  get; set; }
+        public required int[] Points { get; set; }
     }
 }

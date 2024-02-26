@@ -7,6 +7,10 @@ namespace Paintc.Service.Collections
 {
     public static class CGAColorPaletteService
     {
+        /// <summary>
+        /// Colección de los colores disponibles en el modo gráfico
+        /// </summary>
+        /// <returns></returns>
         public static ObservableCollection<CGAColor> GetColorPalette()
         {
             return [
@@ -28,12 +32,24 @@ namespace Paintc.Service.Collections
                 new CGAColor(CGAColorPalette.White, Colors.White)];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static Color GetColor(CGAColorPalette? color)
         {
             if (color == null)
-                return GetColorPalette().Last().Color;
+                return Colors.White; // Color principal por defecto para dibujar
 
             return GetColorPalette().Where(c => c.Cpalette == color).First().Color;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public static CGAColorPalette GetCGAColorPalette(Color color) => GetColorPalette().Where(c => c.Color.Equals(color)).First().Cpalette;
     }
 }

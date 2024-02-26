@@ -1,4 +1,6 @@
-﻿namespace Paintc.Shapes.CStructs
+﻿using Paintc.Core;
+
+namespace Paintc.Shapes.C
 {
     /* 
      * arc (int x, int y, int ang1, int ang2, int rad);
@@ -7,8 +9,12 @@
      * ang2 y radio rad, usando el color actual y el grosor de línea fijado por setlinestyle. 
      */
 
-    public struct Arc
+    public class CArc : SimpleShapeBase
     {
-        public int x, y, angle1, angle2, radius;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Angle1 { get; set; }
+        public int Angle2 { get; set; }
+        public int Radius { get; set; }
     }
 }

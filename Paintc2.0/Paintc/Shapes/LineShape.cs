@@ -1,9 +1,11 @@
 ﻿using Paintc.Core;
+using Paintc.Service.Collections;
+using Paintc.Shapes.C;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes.CSClasses
+namespace Paintc.Shapes
 {
     public class LineShape : ShapeBase
     {
@@ -40,5 +42,22 @@ namespace Paintc.Shapes.CSClasses
         }
 
         public override Shape GetShape() => Line;
+
+        public override SimpleShapeBase GetSimpleShape()
+        {
+            CLine line = new()
+            {
+                X1 = Convert.ToInt32(double.Truncate(Line.X1)),
+                Y1 = Convert.ToInt32(double.Truncate(Line.Y1)),
+                X2 = Convert.ToInt32(double.Truncate(Line.X2)),
+                Y2 = Convert.ToInt32(double.Truncate(Line.Y2)),
+                Name = Name
+            };
+
+            if (GetShape().Fill is SolidColorBrush fillBrush)
+                line.Color = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(fillBrush.Color));
+
+            return line;
+        }
     }
 }

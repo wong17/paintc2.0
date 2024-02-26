@@ -1,10 +1,12 @@
 ﻿using Paintc.Core;
+using Paintc.Service.Collections;
+using Paintc.Shapes.C;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Paintc.Shapes.CSClasses
+namespace Paintc.Shapes
 {
     public class RectangleShape : ShapeBase
     {
@@ -53,6 +55,26 @@ namespace Paintc.Shapes.CSClasses
             LastMousePosition = lastPosition;
             Canvas.SetLeft(_rectangle, lastPosition.X);
             Canvas.SetTop(_rectangle, lastPosition.Y);
+        }
+
+        public override SimpleShapeBase GetSimpleShape()
+        {
+            CRectangle rect = new()
+            {
+                X1 = Convert.ToInt32(double.Truncate(Canvas.GetLeft(_rectangle))),
+                Y1 = Convert.ToInt32(double.Truncate(Canvas.GetTop(_rectangle))),
+                X2 = Convert.ToInt32(double.Truncate(Canvas.GetRight(_rectangle))),
+                Y2 = Convert.ToInt32(double.Truncate(Canvas.GetBottom(_rectangle))),
+                Name = Name
+            };
+
+            if (GetShape().Fill is SolidColorBrush fillBrush)
+                rect.Color = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(fillBrush.Color));
+
+            if (GetShape().Stroke is SolidColorBrush strokeBrush)
+                rect.BorderColor = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(strokeBrush.Color));
+
+            return rect;
         }
     }
 }

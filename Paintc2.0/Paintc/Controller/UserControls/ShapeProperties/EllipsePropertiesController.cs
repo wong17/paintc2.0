@@ -97,6 +97,22 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             private set => SetField(ref _height, value);
         }
 
+        private double _middlePointX;
+
+        public double MiddlePointX
+        {
+            get => _middlePointX;
+            private set => SetField(ref _middlePointX, value);
+        }
+
+        private double _middlePointY;
+
+        public double MiddlePointY
+        {
+            get => _middlePointY;
+            private set => SetField(ref _middlePointY, value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -105,16 +121,23 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             if (_ellipseShape is null)
                 return;
 
-            TopLeftX = double.Truncate(Canvas.GetLeft(_ellipseShape.GetShape()) * 100) / 100;
-            TopLeftY = double.Truncate(Canvas.GetTop(_ellipseShape.GetShape()) * 100) / 100;
-            BottomRightX = double.Truncate(Canvas.GetRight(_ellipseShape.GetShape()) * 100) / 100;
-            BottomRightY = double.Truncate(Canvas.GetBottom(_ellipseShape.GetShape()) * 100) / 100;
-            RadiusX = double.Truncate(Math.Abs((BottomRightX - TopLeftX) / 2) * 100) / 100;
-            RadiusY = double.Truncate(Math.Abs((BottomRightY - TopLeftY) / 2) * 100) / 100;
+            double left = Canvas.GetLeft(_ellipseShape.GetShape());
+            double top = Canvas.GetTop(_ellipseShape.GetShape());
+            double right = Canvas.GetRight(_ellipseShape.GetShape());
+            double bottom = Canvas.GetBottom(_ellipseShape.GetShape());
+
+            TopLeftX = double.Truncate(left * 100) / 100;
+            TopLeftY = double.Truncate(top * 100) / 100;
+            BottomRightX = double.Truncate(right * 100) / 100;
+            BottomRightY = double.Truncate(bottom * 100) / 100;
+            RadiusX = double.Truncate(Math.Abs((right - left) / 2) * 100) / 100;
+            RadiusY = double.Truncate(Math.Abs((bottom - top) / 2) * 100) / 100;
             StartAngle = 0;
             EndAngle = 360;
             Width = double.Truncate(_ellipseShape.GetShape().Width * 100) / 100;
             Height = double.Truncate(_ellipseShape.GetShape().Height * 100) / 100;
+            MiddlePointX = Convert.ToInt32(double.Truncate((right + left) / 2));
+            MiddlePointY = Convert.ToInt32(double.Truncate((bottom + top) / 2));
         }
 
         /// <summary>
