@@ -2,7 +2,4 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
 
-    <!--MainWindow - Menu bar-->
-    <sys:String x:Key="SelectResolution">Select graphic mode resolution:</sys:String>
-    <sys:String x:Key="ToolboxPanelTitle">Toolbox</sys:String>
 </ResourceDictionary>

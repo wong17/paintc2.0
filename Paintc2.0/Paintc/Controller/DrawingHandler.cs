@@ -213,7 +213,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        /// Limpia el canvas, lista de formas y contador
+        /// Limpia el canvas, lista de formas, contador y panel de propiedades
         /// </summary>
         public void ClearDrawingPanel()
         {
@@ -228,6 +228,14 @@ namespace Paintc.Controller
             Shapes.Clear();
             // Reiniciar contador de figuras
             _globalShapeCounter = 0;
+            // Reiniciar panel de propiedades
+            if (_selectedShape is not null)
+            {
+                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+                PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
+                PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
+            }
         }
 
         /// <summary>
