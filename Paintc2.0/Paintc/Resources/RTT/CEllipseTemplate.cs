@@ -12,15 +12,16 @@ namespace Paintc.Resources.RTT
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using Paintc.Shapes.C;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
+    #line 1 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class CRectangle : CRectangleBase
+    public partial class CEllipseTemplate : CEllipseTemplateBase
     {
 #line hidden
         /// <summary>
@@ -44,94 +45,104 @@ void main()
         printf("" Graphics System Error: %s\n"", grapherrormsg(ErrorCode));
         exit(1);
     }
-
-    /* Establecer color de fondo */
+	
+	/* Establecer color de fondo */
     setbkcolor(");
             
-            #line 24 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
+            #line 25 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(settings.BackgroundColor));
             
             #line default
             #line hidden
-            this.Write(");\r\n\r\n    /* Coordenadas del rectángulo */\r\n    int x1 = ");
+            this.Write(");\r\n\r\n\t/* Coordenadas del centro de la ellipse */\r\n\tint centerX = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.X1));
-            
-            #line default
-            #line hidden
-            this.Write(", y1 = ");
-            
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Y1));
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.X));
             
             #line default
             #line hidden
-            this.Write(", x2 = ");
+            this.Write(", centerY = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.X2));
-            
-            #line default
-            #line hidden
-            this.Write(", y2 = ");
-            
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Y2));
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Y));
             
             #line default
             #line hidden
-            this.Write(";\r\n    /* Coordenadas de la barra interna con relleno */\r\n    int x1_bar = x1 + 1" +
-                    ", y1_bar = y1 + 1, x2_bar = x2 - 1, y2_bar = y2 - 1;\r\n\r\n    /* Estilos, colores." +
-                    ".. */\r\n    int color = ");
+            this.Write(";\r\n\t/* Angulo inicio y fin */\r\n\tint startAngle = ");
             
-            #line 32 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Color));
+            #line 30 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.StartAngle));
             
             #line default
             #line hidden
-            this.Write(";\r\n    int borderColor = ");
+            this.Write(", endAngle = ");
             
-            #line 33 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.BorderColor));
-            
-            #line default
-            #line hidden
-            this.Write(";\r\n    int lineStyle = ");
-            
-            #line 34 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.LineStyle));
+            #line 30 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.EndAngle));
             
             #line default
             #line hidden
-            this.Write(";\r\n    int fillPattern = ");
+            this.Write(";\r\n\t/* Radios */\r\n\tint xRadius = ");
             
-            #line 35 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.FillPattern));
+            #line 32 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.XRadius));
             
             #line default
             #line hidden
-            this.Write(";\r\n    int thickness = ");
+            this.Write(", yRadius = ");
             
-            #line 36 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Thickness));
+            #line 32 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.YRadius));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\r\n\t/* Estilos, colores... */\r\n\tint color = ");
+            
+            #line 35 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Color));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\tint borderColor = ");
+            
+            #line 36 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.BorderColor));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\tint lineStyle = ");
+            
+            #line 37 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.LineStyle));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\tint fillPattern = ");
+            
+            #line 38 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.FillPattern));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n\tint thickness = ");
+            
+            #line 39 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Thickness));
             
             #line default
             #line hidden
             this.Write(@";
 
-    /* Establecer el color del borde */
-    setcolor(borderColor);
-    /* Establecer el grosor y estilo de la linea */
-    setlinestyle(lineStyle, 0, thickness);
-    /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
-    rectangle(x1, y1, x2, y2);
-    /* Establecer color de relleno */
-    setfillstyle(fillPattern, color);
-    /* Dibujar bar con color de relleno 'color' */
-    bar(x1_bar, y1_bar, x2_bar, y2_bar);
+	/* Establecer el color del borde */
+	setcolor(borderColor);
+	/* Establecer el estilo de línea del borde */
+	setlinestyle(lineStyle, 0, thickness);
+	/* Establecer el estilo y el color de relleno */
+	setfillstyle(fillPattern, color);
+	/* Dibujar la elipse */
+	ellipse(centerX, centerY, startAngle, endAngle, xRadius, yRadius);	
 
-    getch();
+	getch();
 	closegraph(); /* Return the system to text mode	*/
 	return 0;
 }
@@ -140,10 +151,10 @@ void main()
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 54 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangle.tt"
+        #line 55 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
  
-	public CRectangle rectangle { get; set; }
-    public CanvasSettings settings { get; set; }
+	public CEllipse ellipse { get; set; }
+	public CanvasSettings settings { get; set; }
 
         
         #line default
@@ -157,7 +168,7 @@ void main()
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public class CRectangleBase
+    public class CEllipseTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

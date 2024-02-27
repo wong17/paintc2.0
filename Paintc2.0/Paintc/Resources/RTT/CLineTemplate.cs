@@ -12,15 +12,16 @@ namespace Paintc.Resources.RTT
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using Paintc.Shapes.C;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+    #line 1 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class CLine : CLineBase
+    public partial class CLineTemplate : CLineTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,6 +29,7 @@ namespace Paintc.Resources.RTT
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write("﻿");
             this.Write(@"
 #include <graphics.h>
 #include <conio.h>
@@ -48,49 +50,49 @@ void main()
     /* Establecer color de fondo */
     setbkcolor(");
             
-            #line 24 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 25 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(settings.BackgroundColor));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n    /* Coordenadas de la linea */\r\n    int x1 = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.X1));
             
             #line default
             #line hidden
             this.Write(", y1 = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.Y1));
             
             #line default
             #line hidden
             this.Write(", x2 = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.X2));
             
             #line default
             #line hidden
             this.Write(", y2 = ");
             
-            #line 27 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 28 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.Y2));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n    /* Estilos, colores... */\r\n    int lineStyle = ");
             
-            #line 30 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 31 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.LineStyle));
             
             #line default
             #line hidden
             this.Write(";\r\n    int thickness = ");
             
-            #line 31 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+            #line 32 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.Thickness));
             
             #line default
@@ -113,7 +115,7 @@ void main()
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 45 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLine.tt"
+        #line 46 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
  
 	public CLine line { get; set; }
     public CanvasSettings settings { get; set; }
@@ -130,7 +132,7 @@ void main()
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public class CLineBase
+    public class CLineTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,35 +18,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\RTT\CEllipse.cs">
+    <Compile Update="Resources\RTT\CEllipseTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CEllipse.tt</DependentUpon>
+      <DependentUpon>CEllipseTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Resources\RTT\CLine.cs">
+    <Compile Update="Resources\RTT\CLineTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CLine.tt</DependentUpon>
+      <DependentUpon>CLineTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Resources\RTT\CRectangle.cs">
+    <Compile Update="Resources\RTT\CRectangleTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRectangle.tt</DependentUpon>
+      <DependentUpon>CRectangleTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\RTT\CEllipse.tt">
+    <None Update="Resources\RTT\CEllipseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CEllipse.cs</LastGenOutput>
+      <LastGenOutput>CEllipseTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Resources\RTT\CLine.tt">
+    <None Update="Resources\RTT\CLineTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CLine.cs</LastGenOutput>
+      <LastGenOutput>CLineTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Resources\RTT\CRectangle.tt">
+    <None Update="Resources\RTT\CRectangleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>CRectangle.cs</LastGenOutput>
+      <LastGenOutput>CRectangleTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
