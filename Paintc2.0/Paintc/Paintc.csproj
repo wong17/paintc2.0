@@ -12,4 +12,41 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\RTT\CEllipse.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CEllipse.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\RTT\CLine.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CLine.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\RTT\CRectangle.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRectangle.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\RTT\CEllipse.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CEllipse.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\RTT\CLine.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CLine.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\RTT\CRectangle.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CRectangle.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
 </Project>

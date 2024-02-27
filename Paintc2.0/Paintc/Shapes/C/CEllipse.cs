@@ -26,7 +26,9 @@ namespace Paintc.Shapes.C
         public required int YRadius { get; set; }
         public int Color { get; set; }
         public int BorderColor { get; set; }
-        public int Pattern { get; set; }
+        public int FillPattern { get; set; }
+        public int LineStyle { get; set; }
+        public int Thickness { get; set; }
         public string? Name { get; set; }
     }
 }

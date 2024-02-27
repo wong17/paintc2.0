@@ -1,0 +1,57 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+#include <graphics.h>
+#include <conio.h>
+
+void main()
+{
+	int GraphDriver, GraphMode, ErrorCode;
+
+    GraphDriver = DETECT; /* Request auto-detection	*/
+    initgraph(&GraphDriver, &GraphMode, "");
+    ErrorCode = graphresult(); /* Read result of initialization*/
+    if (ErrorCode != grOk) /* Error occured during init	*/
+    { 
+        printf(" Graphics System Error: %s\n", grapherrormsg(ErrorCode));
+        exit(1);
+    }
+
+    /* Establecer color de fondo */
+    setbkcolor(<#= settings.BackgroundColor #>);
+
+    /* Coordenadas del rectángulo */
+    int x1 = <#= rectangle.X1 #>, y1 = <#= rectangle.Y1 #>, x2 = <#= rectangle.X2 #>, y2 = <#= rectangle.Y2 #>;
+    /* Coordenadas de la barra interna con relleno */
+    int x1_bar = x1 + 1, y1_bar = y1 + 1, x2_bar = x2 - 1, y2_bar = y2 - 1;
+
+    /* Estilos, colores... */
+    int color = <#= rectangle.Color #>;
+    int borderColor = <#= rectangle.BorderColor #>;
+    int lineStyle = <#= rectangle.LineStyle #>;
+    int fillPattern = <#= rectangle.FillPattern #>;
+    int thickness = <#= rectangle.Thickness #>;
+
+    /* Establecer el color del borde */
+    setcolor(borderColor);
+    /* Establecer el grosor y estilo de la linea */
+    setlinestyle(lineStyle, 0, thickness);
+    /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
+    rectangle(x1, y1, x2, y2);
+    /* Establecer color de relleno */
+    setfillstyle(fillPattern, color);
+    /* Dibujar bar con color de relleno 'color' */
+    bar(x1_bar, y1_bar, x2_bar, y2_bar);
+
+    getch();
+	closegraph(); /* Return the system to text mode	*/
+	return 0;
+}
+
+<#+ 
+	public CRectangle rectangle { get; set; }
+    public CanvasSettings settings { get; set; }
+#>

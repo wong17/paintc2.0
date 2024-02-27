@@ -15,6 +15,8 @@ namespace Paintc.Shapes.C
         public required int Y1 { get; set; }
         public required int X2 { get; set; }
         public required int Y2 { get; set; }
+        public int LineStyle { get; set; }
+        public int Thickness { get; set; }
         public int Color { get; set; }
         public required string? Name { get; set; }
     }
