@@ -95,6 +95,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <!---->
                         <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium" Width="160"></TextBox>
@@ -104,7 +105,17 @@
                                 <behavior:EventTrigger EventName="Click">
                                     <behavior:InvokeCommandAction
                                         Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                                   CommandParameter="{Binding Name}" />
+                                        CommandParameter="{Binding Name}" />
+                                </behavior:EventTrigger>
+                            </behavior:Interaction.Triggers>
+                        </Button>
+                        <Button Grid.Column="2" Content="S" Style="{StaticResource ListViewItemBtn}" ToolTip="Source code">
+                            <!--Click event-->
+                            <behavior:Interaction.Triggers>
+                                <behavior:EventTrigger EventName="Click">
+                                    <behavior:InvokeCommandAction 
+                                        Command="{Binding DataContext.ViewSourceCodeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                        CommandParameter="{Binding Name}"/>
                                 </behavior:EventTrigger>
                             </behavior:Interaction.Triggers>
                         </Button>

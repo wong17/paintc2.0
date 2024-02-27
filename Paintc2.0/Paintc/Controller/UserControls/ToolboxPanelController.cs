@@ -4,6 +4,7 @@ using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Service.Collections;
+using Paintc.View;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ namespace Paintc.Controller.UserControls
         public ICommand? RemoveAllShapesClick { get; private set; }
         public ICommand? RemoveShapeClick { get; private set; }
         public ICommand? ListViewSelectedItem { get; private set; }
+        public ICommand? ViewSourceCodeClick { get; private set; }
 
         /// <summary>
         /// Lista de herramientas disponibles para utilizar
@@ -43,6 +45,7 @@ namespace Paintc.Controller.UserControls
             RemoveAllShapesClick = new RelayCommand((obj) => true, RemoveAllShapesClickCommand);
             RemoveShapeClick = new RelayCommand((obj) => true, RemoveShapeClickCommand);
             ListViewSelectedItem = new RelayCommand((obj) => true, ListViewSelectedItemCommand);
+            ViewSourceCodeClick = new RelayCommand((obj) => true, ViewSourceCodeCommand);
         }
 
         /// <summary>
@@ -124,6 +127,16 @@ namespace Paintc.Controller.UserControls
             {
                 DrawingHandler.Instance.ClearDrawingPanel();
             }
+        }
+
+        /// <summary>
+        /// Muestra el código c para dibujar la figura utilizando graphics.h
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ViewSourceCodeCommand(object? parameter)
+        {
+            DialogService.OpenDialog<ViewSourceCodeWindow>(Application.Current.MainWindow, null);
         }
     }
 }

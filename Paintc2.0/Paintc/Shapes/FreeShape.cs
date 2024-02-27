@@ -41,6 +41,10 @@ namespace Paintc.Shapes
 
         public override Shape GetShape() => _polyLine;
 
+        /// <summary>
+        /// Devuelve un objeto de tipo CPencil
+        /// </summary>
+        /// <returns></returns>
         public override SimpleShapeBase GetSimpleShape()
         {
             int color = (int)CGAColorPalette.White;
@@ -48,6 +52,7 @@ namespace Paintc.Shapes
             if (_polyLine.Stroke is SolidColorBrush strokeBrush)
                 color = (int)CGAColorPaletteService.GetCGAColorPalette(strokeBrush.Color);
 
+            /* Crea una lista de pixels a partir de cada punto que forma el trazo */
             List<CPixel> pixels = [];
             var points = GetPoints();
             foreach (var point in points)

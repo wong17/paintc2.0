@@ -59,6 +59,10 @@ namespace Paintc.Shapes
 
         public override Shape GetShape() => _ellipse;
 
+        /// <summary>
+        /// Devuelve un objeto de tipo CEllipse
+        /// </summary>
+        /// <returns></returns>
         public override SimpleShapeBase GetSimpleShape()
         {
             double middlePointX = (Canvas.GetRight(_ellipse) + Canvas.GetLeft(_ellipse)) / 2;

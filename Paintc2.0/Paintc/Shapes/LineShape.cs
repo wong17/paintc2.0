@@ -43,6 +43,10 @@ namespace Paintc.Shapes
 
         public override Shape GetShape() => Line;
 
+        /// <summary>
+        /// Devuelve un objeto de tipo CLine
+        /// </summary>
+        /// <returns></returns>
         public override SimpleShapeBase GetSimpleShape()
         {
             CLine line = new()

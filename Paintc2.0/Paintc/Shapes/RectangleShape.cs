@@ -57,6 +57,10 @@ namespace Paintc.Shapes
             Canvas.SetTop(_rectangle, lastPosition.Y);
         }
 
+        /// <summary>
+        /// Devuelve un objeto de tipo CRectangle
+        /// </summary>
+        /// <returns></returns>
         public override SimpleShapeBase GetSimpleShape()
         {
             CRectangle rect = new()

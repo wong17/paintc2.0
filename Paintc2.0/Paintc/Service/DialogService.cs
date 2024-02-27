@@ -9,10 +9,13 @@ namespace Paintc.Service
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="parent"></param>
-        public static void OpenDialog<T>(Window parent, object dataContext) where T : Window
+        public static void OpenDialog<T>(Window parent, object? dataContext) where T : Window
         {
             var window = Activator.CreateInstance<T>();
-            window.DataContext = dataContext;
+
+            if (dataContext is not null)
+                window.DataContext = dataContext;
+
             window.Owner = parent;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.ShowDialog();
