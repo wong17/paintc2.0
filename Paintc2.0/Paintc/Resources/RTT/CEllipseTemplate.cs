@@ -110,10 +110,10 @@ void main()
             
             #line default
             #line hidden
-            this.Write(";\r\n\tint lineStyle = ");
+            this.Write(";\r\n\tint borderLineStyle = ");
             
             #line 37 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.LineStyle));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.BorderLineStyle));
             
             #line default
             #line hidden
@@ -124,10 +124,10 @@ void main()
             
             #line default
             #line hidden
-            this.Write(";\r\n\tint thickness = ");
+            this.Write(";\r\n\tint borderLineThickness = ");
             
             #line 39 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Thickness));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.BorderLineThickness));
             
             #line default
             #line hidden
@@ -136,7 +136,7 @@ void main()
 	/* Establecer el color del borde */
 	setcolor(borderColor);
 	/* Establecer el estilo de línea del borde */
-	setlinestyle(lineStyle, 0, thickness);
+	setlinestyle(borderLineStyle, 0, borderLineThickness);
 	/* Establecer el estilo y el color de relleno */
 	setfillstyle(fillPattern, color);
 	/* Dibujar la elipse */

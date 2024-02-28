@@ -134,9 +134,17 @@ namespace Paintc.Controller.UserControls
         /// </summary>
         /// <param name="obj"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void ViewSourceCodeCommand(object? parameter)
+        private void ViewSourceCodeCommand(object? shapeName)
         {
-            DialogService.OpenDialog<ViewSourceCodeWindow>(Application.Current.MainWindow, null);
+            if (shapeName is null)
+                return;
+
+            SourceCodeWindowController controller = new()
+            {
+                SelectedShape = DrawingHandler.Instance.GetShapeBase(shapeName.ToString())
+            };
+
+            DialogService.OpenDialog<SourceCodeWindow>(Application.Current.MainWindow, controller);
         }
     }
 }

@@ -29,10 +29,10 @@ void main()
 
     /* Estilos, colores... */
     int lineStyle = <#= line.LineStyle #>;
-    int thickness = <#= line.Thickness #>;
+    int lineThickness = <#= line.LineThickness #>;
 
     /* Establecer el grosor y estilo de la linea */
-    setlinestyle(lineStyle, 0, thickness);
+    setlinestyle(lineStyle, 0, lineThickness);
     /* Establecer el color de la linea */
     setcolor(color);
     /* Dibujar la linea */

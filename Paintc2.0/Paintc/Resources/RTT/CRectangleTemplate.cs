@@ -98,10 +98,10 @@ void main()
             
             #line default
             #line hidden
-            this.Write(";\r\n    int lineStyle = ");
+            this.Write(";\r\n    int borderLineStyle = ");
             
             #line 35 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.LineStyle));
+            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.BorderLineStyle));
             
             #line default
             #line hidden
@@ -112,10 +112,10 @@ void main()
             
             #line default
             #line hidden
-            this.Write(";\r\n    int thickness = ");
+            this.Write(";\r\n    int borderLineThickness = ");
             
             #line 37 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Thickness));
+            this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.BorderLineThickness));
             
             #line default
             #line hidden
@@ -124,7 +124,7 @@ void main()
     /* Establecer el color del borde */
     setcolor(borderColor);
     /* Establecer el grosor y estilo de la linea */
-    setlinestyle(lineStyle, 0, thickness);
+    setlinestyle(borderLineStyle, 0, borderLineThickness);
     /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
     rectangle(x1, y1, x2, y2);
     /* Establecer color de relleno */

@@ -1,4 +1,5 @@
 ﻿using Paintc.Core;
+using Paintc.Enums;
 using Paintc.Service.Collections;
 using Paintc.Shapes.C;
 using System.Windows;
@@ -76,7 +77,10 @@ namespace Paintc.Shapes
                 EndAngle = 360,
                 XRadius = Convert.ToInt32(double.Truncate(_ellipse.Width)) / 2,
                 YRadius = Convert.ToInt32(double.Truncate(_ellipse.Height)) / 2,
-                Name = Name
+                Name = Name,
+                FillPattern = Convert.ToInt32(FillPattern.SOLID_FILL),
+                BorderLineStyle = Convert.ToInt32(LineStyle.SOLID_LINE),
+                BorderLineThickness = Convert.ToInt32(LineThickness.NORM_THICK)
             };
 
             if (GetShape().Fill is SolidColorBrush fillBrush)

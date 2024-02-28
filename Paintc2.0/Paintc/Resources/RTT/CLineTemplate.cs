@@ -90,17 +90,17 @@ void main()
             
             #line default
             #line hidden
-            this.Write(";\r\n    int thickness = ");
+            this.Write(";\r\n    int lineThickness = ");
             
             #line 32 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(line.Thickness));
+            this.Write(this.ToStringHelper.ToStringWithCulture(line.LineThickness));
             
             #line default
             #line hidden
             this.Write(@";
 
     /* Establecer el grosor y estilo de la linea */
-    setlinestyle(lineStyle, 0, thickness);
+    setlinestyle(lineStyle, 0, lineThickness);
     /* Establecer el color de la linea */
     setcolor(color);
     /* Dibujar la linea */

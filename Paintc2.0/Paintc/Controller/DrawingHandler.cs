@@ -103,7 +103,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        ///
+        /// Se ejecuta cada vez que se selecciona un color 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -271,6 +271,13 @@ namespace Paintc.Controller
             _drawingPanel.CustomCanvas.Children.Remove(shape.GetShape());
             Shapes.Remove(shape);
         }
+
+        /// <summary>
+        /// Busca y devuelve la figura por su nombre o null sino se encuentra
+        /// </summary>
+        /// <param name="shapeName"></param>
+        /// <returns></returns>
+        public ShapeBase? GetShapeBase(string? shapeName) => Shapes.Where(s => s is not null && s.Name is not null && s.Name.Equals(shapeName)).FirstOrDefault();
 
         /// <summary>
         /// Genera el nombre de la nueva figura/forma dibujada en el canvas

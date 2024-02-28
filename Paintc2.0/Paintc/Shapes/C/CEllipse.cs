@@ -27,8 +27,8 @@ namespace Paintc.Shapes.C
         public int Color { get; set; }
         public int BorderColor { get; set; }
         public int FillPattern { get; set; }
-        public int LineStyle { get; set; }
-        public int Thickness { get; set; }
+        public int BorderLineStyle { get; set; }
+        public int BorderLineThickness { get; set; }
         public string? Name { get; set; }
     }
 }

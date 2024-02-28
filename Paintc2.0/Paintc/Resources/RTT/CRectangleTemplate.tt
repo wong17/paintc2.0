@@ -32,14 +32,14 @@ void main()
     /* Estilos, colores... */
     int color = <#= rectangle.Color #>;
     int borderColor = <#= rectangle.BorderColor #>;
-    int lineStyle = <#= rectangle.LineStyle #>;
+    int borderLineStyle = <#= rectangle.BorderLineStyle #>;
     int fillPattern = <#= rectangle.FillPattern #>;
-    int thickness = <#= rectangle.Thickness #>;
+    int borderLineThickness = <#= rectangle.BorderLineThickness #>;
 
     /* Establecer el color del borde */
     setcolor(borderColor);
     /* Establecer el grosor y estilo de la linea */
-    setlinestyle(lineStyle, 0, thickness);
+    setlinestyle(borderLineStyle, 0, borderLineThickness);
     /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
     rectangle(x1, y1, x2, y2);
     /* Establecer color de relleno */

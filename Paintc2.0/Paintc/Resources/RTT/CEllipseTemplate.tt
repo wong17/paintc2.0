@@ -34,14 +34,14 @@ void main()
 	/* Estilos, colores... */
 	int color = <#= ellipse.Color #>;
 	int borderColor = <#= ellipse.BorderColor #>;
-	int lineStyle = <#= ellipse.LineStyle #>;
+	int borderLineStyle = <#= ellipse.BorderLineStyle #>;
 	int fillPattern = <#= ellipse.FillPattern #>;
-	int thickness = <#= ellipse.Thickness #>;
+	int borderLineThickness = <#= ellipse.BorderLineThickness #>;
 
 	/* Establecer el color del borde */
 	setcolor(borderColor);
 	/* Establecer el estilo de línea del borde */
-	setlinestyle(lineStyle, 0, thickness);
+	setlinestyle(borderLineStyle, 0, borderLineThickness);
 	/* Establecer el estilo y el color de relleno */
 	setfillstyle(fillPattern, color);
 	/* Dibujar la elipse */
