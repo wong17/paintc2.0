@@ -15,14 +15,18 @@ namespace Paintc.Controller.UserControls
     {
         private readonly PropertiesPanel _drawingPanelProperties;
 
+        /* Lista de algunas resoluciones que soporta el modo gráfico */
         private readonly List<GraphicMode> _graphicModes;
         private GraphicMode? _currentGraphiceMode;
 
+        /* Lista de 16 colores disponibles para establecer como fondo del canvas */
         private readonly ObservableCollection<CGAColor> _colors;
         private CGAColor _currentColor;
 
+        /* Flag para indicar cuando deben de dispararse los eventos de los checkboxs */
         private bool _shouldInvokeCheckedEvents = false;
 
+        /* Se encarga de mostrar el panel de propiedades adecuado según la figura que se seleccione */
         private readonly PropertiesPanelNavigator _panelsNavigator;
 
         /// <summary>

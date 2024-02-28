@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\RTT\BaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BaseTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Resources\RTT\CEllipseTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -36,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\RTT\BaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BaseTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Resources\RTT\CEllipseTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CEllipseTemplate.cs</LastGenOutput>

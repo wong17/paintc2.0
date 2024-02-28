@@ -1,6 +1,5 @@
 ﻿using Paintc.Core;
-using Paintc.Resources.RTT;
-using Paintc.Shapes;
+using Paintc.Factory;
 
 namespace Paintc.Controller
 {
@@ -9,14 +8,6 @@ namespace Paintc.Controller
     /// </summary>
     public class SourceCodeWindowController : ControllerBase
     {
-        /*  */
-        private static readonly Dictionary<Type, Type> SourceCodeTemplates = new()
-        {
-            { typeof(RectangleShape), typeof(CRectangleTemplate) },
-            { typeof(EllipseShape), typeof(CEllipseTemplate) },
-            { typeof(LineShape), typeof(CLineTemplate) }
-        };
-
         /* Figura seleccionada desde el explorador */
         private ShapeBase? selectedShape;
 
@@ -49,12 +40,20 @@ namespace Paintc.Controller
         {
             if (selectedShape is null)
             {
-                Code = "Error al mostrar código fuente de la figura seleccionada.";
+                Code = "Error: No se puede mostrar el código fuente de la figura seleccionada.";
                 return;
             }
 
             /* Generar código C en base a propiedades de la figura */
-
+            var primitiveShape = selectedShape.GetSimpleShape();
+            var template = CodeTemplateFactory.GetTemplate(primitiveShape);
+            if (template is null)
+            {
+                Code = "Error: No se encontró una plantilla para mostrar el código fuente de la figura seleccionada.";
+                return;
+            }
+            /* Obtener código C */
+            Code = template.TransformText();
         }
 
     }
