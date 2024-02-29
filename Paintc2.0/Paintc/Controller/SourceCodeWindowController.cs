@@ -1,5 +1,8 @@
-﻿using Paintc.Core;
+﻿using Paintc.Commands;
+using Paintc.Core;
 using Paintc.Factory;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Paintc.Controller
 {
@@ -43,6 +46,22 @@ namespace Paintc.Controller
             {
                 SetField(ref name, value);
             }
+        }
+
+        public ICommand CopyButtonClick { get; private set; }
+
+        public SourceCodeWindowController()
+        {
+            CopyButtonClick = new RelayCommand((obj) => true, CopyButtonClickCommand);
+        }
+
+        /// <summary>
+        /// Copia el código fuente al portapapeles
+        /// </summary>
+        /// <param name="obj"></param>
+        private void CopyButtonClickCommand(object? obj)
+        {
+            Clipboard.SetText(Code);
         }
 
         /// <summary>

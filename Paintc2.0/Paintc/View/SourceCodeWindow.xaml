@@ -17,6 +17,6 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <TextBox Text="{Binding Code}" Style="{StaticResource TextBlockStyle}" TextWrapping="Wrap" />
         </ScrollViewer>
-        <Button Grid.Row="2" Content="Copy" Style="{StaticResource CopyCodeBtn}"/>
+        <Button Grid.Row="2" Content="Copy" Style="{StaticResource CopyCodeBtn}" Command="{Binding CopyButtonClick}"/>
     </Grid>
 </Window>
