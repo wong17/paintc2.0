@@ -34,6 +34,15 @@
         <Setter Property="FontWeight" Value="Normal"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
+    <Style x:Key="ShapeNameSourceCode" TargetType="Label">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Height" Value="40"/>
+    </Style>
 
     <!--ComboBox-->
     <Style x:Key="ComboboxStyle" TargetType="ComboBox">
@@ -88,7 +97,14 @@
     <Style x:Key="ListViewItemBtn" TargetType="Button">
         <Setter Property="Width" Value="20"></Setter>
     </Style>
-
+    <Style x:Key="CopyCodeBtn" TargetType="Button">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Margin" Value="0,10,10,10"/>
+    </Style>
+    
     <!--Checkbox-->
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
         <Setter Property="FontSize" Value="14"></Setter>
@@ -137,6 +153,14 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
 
+    <!--TextBox-->
+    <Style x:Key="TextBlockStyle" TargetType="TextBox">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+    
     <!---->
     <DrawingBrush x:Key="GrayGridBrush" presentationOptions:Freeze="True" Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
         <DrawingBrush.Drawing>

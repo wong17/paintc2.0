@@ -33,6 +33,18 @@ namespace Paintc.Controller
             }
         }
 
+        /* Nombre de la figura dado desde el explorador */
+        private string? name;
+
+        public string? Name
+        {
+            get => name;
+            set
+            {
+                SetField(ref name, value);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,6 +66,7 @@ namespace Paintc.Controller
             }
             /* Obtener código C */
             Code = template.TransformText();
+            Name = $"Code for {selectedShape.Name}";
         }
 
     }
