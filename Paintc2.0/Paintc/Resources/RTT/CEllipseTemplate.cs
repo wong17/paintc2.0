@@ -160,12 +160,14 @@ int main()
             #line hidden
             this.Write(@";
 
+	/* Establecer el estilo y el color de relleno */
+	setfillstyle(fillPattern, color);
+	/* Dibujar ellipse con relleno */
+	fillellipse(centerX, centerY, xRadius, yRadius);
 	/* Establecer el color del borde */
 	setcolor(borderColor);
 	/* Establecer el estilo de línea del borde */
 	setlinestyle(borderLineStyle, 0, borderLineThickness);
-	/* Establecer el estilo y el color de relleno */
-	setfillstyle(fillPattern, color);
 	/* Dibujar la elipse */
 	ellipse(centerX, centerY, startAngle, endAngle, xRadius, yRadius);
 }
@@ -174,7 +176,7 @@ int main()
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 63 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
+        #line 65 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
  
 	public CEllipse ellipse { get; set; }
 	public CanvasSettings settings { get; set; }

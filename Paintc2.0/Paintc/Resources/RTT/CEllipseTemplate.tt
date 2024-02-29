@@ -50,12 +50,14 @@ void draw<#= ellipse.Name #>()
 	int fillPattern = <#= ellipse.FillPattern #>;
 	int borderLineThickness = <#= ellipse.BorderLineThickness #>;
 
+	/* Establecer el estilo y el color de relleno */
+	setfillstyle(fillPattern, color);
+	/* Dibujar ellipse con relleno */
+	fillellipse(centerX, centerY, xRadius, yRadius);
 	/* Establecer el color del borde */
 	setcolor(borderColor);
 	/* Establecer el estilo de línea del borde */
 	setlinestyle(borderLineStyle, 0, borderLineThickness);
-	/* Establecer el estilo y el color de relleno */
-	setfillstyle(fillPattern, color);
 	/* Dibujar la elipse */
 	ellipse(centerX, centerY, startAngle, endAngle, xRadius, yRadius);
 }
