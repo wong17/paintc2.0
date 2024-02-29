@@ -3,11 +3,11 @@
 namespace Paintc.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for DetailPanel.xaml
+    /// Interaction logic for SourceCodePanel.xaml
     /// </summary>
-    public partial class DetailPanel : UserControl
+    public partial class SourceCodePanel : UserControl
     {
-        public DetailPanel()
+        public SourceCodePanel()
         {
             InitializeComponent();
         }

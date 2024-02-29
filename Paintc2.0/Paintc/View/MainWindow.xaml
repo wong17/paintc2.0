@@ -57,9 +57,9 @@
                     <TabItem Header="Design" Style="{StaticResource TabItemStyle}">
                         <userControls:DrawingPanel x:Name="ucDrawingPanel" />
                     </TabItem>
-                    <!--Detail panel-->
-                    <TabItem Header="Details" Style="{StaticResource TabItemStyle}">
-                        <userControls:DetailPanel x:Name="ucDetailPanel" />
+                    <!--Source code panel-->
+                    <TabItem Header="Source code" Style="{StaticResource TabItemStyle}">
+                        <userControls:SourceCodePanel x:Name="ucSourceCodePanel" />
                     </TabItem>
                 </TabControl>
                 <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
