@@ -47,7 +47,7 @@ namespace Paintc.Resources.RTT
             #line hidden
             this.Write(@"();
 
-void main()
+int main()
 {
     int GraphDriver, GraphMode, ErrorCode;
     GraphDriver = DETECT; /* Request auto-detection	*/

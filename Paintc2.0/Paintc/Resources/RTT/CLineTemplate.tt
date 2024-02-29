@@ -11,7 +11,7 @@
 /* Dibuja <#= line.Name #> */
 void draw<#= line.Name #>();
 
-void main()
+int main()
 {
     int GraphDriver, GraphMode, ErrorCode;
     GraphDriver = DETECT; /* Request auto-detection	*/

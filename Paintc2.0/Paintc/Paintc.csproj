@@ -33,6 +33,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CLineTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Resources\RTT\CPencilTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CPencilTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Resources\RTT\CRectangleTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -52,6 +57,10 @@
     <None Update="Resources\RTT\CLineTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CLineTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\RTT\CPencilTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CPencilTemplate.cs</LastGenOutput>
     </None>
     <None Update="Resources\RTT\CRectangleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

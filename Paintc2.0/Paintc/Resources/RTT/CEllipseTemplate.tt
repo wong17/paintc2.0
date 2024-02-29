@@ -11,7 +11,7 @@
 /* Dibuja <#= ellipse.Name #> */
 void draw<#= ellipse.Name #>();
 
-void main()
+int main()
 {
 	int GraphDriver, GraphMode, ErrorCode;
 	GraphDriver = DETECT; /* Request auto-detection	*/
