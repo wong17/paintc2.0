@@ -98,7 +98,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <!---->
-                        <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay}" FontWeight="Medium" Width="160"></TextBox>
+                        <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" Width="160"></TextBox>
                         <Button Grid.Column="1" Content="X" Style="{StaticResource ListViewItemBtn}" ToolTip="Remove">
                             <!--Click Event-->
                             <behavior:Interaction.Triggers>

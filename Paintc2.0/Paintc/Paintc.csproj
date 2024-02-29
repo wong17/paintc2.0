@@ -43,6 +43,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CRectangleTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Resources\RTT\FullSourceCodeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FullSourceCodeTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -65,6 +70,10 @@
     <None Update="Resources\RTT\CRectangleTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CRectangleTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\RTT\FullSourceCodeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FullSourceCodeTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using Paintc.Adorners;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -6,7 +7,7 @@ using System.Windows.Shapes;
 
 namespace Paintc.Core
 {
-    public abstract class ShapeBase(string? name, Color color) : DependencyObject
+    public abstract class ShapeBase(string? name, Color color) : DependencyObject, INotifyPropertyChanged
     {
         /* Contiene el adorno para cambiar el tamaño de la figura */
         private static readonly Dictionary<Type, Type> ResizeAdorners = new()
@@ -35,7 +36,16 @@ namespace Paintc.Core
         };
 
         /* Nombre para identificarla en el explorador de figuras */
-        public string? Name { get; set; } = name;
+        private string? _name = name;
+        public string? Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+            }
+        }
         
         /* Color de relleno de la figura */
         protected readonly Color Color = color;
@@ -132,6 +142,8 @@ namespace Paintc.Core
 
         public static readonly DependencyProperty ShowDragAdornerProperty =
             DependencyProperty.RegisterAttached("ShowDragAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowDragAdornerChanged));
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public static bool GetShowDragAdorner(UIElement element) => (bool)element.GetValue(ShowDragAdornerProperty);
 

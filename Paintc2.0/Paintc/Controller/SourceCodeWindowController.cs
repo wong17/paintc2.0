@@ -71,6 +71,7 @@ namespace Paintc.Controller
         {
             if (selectedShape is null)
             {
+                Name = "Error :(";
                 Code = "Error: No se puede mostrar el código fuente de la figura seleccionada.";
                 return;
             }
@@ -80,6 +81,7 @@ namespace Paintc.Controller
             var template = CodeTemplateFactory.GetTemplate(primitiveShape);
             if (template is null)
             {
+                Name = "Error :(";
                 Code = "Error: No se encontró una plantilla para mostrar el código fuente de la figura seleccionada.";
                 return;
             }
