@@ -286,6 +286,18 @@ namespace Paintc.Controller
         /// <returns></returns>
         private string GenerateShapeName(ToolType tool) => $"{tool.ToString().Replace("Tool", "")}{++_globalShapeCounter}";
 
+        /// <summary>
+        /// Devuelve el color de fondo actual del canvas para ser usado por SourceViewWindow y su controlador
+        /// para generar el código C poniendo el fondo del canvas del mismo color.
+        /// </summary>
+        public int GetBackgroundColor()
+        {
+            if (_drawingPanel is null || _drawingPanel.CustomCanvas.Background is not SolidColorBrush brush)
+                return Convert.ToInt32(CGAColorPalette.Black); // Fondo por defecto
+
+            return Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(brush.Color)); // Fondo actual en el canvas
+        }
+
         #endregion DRAWING_HANDLER
 
         #region ADORNERS
