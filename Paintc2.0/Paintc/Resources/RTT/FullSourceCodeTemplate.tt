@@ -36,18 +36,18 @@ int main()
     setbkcolor(<#= settings.BackgroundColor #>);
 
     /* Your code here... */
-    <#
-    foreach (var shape in shapes)
-    {
-    #>
-    draw<#= shape.Name #>();
-    <#
-    }
-    #>
+<#
+foreach (var shape in shapes)
+{
+#>
+   draw<#= shape.Name #>();
+<#
+}
+#>
 
-    getch();
-    closegraph(); /* Return the system to text mode	*/
-    return 0;
+   getch();
+   closegraph(); /* Return the system to text mode	*/
+   return 0;
 }
 
 <#
@@ -56,96 +56,95 @@ foreach (var shape in shapes)
 #>
 draw<#= shape.Name #>()
 {
-    <#
+<#
     if (shape is CRectangle rectangle)
-    {
-    #>
-        /* Coordenadas del rectángulo */
-        int x1 = <#= rectangle.X1 #>, y1 = <#= rectangle.Y1 #>, x2 = <#= rectangle.X2 #>, y2 = <#= rectangle.Y2 #>;
-        /* Coordenadas de la barra interna con relleno */
-        int x1_bar = x1 + 1, y1_bar = y1 + 1, x2_bar = x2 - 1, y2_bar = y2 - 1;
+{
+#>
+    /* Coordenadas del rectángulo */
+    int x1 = <#= rectangle.X1 #>, y1 = <#= rectangle.Y1 #>, x2 = <#= rectangle.X2 #>, y2 = <#= rectangle.Y2 #>;
+    /* Coordenadas de la barra interna con relleno */
+    int x1_bar = x1 + 1, y1_bar = y1 + 1, x2_bar = x2 - 1, y2_bar = y2 - 1;
 
-        /* Estilos, colores... */
-        int color = <#= rectangle.Color #>;
-        int borderColor = <#= rectangle.BorderColor #>;
-        int borderLineStyle = <#= rectangle.BorderLineStyle #>;
-        int fillPattern = <#= rectangle.FillPattern #>;
-        int borderLineThickness = <#= rectangle.BorderLineThickness #>;
+    /* Estilos, colores... */
+    int color = <#= rectangle.Color #>;
+    int borderColor = <#= rectangle.BorderColor #>;
+    int borderLineStyle = <#= rectangle.BorderLineStyle #>;
+    int fillPattern = <#= rectangle.FillPattern #>;
+    int borderLineThickness = <#= rectangle.BorderLineThickness #>;
 
-        /* Establecer el color del borde */
-        setcolor(borderColor);
-        /* Establecer el grosor y estilo de la linea */
-        setlinestyle(borderLineStyle, 0, borderLineThickness);
-        /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
-        rectangle(x1, y1, x2, y2);
-        /* Establecer color de relleno */
-        setfillstyle(fillPattern, color);
-        /* Dibujar bar con color de relleno 'color' */
-        bar(x1_bar, y1_bar, x2_bar, y2_bar);
-    <#
-    }
-    else if (shape is CEllipse ellipse)
-    {
-    #>
-        /* Coordenadas del centro de la ellipse */
-	    int centerX = <#= ellipse.X #>, centerY = <#= ellipse.Y #>;
-	    /* Angulo inicio y fin */
-	    int startAngle = <#= ellipse.StartAngle #>, endAngle = <#= ellipse.EndAngle #>;
-	    /* Radios */
-	    int xRadius = <#= ellipse.XRadius #>, yRadius = <#= ellipse.YRadius #>;
+    /* Establecer el color del borde */
+    setcolor(borderColor);
+    /* Establecer el grosor y estilo de la linea */
+    setlinestyle(borderLineStyle, 0, borderLineThickness);
+    /* Dibujar rectangle con el color de borde 'borderColor' y estilo de linea 'lineStyle' */
+    rectangle(x1, y1, x2, y2);
+    /* Establecer color de relleno */
+    setfillstyle(fillPattern, color);
+    /* Dibujar bar con color de relleno 'color' */
+    bar(x1_bar, y1_bar, x2_bar, y2_bar);
+<#
+}
+else if (shape is CEllipse ellipse)
+{
+#>
+  /* Coordenadas del centro de la ellipse */
+  int centerX = <#= ellipse.X #>, centerY = <#= ellipse.Y #>;
+  /* Angulo inicio y fin */
+  int startAngle = <#= ellipse.StartAngle #>, endAngle = <#= ellipse.EndAngle #>;
+  /* Radios */
+  int xRadius = <#= ellipse.XRadius #>, yRadius = <#= ellipse.YRadius #>;
 
-	    /* Estilos, colores... */
-	    int color = <#= ellipse.Color #>;
-	    int borderColor = <#= ellipse.BorderColor #>;
-	    int borderLineStyle = <#= ellipse.BorderLineStyle #>;
-	    int fillPattern = <#= ellipse.FillPattern #>;
-	    int borderLineThickness = <#= ellipse.BorderLineThickness #>;
+  /* Estilos, colores... */
+  int color = <#= ellipse.Color #>;
+  int borderColor = <#= ellipse.BorderColor #>;
+  int borderLineStyle = <#= ellipse.BorderLineStyle #>;
+  int fillPattern = <#= ellipse.FillPattern #>;
+  int borderLineThickness = <#= ellipse.BorderLineThickness #>;
 
-	    /* Establecer el estilo y el color de relleno */
-	    setfillstyle(fillPattern, color);
-	    /* Dibujar ellipse con relleno */
-	    fillellipse(centerX, centerY, xRadius, yRadius);
-	    /* Establecer el color del borde */
-	    setcolor(borderColor);
-	    /* Establecer el estilo de línea del borde */
-	    setlinestyle(borderLineStyle, 0, borderLineThickness);
-	    /* Dibujar la elipse */
-	    ellipse(centerX, centerY, startAngle, endAngle, xRadius, yRadius);
-    <#
-    }
+  /* Establecer el estilo y el color de relleno */
+  setfillstyle(fillPattern, color);
+  /* Dibujar ellipse con relleno */
+  fillellipse(centerX, centerY, xRadius, yRadius);
+  /* Establecer el color del borde */
+  setcolor(borderColor);
+  /* Establecer el estilo de línea del borde */
+  setlinestyle(borderLineStyle, 0, borderLineThickness);
+  /* Dibujar la elipse */
+  ellipse(centerX, centerY, startAngle, endAngle, xRadius, yRadius);
+<#
+}
     else if (shape is CLine line)
-    {
-    #>
-        /* Coordenadas de la linea */
-        int x1 = <#= line.X1 #>, y1 = <#= line.Y1 #>, x2 = <#= line.X2 #>, y2 = <#= line.Y2 #>;
+{
+#>
+    /* Coordenadas de la linea */
+    int x1 = <#= line.X1 #>, y1 = <#= line.Y1 #>, x2 = <#= line.X2 #>, y2 = <#= line.Y2 #>;
 
-        /* Estilos, colores... */
-        int lineStyle = <#= line.LineStyle #>;
-        int lineThickness = <#= line.LineThickness #>;
+    /* Estilos, colores... */
+    int lineStyle = <#= line.LineStyle #>;
+    int lineThickness = <#= line.LineThickness #>;
 
-        /* Establecer el grosor y estilo de la linea */
-        setlinestyle(lineStyle, 0, lineThickness);
-        /* Establecer el color de la linea */
-        setcolor(color);
-        /* Dibujar la linea */
-        line(x1, y1, x2, y2);
-    <#
-    }
+    /* Establecer el grosor y estilo de la linea */
+    setlinestyle(lineStyle, 0, lineThickness);
+    /* Establecer el color de la linea */
+    setcolor(color);
+    /* Dibujar la linea */
+    line(x1, y1, x2, y2);
+<#
+}
     else if (shape is CPencil pencil)
-    {
-    #>
-        /* Dibujar trazo */
-	    <#
-        foreach (var pixel in pencil.Pixels)
-        {
-	    #>
-	    putpixel(<#= pixel.X #>, <#= pixel.Y #>, <#= pixel.Color #>);
-	    <#
-        }
-	    #>
-    <#
-    }
-    #>
+{
+#>
+/* Dibujar trazo */
+<#
+foreach (var pixel in pencil.Pixels)
+{#>
+      putpixel(<#= pixel.X #>, <#= pixel.Y #>, <#= pixel.Color #>);
+<#
+}
+#>
+<#
+}
+#>
 }
 <#
 }
