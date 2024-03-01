@@ -7,21 +7,32 @@ namespace Paintc.Factory
 {
     public static class CodeTemplateFactory
     {
+        /* Asocia una figura primitiva a un template */
+        private static readonly Dictionary<Type, Func<SimpleShapeBase, BaseTemplate>> SourceCodeTemplates = new()
+        {
+            { typeof(CRectangle), shape => new CRectangleTemplate { rectangle = (CRectangle)shape, settings = CreateCanvasSettings() } },
+            { typeof(CEllipse), shape => new CEllipseTemplate { ellipse = (CEllipse)shape, settings = CreateCanvasSettings() } },
+            { typeof(CLine), shape => new CLineTemplate { line = (CLine)shape, settings = CreateCanvasSettings() } },
+            { typeof(CPencil), shape => new CPencilTemplate { pencil = (CPencil)shape, settings = CreateCanvasSettings() } }
+        };
+
+        /// <summary>
+        /// Devuelve la plantilla de código asociada a la figura
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         public static BaseTemplate? GetTemplate(SimpleShapeBase shape)
         {
-            int backgroundColor = DrawingHandler.Instance.GetBackgroundColor();
-            var settings = new CanvasSettings() { BackgroundColor = backgroundColor };
-
-            if (shape is CRectangle rectangle)
-                return new CRectangleTemplate() { rectangle = rectangle, settings = settings };
-            else if (shape is CEllipse ellipse)
-                return new CEllipseTemplate() { ellipse = ellipse, settings = settings };
-            else if (shape is CLine line)
-                return new CLineTemplate() { line = line, settings = settings };
-            else if (shape is CPencil pencil)
-                return new CPencilTemplate() { pencil = pencil, settings = settings };
+            if (SourceCodeTemplates.TryGetValue(shape.GetType(), out var creator))
+                return creator(shape);
 
             return null;
+        }
+
+        private static CanvasSettings CreateCanvasSettings()
+        {
+            int backgroundColor = DrawingHandler.Instance.GetBackgroundColor();
+            return new CanvasSettings { BackgroundColor = backgroundColor };
         }
     }
 }
