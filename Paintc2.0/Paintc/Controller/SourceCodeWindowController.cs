@@ -62,6 +62,7 @@ namespace Paintc.Controller
         private void CopyButtonClickCommand(object? obj)
         {
             Clipboard.SetText(Code);
+            MessageBox.Show("Source code copied to clipboard", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
