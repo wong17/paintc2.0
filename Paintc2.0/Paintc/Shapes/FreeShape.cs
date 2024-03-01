@@ -66,6 +66,11 @@ namespace Paintc.Shapes
                 pixels.Add(pixel);
             }
 
+            pixels = pixels
+                .GroupBy(p => new { p.X, p.Y })  // Agrupar por coordenadas X e Y
+                .Select(g => g.First())          // Seleccionar el primer píxel de cada grupo (elimina los duplicados)
+                .ToList();
+
             CPencil pencil = new()
             {
                 Name = Name,
