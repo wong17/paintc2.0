@@ -110,27 +110,34 @@ int main()
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n    /* Estilos, colores... */\r\n    int lineStyle = ");
+            this.Write(";\r\n\r\n    /* Estilos, colores... */\r\n    int color = ");
             
             #line 43 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(line.Color));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n    int lineStyle = ");
+            
+            #line 44 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.LineStyle));
             
             #line default
             #line hidden
             this.Write(";\r\n    int lineThickness = ");
             
-            #line 44 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
+            #line 45 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(line.LineThickness));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n    /* Establecer el grosor y estilo de la linea */\r\n    setlinestyle(lineSt" +
-                    "yle, 0, lineThickness);\r\n    /* Establecer el color de la linea */\r\n    setcolor" +
-                    "(color);\r\n    /* Dibujar la linea */\r\n    line(x1, y1, x2, y2);\r\n}\r\n\r\n");
+            this.Write(";\r\n    \r\n    /* Establecer el grosor y estilo de la linea */\r\n    setlinestyle(li" +
+                    "neStyle, 0, lineThickness);\r\n    /* Establecer el color de la linea */\r\n    setc" +
+                    "olor(color);\r\n    /* Dibujar la linea */\r\n    line(x1, y1, x2, y2);\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 54 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
+        #line 55 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CLineTemplate.tt"
  
 	public CLine line { get; set; }
     public CanvasSettings settings { get; set; }

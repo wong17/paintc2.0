@@ -58,7 +58,7 @@ namespace Paintc.Shapes
                 Name = Name
             };
 
-            if (GetShape().Fill is SolidColorBrush fillBrush)
+            if (GetShape().Stroke is SolidColorBrush fillBrush)
                 line.Color = Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(fillBrush.Color));
 
             return line;

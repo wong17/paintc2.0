@@ -40,9 +40,10 @@ void draw<#= line.Name #>()
     int x1 = <#= line.X1 #>, y1 = <#= line.Y1 #>, x2 = <#= line.X2 #>, y2 = <#= line.Y2 #>;
 
     /* Estilos, colores... */
+    int color = <#= line.Color #>;
     int lineStyle = <#= line.LineStyle #>;
     int lineThickness = <#= line.LineThickness #>;
-
+    
     /* Establecer el grosor y estilo de la linea */
     setlinestyle(lineStyle, 0, lineThickness);
     /* Establecer el color de la linea */
