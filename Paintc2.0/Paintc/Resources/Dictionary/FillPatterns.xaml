@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Empty Fill Pattern -->
+    <DrawingBrush x:Key="EmptyFillPattern"/>
+
+    <!-- Solid Fill Pattern -->
+    
+
+    <!-- Line Fill Pattern -->
+    
+
+    <!-- LTSlash Fill Pattern -->
+    
+
+    <!-- Slash Fill Pattern -->
+    
+
+    <!-- BKSlash Fill Pattern -->
+    
+
+    <!-- LTBKSlash Fill Pattern -->
+    
+
+    <!-- Hatch Fill Pattern -->
+    
+
+    <!-- XHatch Fill Pattern -->
+    
+
+    <!-- Interleave Fill Pattern -->
+    
+
+    <!-- Wide Dot Fill Pattern -->
+    
+
+    <!-- Close Dot Fill Pattern -->
+    
+
+</ResourceDictionary>
