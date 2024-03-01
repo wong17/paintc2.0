@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using Paintc.Commands;
 using Paintc.Core;
+using Paintc.Service;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -21,6 +23,19 @@ namespace Paintc.Controller.UserControls
             }
         }
 
+        private ObservableCollection<SimpleShapeBase>? _primitiveShapes;
+
+        public ObservableCollection<SimpleShapeBase>? PrimitiveShapes
+        {
+            get => _primitiveShapes;
+            set
+            {
+                SetField(ref _primitiveShapes, value);
+                ShowSourceCode();
+            }
+        }
+
+
         public ICommand CopyButtonClick { get; private set; }
         public ICommand SaveButtonClick { get; private set; }
 
@@ -28,6 +43,7 @@ namespace Paintc.Controller.UserControls
         {
             CopyButtonClick = new RelayCommand((obj) => true, CopyButtonClickCommand);
             SaveButtonClick = new RelayCommand((obj) => true, SaveButtonClickCommand);
+            SourceCodePanelService.Instance.SetPrimitiveShapesCollectionEventHandler += SetPrimitiveShapesCollection;
         }
 
         /// <summary>
@@ -60,6 +76,17 @@ namespace Paintc.Controller.UserControls
         {
             Clipboard.SetText(Code);
             MessageBox.Show("Source code copied to clipboard", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        /* Esto dispara el método ShowSourceCode y genera el código fuente de todo el contenido del canvas */
+        private void SetPrimitiveShapesCollection(object? sender, ObservableCollection<SimpleShapeBase>? shapesCollection)
+        {
+            PrimitiveShapes = shapesCollection;
+        }
+
+        private void ShowSourceCode()
+        {
+            
         }
     }
 }

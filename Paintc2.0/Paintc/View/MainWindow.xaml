@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:Paintc.View.UserControls" 
         xmlns:controller="clr-namespace:Paintc.Controller"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Paintc2.0 - Alpha 1.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen">
 
@@ -61,6 +62,12 @@
                     <TabItem Header="Source code" Style="{StaticResource TabItemStyle}">
                         <userControls:SourceCodePanel x:Name="ucSourceCodePanel" />
                     </TabItem>
+                    <behavior:Interaction.Triggers>
+                        <behavior:EventTrigger EventName="SelectionChanged">
+                            <behavior:InvokeCommandAction Command="{Binding TabSelectionChanged}" 
+                                                          CommandParameter="{Binding SelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl}}" />
+                        </behavior:EventTrigger>
+                    </behavior:Interaction.Triggers>
                 </TabControl>
                 <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
             </Grid>

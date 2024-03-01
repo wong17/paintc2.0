@@ -12,16 +12,18 @@ namespace Paintc.Controller
         public ICommand SaveMenuItemClick { get; private set; }
         public ICommand ExitMenuItemClick { get; private set; }
         public ICommand AboutMenuItemClick { get; private set; }
+        public ICommand TabSelectionChanged {  get; private set; }
 
         public MainWindowController()
         {
             SaveMenuItemClick = new RelayCommand((obj) => true, SaveMenuItemClickCommand);
             ExitMenuItemClick = new RelayCommand((obj) => true, ExitMenuItemClickCommand);
             AboutMenuItemClick = new RelayCommand((obj) => true, AboutMenuItemClickCommand);
+            TabSelectionChanged = new RelayCommand((obj) => true, TabSelectionChangedCommand);
         }
 
         /// <summary>
-        ///
+        /// Muestra información acerca del programa
         /// </summary>
         /// <param name="obj"></param>
         private void AboutMenuItemClickCommand(object? obj)
@@ -30,7 +32,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        ///
+        /// Cierra la aplicación
         /// </summary>
         /// <param name="obj"></param>
         private void ExitMenuItemClickCommand(object? obj)
@@ -49,12 +51,27 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        ///
+        /// Guarda el contenido del canvas en formato .bmp
         /// </summary>
         /// <param name="obj"></param>
         private void SaveMenuItemClickCommand(object? obj)
         {
             CanvasImageSaverService.SaveCanvasContent();
+        }
+
+        /// <summary>
+        /// Actualiza la lista de figuras que contiene el canvas para generar el nuevo código fuente
+        /// y mostrarlo en SourceCodePanel
+        /// </summary>
+        /// <param name="obj"></param>
+        private void TabSelectionChangedCommand(object? selectedIndex)
+        {
+            if (selectedIndex is null || selectedIndex is not int index)
+                return;
+
+            // Si se selecciona el tab "Source code"
+            if (index == 1)
+                SourceCodePanelService.Instance.SetPrimitiveShapesCollection(DrawingHandler.Instance.GetSimpleShapes());
         }
     }
 }

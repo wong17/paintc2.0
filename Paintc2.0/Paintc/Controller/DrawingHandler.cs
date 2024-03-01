@@ -298,6 +298,20 @@ namespace Paintc.Controller
             return Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(brush.Color)); // Fondo actual en el canvas
         }
 
+        /// <summary>
+        /// Retorna una lista que contiene la forma primitiva de cada figura dibujada en el canvas
+        /// para generar el código C y mostrarlo en el panel SourceCodePanel
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<SimpleShapeBase>? GetSimpleShapes()
+        {
+            var primitiveShapes = new ObservableCollection<SimpleShapeBase>();
+
+
+
+            return primitiveShapes;
+        }
+
         #endregion DRAWING_HANDLER
 
         #region ADORNERS
