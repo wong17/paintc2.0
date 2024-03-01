@@ -96,7 +96,9 @@ namespace Paintc.Controller.UserControls
                 settings = new CanvasSettings() { BackgroundColor = DrawingHandler.Instance.GetBackgroundColor() }
             };
 
+            Mouse.OverrideCursor = Cursors.Wait;
             Code = template.TransformText();
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }
