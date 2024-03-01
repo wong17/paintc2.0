@@ -306,8 +306,12 @@ namespace Paintc.Controller
         public ObservableCollection<SimpleShapeBase>? GetSimpleShapes()
         {
             var primitiveShapes = new ObservableCollection<SimpleShapeBase>();
-
-
+            
+            foreach (var shape in Shapes)
+            {
+                if (shape is not null)
+                    primitiveShapes.Add(shape.GetSimpleShape());
+            }
 
             return primitiveShapes;
         }

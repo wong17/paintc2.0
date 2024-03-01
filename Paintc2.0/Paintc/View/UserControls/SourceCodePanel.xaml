@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <!---->
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <TextBox Text="{Binding Code}" Style="{StaticResource TextBlockStyle}" TextWrapping="Wrap" />
+            <TextBox Text="{Binding Code}" Style="{StaticResource SourceCodePanelTextBoxStyle}" TextWrapping="Wrap" />
         </ScrollViewer>
         <!---->
         <Grid Grid.Row="1">

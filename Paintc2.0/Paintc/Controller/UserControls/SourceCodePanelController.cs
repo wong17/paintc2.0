@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using Paintc.Commands;
 using Paintc.Core;
+using Paintc.Resources.RTT;
 using Paintc.Service;
+using Paintc.Shapes.C;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -23,7 +25,8 @@ namespace Paintc.Controller.UserControls
             }
         }
 
-        private ObservableCollection<SimpleShapeBase>? _primitiveShapes;
+        /* Lista de todas las figuras que contiene el canvas */
+        private ObservableCollection<SimpleShapeBase>? _primitiveShapes = [];
 
         public ObservableCollection<SimpleShapeBase>? PrimitiveShapes
         {
@@ -34,7 +37,6 @@ namespace Paintc.Controller.UserControls
                 ShowSourceCode();
             }
         }
-
 
         public ICommand CopyButtonClick { get; private set; }
         public ICommand SaveButtonClick { get; private set; }
@@ -47,7 +49,7 @@ namespace Paintc.Controller.UserControls
         }
 
         /// <summary>
-        /// Guarda el código fuente para dibujar el contenido del canvas
+        /// Guarda el código fuente necesario para dibujar el contenido del canvas
         /// </summary>
         /// <param name="obj"></param>
         private void SaveButtonClickCommand(object? obj)
@@ -79,14 +81,22 @@ namespace Paintc.Controller.UserControls
         }
 
         /* Esto dispara el método ShowSourceCode y genera el código fuente de todo el contenido del canvas */
+
         private void SetPrimitiveShapesCollection(object? sender, ObservableCollection<SimpleShapeBase>? shapesCollection)
         {
             PrimitiveShapes = shapesCollection;
         }
 
+        /* Muestra el código c generado a partir de las figuras que contiene el canvas */
         private void ShowSourceCode()
         {
-            
+            var template = new FullSourceCodeTemplate()
+            {
+                shapes = PrimitiveShapes,
+                settings = new CanvasSettings() { BackgroundColor = DrawingHandler.Instance.GetBackgroundColor() }
+            };
+
+            Code = template.TransformText();
         }
     }
 }
