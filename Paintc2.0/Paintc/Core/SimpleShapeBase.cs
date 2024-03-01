@@ -5,5 +5,6 @@
     /// </summary>
     public abstract class SimpleShapeBase
     {
+        public required string? Name { get; set; }
     }
 }

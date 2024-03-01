@@ -18,6 +18,5 @@ namespace Paintc.Shapes.C
         public int LineStyle { get; set; }
         public int LineThickness { get; set; }
         public int Color { get; set; }
-        public required string? Name { get; set; }
     }
 }
