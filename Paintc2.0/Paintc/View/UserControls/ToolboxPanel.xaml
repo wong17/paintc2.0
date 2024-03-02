@@ -18,119 +18,122 @@
     </UserControl.Resources>
     
     <!---->
-    <Grid Background="{StaticResource BlackBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <!--Tools-->
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <!--Colors-->
-            <RowDefinition Height="Auto" />
-            <!--Shapes explorer-->
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <!--Tools-->
-        <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
-        <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" Rows="2" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}"
-                            Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}">
-                        <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}" />
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <!--Colors-->
-        <Grid Grid.Row="2">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Background="{StaticResource BlackBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <!--Tools-->
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!--Colors-->
+                <RowDefinition Height="Auto" />
+                <!--Shapes explorer-->
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <!--Title-->
-            <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Colors"></Label>
-            <!--Color palette-->
-            <ItemsControl x:Name="ColorPaletteItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
+
+            <!--Tools-->
+            <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
+            <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4" Rows="4" />
+                        <UniformGrid Columns="4" Rows="2" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
-                                CommandParameter="{Binding Cpalette}"
-                                Command="{Binding ElementName=ColorPaletteItemsControl, Path=DataContext.CGAButtonsClick}"
-                                Style="{StaticResource ButtonCGAColorPalette}" />
+                        <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}"
+                        Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}">
+                            <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}" />
+                        </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
 
-        <!--Shapes explorer-->
-        <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
-        <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single">
-            <!--Layout-->
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Background="Gainsboro"></StackPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <!--Data-->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <!---->
-                        <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" Width="160"></TextBox>
-                        <Button Grid.Column="1" Content="X" Style="{StaticResource ListViewItemBtn}" ToolTip="Remove">
-                            <!--Click Event-->
-                            <behavior:Interaction.Triggers>
-                                <behavior:EventTrigger EventName="Click">
-                                    <behavior:InvokeCommandAction
-                                        Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding Name}" />
-                                </behavior:EventTrigger>
-                            </behavior:Interaction.Triggers>
-                        </Button>
-                        <Button Grid.Column="2" Content="S" Style="{StaticResource ListViewItemBtn}" ToolTip="Source code">
-                            <!--Click event-->
-                            <behavior:Interaction.Triggers>
-                                <behavior:EventTrigger EventName="Click">
-                                    <behavior:InvokeCommandAction 
-                                        Command="{Binding DataContext.ViewSourceCodeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                        CommandParameter="{Binding Name}"/>
-                                </behavior:EventTrigger>
-                            </behavior:Interaction.Triggers>
-                        </Button>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <!-- Evento SelectionChanged del ListView -->
-            <behavior:Interaction.Triggers>
-                <behavior:EventTrigger EventName="SelectionChanged">
-                    <behavior:InvokeCommandAction Command="{Binding ListViewSelectedItem}"
-                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" />
-                </behavior:EventTrigger>
-            </behavior:Interaction.Triggers>
-        </ListView>
-        <!---->
-        <Button Grid.Row="5" Content="Remove all" Style="{StaticResource RemoveAllShapesBtn}" Command="{Binding RemoveAllShapesClick}" />
-    </Grid>
+            <!--Colors-->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--Title-->
+                <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Colors"></Label>
+                <!--Color palette-->
+                <ItemsControl x:Name="ColorPaletteItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ColorPaletteItems}" Margin="5">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4" Rows="4" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
+                            CommandParameter="{Binding Cpalette}"
+                            Command="{Binding ElementName=ColorPaletteItemsControl, Path=DataContext.CGAButtonsClick}"
+                            Style="{StaticResource ButtonCGAColorPalette}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <!--Shapes explorer-->
+            <Label Grid.Row="3" Style="{StaticResource SidePanelHeaderLabel}" Content="Shapes explorer"></Label>
+            <ListView Grid.Row="4" ItemsSource="{Binding ShapesList}" Style="{StaticResource ListViewStyle}" DockPanel.Dock="Top"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single">
+                <!--Layout-->
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Gainsboro"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <!--Data-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!---->
+                            <TextBox Grid.Column="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" Width="160"></TextBox>
+                            <Button Grid.Column="1" Content="X" Style="{StaticResource ListViewItemBtn}" ToolTip="Remove">
+                                <!--Click Event-->
+                                <behavior:Interaction.Triggers>
+                                    <behavior:EventTrigger EventName="Click">
+                                        <behavior:InvokeCommandAction
+                                    Command="{Binding DataContext.RemoveShapeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding Name}" />
+                                    </behavior:EventTrigger>
+                                </behavior:Interaction.Triggers>
+                            </Button>
+                            <Button Grid.Column="2" Content="S" Style="{StaticResource ListViewItemBtn}" ToolTip="Source code">
+                                <!--Click event-->
+                                <behavior:Interaction.Triggers>
+                                    <behavior:EventTrigger EventName="Click">
+                                        <behavior:InvokeCommandAction 
+                                    Command="{Binding DataContext.ViewSourceCodeClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding Name}"/>
+                                    </behavior:EventTrigger>
+                                </behavior:Interaction.Triggers>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!-- Evento SelectionChanged del ListView -->
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="SelectionChanged">
+                        <behavior:InvokeCommandAction Command="{Binding ListViewSelectedItem}"
+                               CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" />
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+            </ListView>
+            <!---->
+            <Button Grid.Row="5" Content="Remove all" Style="{StaticResource RemoveAllShapesBtn}" Command="{Binding RemoveAllShapesClick}" />
+        </Grid>
+    </ScrollViewer>
+    
 </UserControl>
