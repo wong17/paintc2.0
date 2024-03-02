@@ -6,8 +6,8 @@ namespace Paintc.Controller.UserControls.ShapeProperties
 {
     public class PencilPropertiesController : ObservableObject, IPropertiesController
     {
-        private FreeShape? _freeShape;
-        public FreeShape? FreeShape 
+        private PencilShape? _freeShape;
+        public PencilShape? FreeShape 
         { 
             get => _freeShape; 
             set

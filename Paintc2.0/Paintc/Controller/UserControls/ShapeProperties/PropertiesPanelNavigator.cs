@@ -17,7 +17,7 @@ namespace Paintc.Controller.UserControls.ShapeProperties
                 { typeof(RectangleShape), new RectanglePropertiesController() },
                 { typeof(EllipseShape), new EllipsePropertiesController() },
                 { typeof(LineShape), new LinePropertiesController() },
-                { typeof(FreeShape), new PencilPropertiesController() }
+                { typeof(PencilShape), new PencilPropertiesController() }
             };
         }
 
