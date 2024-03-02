@@ -12,7 +12,7 @@ namespace Paintc.Shapes.C
 
     public sealed class CPoly : SimpleShapeBase
     {
-        public required int NPoints {  get; set; }
-        public required int[] Points { get; set; }
+        public int NPoints {  get; set; }
+        public int[]? Points { get; set; }
     }
 }

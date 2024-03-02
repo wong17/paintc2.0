@@ -144,6 +144,7 @@ namespace Paintc.Controller
                 return;
             }
 
+            /* Crear nueva figura en base a la herramienta seleccionada */
             _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool), CGAColorPaletteService.GetColor(_currentColor));
             if (_currentShape is null)
                 return;
@@ -176,10 +177,7 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_drawingPanel is null) return;
-
-            if (_toolbox?.CurrentTool == ToolType.FillerTool)
-                return;
+            if (_drawingPanel is null || _toolbox?.CurrentTool == ToolType.FillerTool) return;
 
             if (_toolbox?.CurrentTool == ToolType.PolygonTool)
             {

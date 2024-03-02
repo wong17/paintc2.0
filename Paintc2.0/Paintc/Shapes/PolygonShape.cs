@@ -1,4 +1,5 @@
 ﻿using Paintc.Core;
+using Paintc.Shapes.C;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -14,6 +15,7 @@ namespace Paintc.Shapes
 
         public PolygonShape(string? name, Color color) : base(name, color)
         {
+            // Pendiente
         }
 
         public Line? GetCurrentLine
@@ -102,9 +104,15 @@ namespace Paintc.Shapes
             }
         }
 
+        // Pendiente
         public override SimpleShapeBase GetSimpleShape()
         {
-            throw new NotImplementedException();
+            CPoly polygon = new()
+            {
+                Name = Name
+            };
+
+            return polygon;
         }
     }
 }
