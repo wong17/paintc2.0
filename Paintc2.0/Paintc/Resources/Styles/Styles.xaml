@@ -125,7 +125,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    <Style x:Key="MenuItemCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    
     <!--TabItem-->
     <Style x:Key="TabItemStyle" TargetType="TabItem">
         <Setter Property="Template">

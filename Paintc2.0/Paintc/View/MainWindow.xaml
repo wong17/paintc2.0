@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:Paintc.View.UserControls" 
         xmlns:controller="clr-namespace:Paintc.Controller"
-        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Paintc2.0 - Alpha 1.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen">
+        x:Name="PaintcWindow"
+        Title="Paintc2.0 - Alpha 1.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen"
+        controller:MainWindowController.SaveWindowState="false">
 
+    <!---->
     <Window.DataContext>
         <controller:MainWindowController />
     </Window.DataContext>
-    
+
     <!---->
     <Grid x:Name="WindowLayout">
         <!--Rows definition-->
@@ -26,6 +29,28 @@
             <MenuItem Header="File" Style="{StaticResource MenuItemStyle}">
                 <MenuItem x:Name="SaveMenuItem" Header="Save" Command="{Binding SaveMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
                 <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
+            </MenuItem>
+            <MenuItem Header="Window" Style="{StaticResource MenuItemStyle}">
+                <MenuItem x:Name="WindowMenuItem" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="Save window state" Style="{StaticResource MenuItemCheckBoxStyle}" 
+                                      IsChecked="{Binding Path=(controller:MainWindowController.SaveWindowState), Mode=OneWay, RelativeSource= {RelativeSource Mode=FindAncestor, AncestorType=Window}}">
+                                <!---->
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Checked">
+                                        <i:InvokeCommandAction Command="{Binding DataContext.CheckedStatus, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}"
+                                                               CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=MenuItem}}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Unchecked">
+                                        <i:InvokeCommandAction Command="{Binding DataContext.UncheckedStatus, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}"
+                                                               CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=MenuItem}}"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </CheckBox>
+                        </DataTemplate>
+                    </MenuItem.HeaderTemplate>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Help" Style="{StaticResource MenuItemStyle}">
                 <MenuItem x:Name="AboutMenuItem" Header="About" Command="{Binding AboutMenuItemClick}" Style="{StaticResource MenuItemStyle}" />
@@ -62,12 +87,12 @@
                     <TabItem Header="Source code" Style="{StaticResource TabItemStyle}">
                         <userControls:SourceCodePanel x:Name="ucSourceCodePanel" />
                     </TabItem>
-                    <behavior:Interaction.Triggers>
-                        <behavior:EventTrigger EventName="SelectionChanged">
-                            <behavior:InvokeCommandAction Command="{Binding TabSelectionChanged}" 
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding TabSelectionChanged}" 
                                                           CommandParameter="{Binding SelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl}}" />
-                        </behavior:EventTrigger>
-                    </behavior:Interaction.Triggers>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TabControl>
                 <userControls:StatusBarPanel Grid.Row="1" x:Name="ucStatusBarPanel"/>
             </Grid>

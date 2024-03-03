@@ -35,6 +35,8 @@ namespace Paintc.Core
             { typeof(Line), typeof(LineDragAdorner) }
         };
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         /* Nombre para identificarla en el explorador de figuras */
         private string? _name = name;
         public string? Name
@@ -142,8 +144,6 @@ namespace Paintc.Core
 
         public static readonly DependencyProperty ShowDragAdornerProperty =
             DependencyProperty.RegisterAttached("ShowDragAdorner", typeof(bool), typeof(ShapeBase), new FrameworkPropertyMetadata(false, OnShowDragAdornerChanged));
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public static bool GetShowDragAdorner(UIElement element) => (bool)element.GetValue(ShowDragAdornerProperty);
 

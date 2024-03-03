@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Paintc.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowPlacement" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"length":44,"flags":0,"showCmd":1,"minPosition":{"X":-1,"Y":-1},"maxPosition":{"X":-1,"Y":-1},"normalPosition":{"Left":320,"Top":160,"Right":2240,"Bottom":1240}}</Value>
+    </Setting>
+    <Setting Name="SaveWindowState" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
