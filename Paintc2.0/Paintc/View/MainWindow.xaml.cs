@@ -6,7 +6,6 @@ using static Paintc.Interop.Win32Api;
 using Paintc.Properties;
 using Newtonsoft.Json;
 using Paintc.Controller;
-using System.Configuration;
 
 namespace Paintc.Views
 {
@@ -30,7 +29,7 @@ namespace Paintc.Views
 
             // Obtiene el valor del archivo user.config en C:\Users\...\AppData\Local\Paintc\...\...\user.config
             var saveWindowStateFlag = Convert.ToBoolean(Settings.Default.SaveWindowState);
-            // Actualiza propiedades "SaveWindowState" de la ventana y "IsChecked" del checkbox por medio de un Binding 
+            // Actualiza propiedades "SaveWindowState" de la ventana y "IsChecked" del checkbox por medio de un Binding
             MainWindowController.SetSaveWindowState(this, saveWindowStateFlag);
             if (saveWindowStateFlag)
             {
