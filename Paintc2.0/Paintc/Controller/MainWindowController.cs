@@ -99,7 +99,6 @@ namespace Paintc.Controller
         /// 
         /// </summary>
         /// <param name="value"></param>
-        // https://stackoverflow.com/questions/5566050/executing-a-command-on-checkbox-checked-or-unchecked
         private void UncheckedStatusCommand(object? value) => SetSaveWindowState(Application.Current.MainWindow, Convert.ToBoolean(value));
 
         /// <summary>
