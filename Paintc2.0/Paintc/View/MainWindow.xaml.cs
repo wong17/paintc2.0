@@ -27,7 +27,10 @@ namespace Paintc.Views
             // Load window placement details for previous application session from application settings
             // Note - if window was closed on a monitor that is now disconnected from the computer,
             //        SetWindowPlacement will place the window onto a visible monitor.
+
+            // Obtiene el valor del archivo user.config en C:\Users\...\AppData\Local\Paintc\...\...\user.config
             var saveWindowStateFlag = Convert.ToBoolean(Settings.Default.SaveWindowState);
+            // Actualiza propiedades "SaveWindowState" de la ventana y "IsChecked" del checkbox por medio de un Binding 
             MainWindowController.SetSaveWindowState(this, saveWindowStateFlag);
             if (saveWindowStateFlag)
             {
@@ -38,7 +41,7 @@ namespace Paintc.Views
                 SetWindowPlacement(new WindowInteropHelper(this).Handle, ref wp);
                 return;
             }
-
+            // Establece el tamaño y posición de la ventana por defecto
             Width = 1920;
             Height = 1080;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -48,7 +51,7 @@ namespace Paintc.Views
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
+            // Obtener valor de la propiedad SaveWindowState
             var saveWindowStateFlag = MainWindowController.GetSaveWindowState(this);
             if (saveWindowStateFlag)
             {
