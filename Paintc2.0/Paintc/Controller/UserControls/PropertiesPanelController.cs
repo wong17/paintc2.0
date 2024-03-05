@@ -44,6 +44,8 @@ namespace Paintc.Controller.UserControls
             _drawingPanelProperties.IsResizableCheckbox.Checked += IsResizableCheckbox_Checked;
             _drawingPanelProperties.IsDraggableCheckbox.Unchecked += IsDraggableCheckbox_Unchecked;
             _drawingPanelProperties.IsResizableCheckbox.Unchecked += IsResizableCheckbox_Unchecked;
+            _drawingPanelProperties.ShowGridCheckbox.Checked += ShowGridCheckbox_Checked;
+            _drawingPanelProperties.ShowGridCheckbox.Unchecked += ShowGridCheckbox_Unchecked;
 
             // Canvas background colors, default: White
             _colors = CGAColorPaletteService.GetColorPalette();
@@ -207,6 +209,26 @@ namespace Paintc.Controller.UserControls
         private void UpdatePropertiesPanel(object? sender, object? obj)
         {
             _panelsNavigator.UpdatePropertiesPanel();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowGridCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PropertiesPanelService.Instance.ShowGrid(_drawingPanelProperties.ShowGridCheckbox.IsChecked ?? false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowGridCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            PropertiesPanelService.Instance.ShowGrid(_drawingPanelProperties.ShowGridCheckbox.IsChecked ?? false);
         }
     }
 }

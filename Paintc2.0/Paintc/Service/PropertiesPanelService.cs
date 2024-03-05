@@ -40,5 +40,10 @@ namespace Paintc.Service
         public event EventHandler<object?>? UpdatePropertiesPanelEventHandler;
 
         public void UpdatePropertiesPanel(object? obj = null) => UpdatePropertiesPanelEventHandler?.Invoke(this, obj);
+
+        // Notifica que debe mostrar el grid en el canvas
+        public event EventHandler<bool>? ShowGridEventHandler;
+
+        public void ShowGrid(bool flag) => ShowGridEventHandler?.Invoke(this, flag);
     }
 }

@@ -29,7 +29,10 @@
                 <!--Background color-->
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <!--More options...-->
+                <!--Canvas options-->
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!--Shape options...-->
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <!--Current/selected shape properties-->
@@ -53,9 +56,26 @@
                 </Border>
             </Grid>
 
-            <!--More options...-->
-            <Label Grid.Row="4" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Shape options:"></Label>
+            <!--Canvas options-->
+            <Label Grid.Row="4" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Canvas options:"></Label>
             <Grid Grid.Row="5">
+                <!---->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!--Show grid-->
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <UniformGrid Grid.Row="0" Rows="1" Columns="1">
+                    <CheckBox Content="Show grid line" x:Name="ShowGridCheckbox" Style="{StaticResource CanvasOptionsCheckBoxStyle}" />
+                </UniformGrid>
+            </Grid>
+            
+            <!--Shape options...-->
+            <Label Grid.Row="6" Style="{StaticResource SubtitleSidePanelHeaderLabel}" Content="Shape options:"></Label>
+            <Grid Grid.Row="7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -66,13 +86,13 @@
 
                 <!--IsDraggable, IsResizable-->
                 <UniformGrid Grid.Row="0" Rows="1" Columns="2">
-                    <CheckBox Content="IsDraggable" x:Name="IsDraggableCheckbox" Style="{StaticResource CheckBoxStyle}" />
-                    <CheckBox Content="IsResizable" x:Name="IsResizableCheckbox" Style="{StaticResource CheckBoxStyle}" />
+                    <CheckBox Content="IsDraggable" x:Name="IsDraggableCheckbox" Style="{StaticResource ShapeOptionsCheckBoxStyle}" />
+                    <CheckBox Content="IsResizable" x:Name="IsResizableCheckbox" Style="{StaticResource ShapeOptionsCheckBoxStyle}" />
                 </UniformGrid>
             </Grid>
 
             <!--Current/selected shape properties-->
-            <ContentControl Grid.Row="6" x:Name="ShapePropertiesContent" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <ContentControl Grid.Row="8" x:Name="ShapePropertiesContent" HorizontalAlignment="Left" VerticalAlignment="Top"
                             HorizontalContentAlignment="Left" VerticalContentAlignment="Top" ClipToBounds="True">
             </ContentControl>
         </Grid>

@@ -4,6 +4,7 @@ using Paintc.Model;
 using Paintc.Service;
 using Paintc.View.UserControls;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -13,6 +14,49 @@ namespace Paintc.Controller.UserControls
     {
         private readonly DrawingPanel _drawingPanel;
         private GraphicMode? _graphicMode;
+
+        private static SolidColorBrush? _colorBrush;
+        private static ResourceDictionary? _brushResource;
+        private static DrawingBrush? _gridBrush;
+
+        #region ATTACHED_PROPERTIES
+
+        public static bool GetShowGrid(DependencyObject obj) => (bool)obj.GetValue(ShowGridProperty);
+
+        public static void SetShowGrid(DependencyObject obj, bool value) => obj.SetValue(ShowGridProperty, value);
+
+        // Using a DependencyProperty as the backing store for ShowGrid.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowGridProperty =
+            DependencyProperty.RegisterAttached("ShowGrid", typeof(bool), typeof(DrawingPanelController), new PropertyMetadata(false, ShowGridCallback));
+
+        private static void ShowGridCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Canvas canvas || _gridBrush is null)
+                return;
+
+            var value = (bool)e.NewValue;
+            if (value)
+            {
+                _gridBrush.Viewport = new Rect(0, 0, canvas.ActualWidth / 10, canvas.ActualHeight / 10);
+                // Obtener el GeometryDrawing "DrawingBackground" del DrawingBrush "_gridBrush"
+                var drawingGroup = _gridBrush.Drawing as DrawingGroup;
+
+                GeometryDrawing? geometryDrawing = drawingGroup?.Children[0] as GeometryDrawing;
+                if (geometryDrawing is not null)
+                    geometryDrawing.Brush = _colorBrush;
+
+                RectangleGeometry? rectangleGeometry = geometryDrawing?.Geometry as RectangleGeometry;
+                if (rectangleGeometry is not null)
+                    rectangleGeometry.Rect = new Rect(0, 0, _gridBrush.Viewport.Width - 1, _gridBrush.Viewport.Height - 1);
+
+                canvas.Background = _gridBrush;
+                return;
+            }
+
+            canvas.Background = _colorBrush;
+        }
+
+        #endregion
 
         #region ZOOM
 
@@ -38,10 +82,16 @@ namespace Paintc.Controller.UserControls
         public DrawingPanelController(DrawingPanel drawingPanel)
         {
             _drawingPanel = drawingPanel;
+            _brushResource = new()
+            {
+                Source = new Uri("/Paintc;component/Resources/Brushes/DrawingBrushes.xaml", UriKind.RelativeOrAbsolute)
+            };
+            _gridBrush = (DrawingBrush?)_brushResource["GridLineBrush"];
 
             DrawingHandler.Instance.DrawingPanel = drawingPanel;
             PropertiesPanelService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
             PropertiesPanelService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
+            PropertiesPanelService.Instance.ShowGridEventHandler += ShowGridEventHandler;
 
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
@@ -115,7 +165,7 @@ namespace Paintc.Controller.UserControls
 
         #endregion ZOOM
 
-        #region CANVASRESIZER_EVENT
+        #region PROPERTIESPANEL_SERVICE
 
         /// <summary>
         ///
@@ -147,10 +197,6 @@ namespace Paintc.Controller.UserControls
             PropertiesPanelService.Instance.UpdateGraphicModeSelection(true);
         }
 
-        #endregion CANVASRESIZER_EVENT
-
-        #region CANVASBGCOLOR_EVENT
-
         /// <summary>
         ///
         /// </summary>
@@ -158,10 +204,29 @@ namespace Paintc.Controller.UserControls
         /// <param name="color"></param>
         public void ChangeBackgroundColorEventHandler(object? sender, CGAColor color)
         {
-            _drawingPanel.CustomCanvas.Background = new SolidColorBrush(color.Color);
+            _colorBrush = new SolidColorBrush(color.Color);
+            /* 
+             * Si ya estaba activo el grid se oculta y se vuelve a mostrar cambiando el relleno de los rectángulos 
+             * por el nuevo color y se vuelve a dibujar el grid.
+             */
+            if (GetShowGrid(_drawingPanel.CustomCanvas) && _gridBrush is not null)
+            {
+                SetShowGrid(_drawingPanel.CustomCanvas, false);
+                SetShowGrid(_drawingPanel.CustomCanvas, true);
+            }
+            else
+                _drawingPanel.CustomCanvas.Background = _colorBrush;
         }
 
-        #endregion CANVASBGCOLOR_EVENT
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowGridEventHandler(object? sender, bool flag) => 
+            SetShowGrid(_drawingPanel.CustomCanvas, flag);
+
+        #endregion PROPERTIESPANEL_SERVICE
 
         #region CUSTOMCANVAS_EVENTS
 
@@ -171,15 +236,11 @@ namespace Paintc.Controller.UserControls
             StatusBarPanelService.Instance.UpdateMousePosition(e.GetPosition(_drawingPanel.CustomCanvas));
         }
 
-        private void CustomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        private void CustomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => 
             DrawingHandler.Instance.OnMouseLeftButtonDown(sender, e);
-        }
 
-        private void CustomCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        private void CustomCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e) =>
             DrawingHandler.Instance.OnMouseRightButtonDown(sender, e);
-        }
 
         #endregion CUSTOMCANVAS_EVENTS
     }
