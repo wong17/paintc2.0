@@ -100,6 +100,15 @@ namespace Paintc.Controller
             _toolbox = toolbox;
             _state = DrawingState.Finished;
             _currentShape = null;
+
+            // Limpiar seleccion al seleccionar una nueva herramienta
+            if (_selectedShape is not null)
+            {
+                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
+                _selectedShape = null;
+                PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
+                PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
+            }
         }
 
         /// <summary>
@@ -144,6 +153,13 @@ namespace Paintc.Controller
                 return;
             }
 
+            if (_toolbox.CurrentTool == ToolType.EraserTool)
+            {
+                EraserToolLeftButtonDown(sender, e);
+                _state = DrawingState.Finished;
+                return;
+            }
+
             /* Crear nueva figura en base a la herramienta seleccionada */
             _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool), CGAColorPaletteService.GetColor(_currentColor));
             if (_currentShape is null)
@@ -177,7 +193,7 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_drawingPanel is null || _toolbox?.CurrentTool == ToolType.FillerTool) return;
+            if (_drawingPanel is null || _toolbox?.CurrentTool == ToolType.FillerTool || _toolbox?.CurrentTool == ToolType.EraserTool) return;
 
             if (_toolbox?.CurrentTool == ToolType.PolygonTool)
             {
@@ -392,7 +408,7 @@ namespace Paintc.Controller
         #region PROPERTIES_PANEL
 
         /// <summary>
-        ///
+        /// Se dispara cuando se selecciona el checkbox para habilitar/deshabilitar que una figura sea arrastrable
         /// </summary>
         /// <param name="isDraggable"></param>
         public void SetIsDraggableSelectedShape(bool isDraggable)
@@ -404,7 +420,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        ///
+        /// Se dispara cuando se selecciona el checkbox para habilitar/deshabilitar que una figura se pueda cambiar de tamaño
         /// </summary>
         /// <param name="isResizable"></param>
         public void SetIsResizableSelectedShape(bool isResizable)
@@ -420,7 +436,7 @@ namespace Paintc.Controller
         #region TOOL_LEFTMOUSEDOWN
 
         /// <summary>
-        ///
+        /// Evento click izquierdo de la herramienta FillerTool
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -438,7 +454,7 @@ namespace Paintc.Controller
         }
 
         /// <summary>
-        ///
+        /// Evento click izquierdo de la herramienta SelectTool
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -461,6 +477,32 @@ namespace Paintc.Controller
                 PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
                 PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
             }
+        }
+
+        /// <summary>
+        /// Evento click izquierdo de la herramienta EraserTool
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EraserToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Sino se seleccionada una figura o el canvas es null
+            if (e.OriginalSource is not Shape shape || _drawingPanel is null)
+                return;
+
+            // Buscar figura seleccionada
+            _selectedShape = Shapes.Where(s => s is not null && s.GetShape().Equals(shape)).First();
+
+            if (_selectedShape is null)
+                return;
+
+            // Si la figura a eliminar es la que esta actualmente seleccionada, se ocultan los adornos
+            if (shape.Equals(_selectedShape))
+                SetShowAdornersAttachedProperties(_selectedShape.GetShape(), false);
+
+            // Elimina figura del canvas y de la lista de formas
+            _drawingPanel.CustomCanvas.Children.Remove(_selectedShape.GetShape());
+            Shapes.Remove(_selectedShape);
         }
 
         #endregion TOOL_LEFTMOUSEDOWN
