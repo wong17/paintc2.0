@@ -13,7 +13,8 @@ namespace Paintc.Factory
             { typeof(CRectangle), shape => new CRectangleTemplate { rectangle = (CRectangle)shape, settings = CreateCanvasSettings() } },
             { typeof(CEllipse), shape => new CEllipseTemplate { ellipse = (CEllipse)shape, settings = CreateCanvasSettings() } },
             { typeof(CLine), shape => new CLineTemplate { line = (CLine)shape, settings = CreateCanvasSettings() } },
-            { typeof(CPencil), shape => new CPencilTemplate { pencil = (CPencil)shape, settings = CreateCanvasSettings() } }
+            { typeof(CPencil), shape => new CPencilTemplate { pencil = (CPencil)shape, settings = CreateCanvasSettings() } },
+            { typeof(CPoly), shape => new CPolyTemplate { poly = (CPoly)shape, settings = CreateCanvasSettings() } }
         };
 
         /// <summary>

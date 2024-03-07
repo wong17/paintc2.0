@@ -12,7 +12,9 @@ namespace Paintc.Shapes.C
 
     public sealed class CPoly : SimpleShapeBase
     {
-        public int NPoints {  get; set; }
-        public int[]? Points { get; set; }
+        public int Fill { get; set; }
+        public int Stroke { get; set; }
+        public int FillPattern { get; set; }
+        public required List<CVertex> Vertices { get; set; } = [];
     }
 }

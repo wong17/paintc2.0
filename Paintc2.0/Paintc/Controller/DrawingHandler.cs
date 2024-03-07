@@ -164,7 +164,6 @@ namespace Paintc.Controller
             if (_toolbox.CurrentTool == ToolType.PolygonTool)
             {
                 PolygonToolLeftButtonDown(sender, e);
-                //_state = DrawingState.Finished;
                 return;
             }
 

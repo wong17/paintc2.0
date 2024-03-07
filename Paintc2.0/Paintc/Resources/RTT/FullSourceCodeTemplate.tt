@@ -120,6 +120,7 @@ else if (shape is CEllipse ellipse)
     int x1 = <#= line.X1 #>, y1 = <#= line.Y1 #>, x2 = <#= line.X2 #>, y2 = <#= line.Y2 #>;
 
     /* Estilos, colores... */
+    int color = <#= line.Color #>;
     int lineStyle = <#= line.LineStyle #>;
     int lineThickness = <#= line.LineThickness #>;
 
@@ -134,17 +135,49 @@ else if (shape is CEllipse ellipse)
     else if (shape is CPencil pencil)
 {
 #>
-/* Dibujar trazo */
+
+   /* Dibujar trazo */
 <#
 foreach (var pixel in pencil.Pixels)
-{#>
-      putpixel(<#= pixel.X #>, <#= pixel.Y #>, <#= pixel.Color #>);
+{
+#>
+    putpixel(<#= pixel.X #>, <#= pixel.Y #>, <#= pixel.Color #>);
 <#
 }
 #>
+
 <#
 }
+    else if (shape is CPoly poly)
+{
 #>
+
+  /* Dibujar poligono */
+  int n = <#= poly.Vertices.Count #>;
+  int points[<#= poly.Vertices.Count * 2#>];
+
+  int color = <#= poly.Fill #>;
+  int fillPattern = <#= poly.FillPattern #>;
+
+  /* Agregar coordenadas de vértices al arreglo */
+<# 
+for (int i = 0; i < poly.Vertices.Count * 2; i += 2) 
+{ 
+#>
+  points[<#= i #>] = <#= poly.Vertices[i / 2].X #>;
+  points[<#= i + 1#>] = <#= poly.Vertices[i / 2].Y #>;
+<#
+} 
+#>
+  /* Establecer color de relleno */
+  setfillstyle(fillPattern, color);
+  /* Dibujar polígono usando el arreglo de puntos */
+  fillpoly(n, points);
+
+<#   
+}
+#>
+
 }
 <#
 }
