@@ -4,6 +4,7 @@ using Paintc.Factory;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Service.Collections;
+using Paintc.Shapes;
 using Paintc.View.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -160,6 +161,13 @@ namespace Paintc.Controller
                 return;
             }
 
+            if (_toolbox.CurrentTool == ToolType.PolygonTool)
+            {
+                PolygonToolLeftButtonDown(sender, e);
+                //_state = DrawingState.Finished;
+                return;
+            }
+
             /* Crear nueva figura en base a la herramienta seleccionada */
             _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool), CGAColorPaletteService.GetColor(_currentColor));
             if (_currentShape is null)
@@ -182,8 +190,12 @@ namespace Paintc.Controller
         {
             if (_toolbox is null || _drawingPanel is null) return;
 
-            if (e.OriginalSource is not Shape shape)
-                return;
+            // Si se esta dibujando un poligono cerrarlo
+            if (_currentShape is PolygonShape poly && poly.IsActivePolygon)
+            {
+                poly.IsActivePolygon = false;
+                _state = DrawingState.Finished;
+            }
         }
 
         /// <summary>
@@ -193,12 +205,8 @@ namespace Paintc.Controller
         /// <param name="e"></param>
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_drawingPanel is null || _toolbox?.CurrentTool == ToolType.FillerTool || _toolbox?.CurrentTool == ToolType.EraserTool) return;
-
-            if (_toolbox?.CurrentTool == ToolType.PolygonTool)
-            {
-                return;
-            }
+            if (_drawingPanel is null || _toolbox?.CurrentTool == ToolType.FillerTool 
+                || _toolbox?.CurrentTool == ToolType.EraserTool || _toolbox?.CurrentTool == ToolType.PolygonTool) return;
 
             // para las demás herramientas...
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -503,6 +511,39 @@ namespace Paintc.Controller
             // Elimina figura del canvas y de la lista de formas
             _drawingPanel.CustomCanvas.Children.Remove(_selectedShape.GetShape());
             Shapes.Remove(_selectedShape);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PolygonToolLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_toolbox is null || _drawingPanel is null)
+                return;
+
+            // Si se esta dibujando un poligono...
+            if (_currentShape is PolygonShape poly && poly.IsActivePolygon)
+            {
+                // Tomar nuevo punto y asignar al poligono actual
+                _currentMousePosition = e.GetPosition(_drawingPanel.CustomCanvas);
+                _currentShape?.SetCurrentMousePosition(_currentMousePosition);
+                return;
+            }
+
+            // Si se va a dibujar un poligono...
+            _currentShape = ShapeFactory.Create(_toolbox.CurrentTool, GenerateShapeName(_toolbox.CurrentTool), CGAColorPaletteService.GetColor(_currentColor));
+            if (_currentShape is null)
+                return;
+
+            // Dibujar primer vertice del poligono
+            _state = DrawingState.Drawing;
+            _lastMousePosition = e.GetPosition(_drawingPanel.CustomCanvas);
+
+            // Asignar punto y agregar al canvas
+            _currentShape.SetLastMousePosition(_lastMousePosition);
+            _drawingPanel.CustomCanvas.Children.Add(_currentShape.GetShape());
         }
 
         #endregion TOOL_LEFTMOUSEDOWN
