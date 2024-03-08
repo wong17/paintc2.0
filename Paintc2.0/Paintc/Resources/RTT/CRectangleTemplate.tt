@@ -9,7 +9,7 @@
 #include <conio.h>
 
 /* Dibuja <#= rectangle.Name #> */
-void draw<#= rectangle.Name #>();
+void draw_<#= rectangle.Name #>();
 
 int main()
 {
@@ -27,14 +27,14 @@ int main()
     setbkcolor(<#= settings.BackgroundColor #>);
 
     /* Your code here... */
-    draw<#= rectangle.Name #>();
+    draw_<#= rectangle.Name #>();
 
     getch();
     closegraph(); /* Return the system to text mode	*/
     return 0;
 }
 
-void draw<#= rectangle.Name #>()
+void draw_<#= rectangle.Name #>()
 {
     /* Coordenadas del rectángulo */
     int x1 = <#= rectangle.X1 #>, y1 = <#= rectangle.Y1 #>, x2 = <#= rectangle.X2 #>, y2 = <#= rectangle.Y2 #>;

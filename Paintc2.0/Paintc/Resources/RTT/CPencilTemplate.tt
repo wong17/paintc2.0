@@ -9,7 +9,7 @@
 #include <conio.h>
 
 /* Dibuja <#= pencil.Name #> */
-void draw<#= pencil.Name #>();
+void draw_<#= pencil.Name #>();
 
 int main()
 {
@@ -27,14 +27,14 @@ int main()
 	setbkcolor(<#= settings.BackgroundColor #>);
 
 	/* Your code here... */
-	draw<#= pencil.Name #>();
+	draw_<#= pencil.Name #>();
 
 	getch();
 	closegraph(); /* Return the system to text mode	*/
 	return 0;
 }
 
-void draw<#= pencil.Name #>()
+void draw_<#= pencil.Name #>()
 {
 	/* Dibujar trazo */
 	<#

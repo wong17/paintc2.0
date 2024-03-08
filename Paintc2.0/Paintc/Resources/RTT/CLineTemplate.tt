@@ -9,7 +9,7 @@
 #include <conio.h>
 
 /* Dibuja <#= line.Name #> */
-void draw<#= line.Name #>();
+void draw_<#= line.Name #>();
 
 int main()
 {
@@ -27,14 +27,14 @@ int main()
     setbkcolor(<#= settings.BackgroundColor #>);
 
     /* Your code here... */
-    draw<#= line.Name #>();
+    draw_<#= line.Name #>();
 
     getch();
     closegraph(); /* Return the system to text mode	*/
     return 0;
 }
 
-void draw<#= line.Name #>()
+void draw_<#= line.Name #>()
 {
     /* Coordenadas de la linea */
     int x1 = <#= line.X1 #>, y1 = <#= line.Y1 #>, x2 = <#= line.X2 #>, y2 = <#= line.Y2 #>;

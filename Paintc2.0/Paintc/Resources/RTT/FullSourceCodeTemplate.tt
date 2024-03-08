@@ -15,7 +15,7 @@ foreach (var shape in shapes)
 {
 #>
 /* Dibuja <#= shape.Name #> */
-draw<#= shape.Name #>();
+draw_<#= shape.Name #>();
 <#
 }
 #>
@@ -40,7 +40,7 @@ int main()
 foreach (var shape in shapes)
 {
 #>
-   draw<#= shape.Name #>();
+   draw_<#= shape.Name #>();
 <#
 }
 #>
@@ -54,7 +54,7 @@ foreach (var shape in shapes)
 foreach (var shape in shapes)
 {
 #>
-draw<#= shape.Name #>()
+draw_<#= shape.Name #>()
 {
 <#
     if (shape is CRectangle rectangle)
@@ -177,8 +177,8 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
 <#   
 }
 #>
-
 }
+
 <#
 }
 #>

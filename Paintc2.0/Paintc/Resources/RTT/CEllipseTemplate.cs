@@ -37,7 +37,7 @@ namespace Paintc.Resources.RTT
             
             #line default
             #line hidden
-            this.Write(" */\r\nvoid draw");
+            this.Write(" */\r\nvoid draw_");
             
             #line 12 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Name));
@@ -66,7 +66,7 @@ int main()
             
             #line default
             #line hidden
-            this.Write(");\r\n\r\n\t/* Your code here... */\r\n\tdraw");
+            this.Write(");\r\n\r\n\t/* Your code here... */\r\n\tdraw_");
             
             #line 30 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Name));
@@ -74,7 +74,7 @@ int main()
             #line default
             #line hidden
             this.Write("();\r\n\r\n\tgetch();\r\n\tclosegraph(); /* Return the system to text mode\t*/\r\n\treturn 0;" +
-                    "\r\n}\r\n\r\nvoid draw");
+                    "\r\n}\r\n\r\nvoid draw_");
             
             #line 37 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CEllipseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ellipse.Name));

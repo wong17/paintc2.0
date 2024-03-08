@@ -9,7 +9,7 @@
 #include <conio.h>
 
 /* Dibuja <#= ellipse.Name #> */
-void draw<#= ellipse.Name #>();
+void draw_<#= ellipse.Name #>();
 
 int main()
 {
@@ -27,14 +27,14 @@ int main()
 	setbkcolor(<#= settings.BackgroundColor #>);
 
 	/* Your code here... */
-	draw<#= ellipse.Name #>();
+	draw_<#= ellipse.Name #>();
 
 	getch();
 	closegraph(); /* Return the system to text mode	*/
 	return 0;
 }
 
-void draw<#= ellipse.Name #>()
+void draw_<#= ellipse.Name #>()
 {
 	/* Coordenadas del centro de la ellipse */
 	int centerX = <#= ellipse.X #>, centerY = <#= ellipse.Y #>;

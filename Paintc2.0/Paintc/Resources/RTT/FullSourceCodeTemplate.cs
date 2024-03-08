@@ -48,7 +48,7 @@ foreach (var shape in shapes)
             
             #line default
             #line hidden
-            this.Write(" */\r\ndraw");
+            this.Write(" */\r\ndraw_");
             
             #line 18 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(shape.Name));
@@ -95,7 +95,7 @@ foreach (var shape in shapes)
             
             #line default
             #line hidden
-            this.Write("   draw");
+            this.Write("   draw_");
             
             #line 43 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(shape.Name));
@@ -122,7 +122,7 @@ foreach (var shape in shapes)
             
             #line default
             #line hidden
-            this.Write("draw");
+            this.Write("draw_");
             
             #line 57 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(shape.Name));
@@ -525,7 +525,7 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             
             #line default
             #line hidden
-            this.Write("\r\n}\r\n");
+            this.Write("}\r\n\r\n");
             
             #line 182 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
 

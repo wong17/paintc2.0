@@ -37,7 +37,7 @@ namespace Paintc.Resources.RTT
             
             #line default
             #line hidden
-            this.Write(" */\r\nvoid draw");
+            this.Write(" */\r\nvoid draw_");
             
             #line 12 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Name));
@@ -66,7 +66,7 @@ int main()
             
             #line default
             #line hidden
-            this.Write(");\r\n\r\n    /* Your code here... */\r\n    draw");
+            this.Write(");\r\n\r\n    /* Your code here... */\r\n    draw_");
             
             #line 30 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Name));
@@ -74,7 +74,7 @@ int main()
             #line default
             #line hidden
             this.Write("();\r\n\r\n    getch();\r\n    closegraph(); /* Return the system to text mode\t*/\r\n    " +
-                    "return 0;\r\n}\r\n\r\nvoid draw");
+                    "return 0;\r\n}\r\n\r\nvoid draw_");
             
             #line 37 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CRectangleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(rectangle.Name));
