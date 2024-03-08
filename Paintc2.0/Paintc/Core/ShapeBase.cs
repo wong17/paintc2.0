@@ -15,7 +15,8 @@ namespace Paintc.Core
             { typeof(Rectangle), typeof(ResizerAdorner) },
             { typeof(Ellipse), typeof(ResizerAdorner) },
             { typeof(Line), typeof(LineResizerAdorner) },
-            { typeof(Polyline), typeof(PolylineResizerAdorner) }
+            { typeof(Polyline), typeof(PolylineResizerAdorner) },
+            { typeof(Polygon), typeof(PolygonResizerAdorner) }
         };
 
         /* Contiene el adorno para indicar que la figura esta seleccionada */
@@ -24,7 +25,8 @@ namespace Paintc.Core
             { typeof(Rectangle), typeof(SelectionAdorner) },
             { typeof(Ellipse), typeof(SelectionAdorner) },
             { typeof(Line), typeof(LineSelectionAdorner) },
-            { typeof(Polyline), typeof(PolylineSelectionAdorner) }
+            { typeof(Polyline), typeof(PolylineSelectionAdorner) },
+            { typeof(Polygon), typeof(PolygonSelectionAdorner) }
         };
 
         /* Contiene el adorno para arrastrar la figura seleccionada */
