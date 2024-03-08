@@ -39,7 +39,7 @@ namespace Paintc.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        /* Nombre para identificarla en el explorador de figuras */
+        /* Nombre para identificar la figura en el explorador de figuras */
         private string? _name = name;
         public string? Name
         {
