@@ -1,0 +1,91 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+
+namespace Paintc.Adorners
+{
+    public class PolygonDragAdorner : Adorner
+    {
+        private readonly VisualCollection _visuals;
+        private readonly Thumb _thumb;
+
+        public PolygonDragAdorner(UIElement adornedElement) : base(adornedElement)
+        {
+            _thumb = new Thumb
+            {
+                Cursor = Cursors.Hand,
+                Width = 15,
+                Height = 15,
+                Background = Brushes.DodgerBlue,
+                BorderBrush = new SolidColorBrush(Colors.DodgerBlue)
+            };
+            _thumb.DragDelta += Thumb_DragDelta;
+            _visuals = new VisualCollection(this) { _thumb };
+        }
+
+        /// <summary>
+        /// Dibuja el thumb para arrastrar la figura en el centro de esta
+        /// </summary>
+        /// <param name="finalSize"></param>
+        /// <returns></returns>
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            Polygon polygon = (Polygon)AdornedElement;
+            Rect rect = polygon.RenderedGeometry.Bounds;
+            double centerX = ((rect.Right + rect.Left) - (_thumb.RenderSize.Width)) / 2;
+            double centerY = ((rect.Bottom + rect.Top) - (_thumb.RenderSize.Height)) / 2;
+            _thumb.Arrange(new Rect(new Point(centerX, centerY), _thumb.RenderSize));
+
+            return base.ArrangeOverride(finalSize);
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        protected override int VisualChildrenCount => _visuals.Count;
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        protected override Visual GetVisualChild(int index) => _visuals[index];
+
+        /// <summary>
+        /// Se ejecuta al momento de pulsar y arrastrar el thumb para cambiar de lugar la figura
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (AdornedElement is not FrameworkElement adornedElement)
+                return;
+
+            if (adornedElement.Parent is not Canvas parentCanvas)
+                return;
+
+            //double newLeft = Canvas.GetLeft(adornedElement) + e.HorizontalChange;
+            //double newTop = Canvas.GetTop(adornedElement) + e.VerticalChange;
+            //double newRight = Canvas.GetRight(adornedElement) + e.HorizontalChange;
+            //double newBottom = Canvas.GetBottom(adornedElement) + e.VerticalChange;
+
+            //if (newLeft >= 0 && newLeft + adornedElement.ActualWidth <= parentCanvas.ActualWidth)
+            //{
+            //    Canvas.SetLeft(adornedElement, newLeft);
+            //    Canvas.SetRight(adornedElement, newRight);
+            //}
+
+            //if (newTop >= 0 && newTop + adornedElement.ActualHeight <= parentCanvas.ActualHeight)
+            //{
+            //    Canvas.SetTop(adornedElement, newTop);
+            //    Canvas.SetBottom(adornedElement, newBottom);
+            //}
+
+            //PropertiesPanelService.Instance.UpdatePropertiesPanel();
+        }
+    }
+}

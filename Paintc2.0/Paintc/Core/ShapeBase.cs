@@ -34,7 +34,9 @@ namespace Paintc.Core
         {
             { typeof(Rectangle), typeof(DragAdorner) },
             { typeof(Ellipse), typeof(DragAdorner) },
-            { typeof(Line), typeof(LineDragAdorner) }
+            { typeof(Line), typeof(LineDragAdorner) },
+            { typeof(Polyline), typeof (PolylineDragAdorner) },
+            { typeof(Polygon), typeof (PolygonDragAdorner) }
         };
 
         public event PropertyChangedEventHandler? PropertyChanged;
