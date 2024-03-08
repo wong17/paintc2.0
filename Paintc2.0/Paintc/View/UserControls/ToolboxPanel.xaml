@@ -37,7 +37,7 @@
 
             <!--Tools-->
             <Label Grid.Row="0" Style="{StaticResource SidePanelHeaderLabel}" Content="Toolbox"></Label>
-            <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}">
+            <ItemsControl x:Name="ToolItemsControl" Grid.Row="1" Width="Auto" ItemsSource="{Binding ToolItems}" Margin="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="4" Rows="2" />
@@ -46,7 +46,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource ButtonTool}" CommandParameter="{Binding Type}"
-                        Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}">
+                        Command="{Binding ElementName=ToolItemsControl, Path=DataContext.ToolsButtonsClick}" ToolTip="{Binding Tooltip}">
                             <Image Style="{StaticResource ImageStyle}" ToolTip="{Binding Tooltip}" Source="{Binding ImageSource}" />
                         </Button>
                     </DataTemplate>

@@ -51,7 +51,7 @@
 
     <!--Image-->
     <Style x:Key="ImageStyle" TargetType="Image">
-        <Setter Property="Margin" Value="8"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
     </Style>
 
     <!--GridSplitter-->
@@ -86,6 +86,9 @@
     <Style x:Key="ButtonTool" TargetType="Button">
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="Height" Value="60"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
     </Style>
     <Style x:Key="RemoveAllShapesBtn" TargetType="Button">
         <Setter Property="Height" Value="30"></Setter>
