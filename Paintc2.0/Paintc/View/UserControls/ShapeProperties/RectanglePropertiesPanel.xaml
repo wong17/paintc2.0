@@ -18,6 +18,7 @@
 
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0" Content="Top-Left coordinates" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
@@ -42,6 +43,12 @@
             <Label Content="{Binding Width}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
             <Label Content="Height:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
             <Label Content="{Binding Height}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Area:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding Area}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="Perimeter:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding Perimeter}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
         </StackPanel>
 
     </Grid>

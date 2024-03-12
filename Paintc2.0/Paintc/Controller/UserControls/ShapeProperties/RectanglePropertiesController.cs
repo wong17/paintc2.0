@@ -66,6 +66,22 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             private set => SetField(ref _height, value);
         }
 
+        private double _area;
+
+        public double Area
+        {
+            get => _area;
+            private set => SetField(ref _area, value);
+        }
+
+        private double _perimeter;
+
+        public double Perimeter
+        {
+            get => _perimeter;
+            private set => SetField(ref _perimeter, value);
+        }
+
         /// <summary>
         ///
         /// </summary>
@@ -81,6 +97,8 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             BottomRightY = double.Truncate(Canvas.GetBottom(_rectangleShape.GetShape()) * 100) / 100;
             Width = double.Truncate(_rectangleShape.GetShape().Width * 100) / 100;
             Height = double.Truncate(_rectangleShape.GetShape().Height * 100) / 100;
+            Area = double.Truncate((Width * Height) * 100) / 100;
+            Perimeter = double.Truncate((2 * (Width + Height)) * 100) / 100;
         }
 
         /// <summary>
