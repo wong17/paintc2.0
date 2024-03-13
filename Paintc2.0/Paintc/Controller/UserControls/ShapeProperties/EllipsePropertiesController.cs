@@ -49,20 +49,20 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             private set => SetField(ref _bottomRightY, value);
         }
 
-        private double _radiusX;
+        private double _lengthSemiAxisX;
 
-        public double RadiusX
+        public double LengthSemiAxisX
         {
-            get => _radiusX;
-            private set => SetField(ref _radiusX, value);
+            get => _lengthSemiAxisX;
+            private set => SetField(ref _lengthSemiAxisX, value);
         }
 
-        private double _radiusY;
+        private double _lengthSemiAxisY;
 
-        public double RadiusY
+        public double LengthSemiAxisY
         {
-            get => _radiusY;
-            private set => SetField(ref _radiusY, value);
+            get => _lengthSemiAxisY;
+            private set => SetField(ref _lengthSemiAxisY, value);
         }
 
         private double _startAngle;
@@ -113,6 +113,22 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             private set => SetField(ref _middlePointY, value);
         }
 
+        private double _area;
+
+        public double Area
+        {
+            get => _area;
+            private set => SetField(ref _area, value);
+        }
+
+        private double _perimeter;
+
+        public double Perimeter
+        {
+            get => _perimeter;
+            private set => SetField(ref _perimeter, value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -126,18 +142,42 @@ namespace Paintc.Controller.UserControls.ShapeProperties
             double right = Canvas.GetRight(_ellipseShape.GetShape());
             double bottom = Canvas.GetBottom(_ellipseShape.GetShape());
 
+            double lengthSemiAxisX = Math.Abs((right - left) / 2);
+            double lengthSemiAxisY = Math.Abs((bottom - top) / 2);
+
             TopLeftX = double.Truncate(left * 100) / 100;
             TopLeftY = double.Truncate(top * 100) / 100;
             BottomRightX = double.Truncate(right * 100) / 100;
             BottomRightY = double.Truncate(bottom * 100) / 100;
-            RadiusX = double.Truncate(Math.Abs((right - left) / 2) * 100) / 100;
-            RadiusY = double.Truncate(Math.Abs((bottom - top) / 2) * 100) / 100;
+            LengthSemiAxisX = double.Truncate(lengthSemiAxisX * 100) / 100;
+            LengthSemiAxisY = double.Truncate(lengthSemiAxisY * 100) / 100;
             StartAngle = 0;
             EndAngle = 360;
             Width = double.Truncate(_ellipseShape.GetShape().Width * 100) / 100;
             Height = double.Truncate(_ellipseShape.GetShape().Height * 100) / 100;
             MiddlePointX = Convert.ToInt32(double.Truncate((right + left) / 2));
             MiddlePointY = Convert.ToInt32(double.Truncate((bottom + top) / 2));
+            // A = πab, a: longitud del semi eje x, b: longitud del semi eje y
+            Area = double.Truncate(Math.PI * LengthSemiAxisX * LengthSemiAxisY * 100) / 100;
+            // Formula de Ramanujan para aproximación del perimetro
+            Perimeter = double.Truncate(CalculatePerimeter(lengthSemiAxisX, lengthSemiAxisY) * 100) / 100; 
+        }
+
+        /// <summary>
+        /// Hace un cálculo aproximado del perímetro de la elipse utilizando la fórmula de Ramanujan
+        /// </summary>
+        /// <param name="lengthSemiAxisX"></param>
+        /// <param name="lengthSemiAxisY"></param>
+        /// <returns></returns>
+        private static double CalculatePerimeter(double lengthSemiAxisX, double lengthSemiAxisY)
+        {
+            double a = lengthSemiAxisX; 
+            double b = lengthSemiAxisY;
+
+            double h = ((a - b) * (a - b)) / ((a + b) * (a + b));
+            double perimeter = Math.PI * (a + b) * (1.0 + 3.0 * h / (10.0 + Math.Sqrt(4.0 - 3.0 * h)));
+
+            return perimeter;
         }
 
         /// <summary>

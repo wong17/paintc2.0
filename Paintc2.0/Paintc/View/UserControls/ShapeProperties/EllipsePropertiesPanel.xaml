@@ -22,6 +22,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
 
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -53,10 +54,10 @@
         <!--Size-->
         <Label Grid.Row="6" Content="Size" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
         <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Label Content="Radius X:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
-            <Label Content="{Binding RadiusX}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
-            <Label Content="Radius Y:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
-            <Label Content="{Binding RadiusY}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="Semi-axis X:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding LengthSemiAxisX}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="Semi-axis Y:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding LengthSemiAxisY}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
         </StackPanel>
         <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Label Content="Width:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
@@ -64,9 +65,15 @@
             <Label Content="Height:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
             <Label Content="{Binding Height}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
         </StackPanel>
+        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Area:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding Area}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="Perimeter:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+            <Label Content="{Binding Perimeter}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+        </StackPanel>
         <!--Angles-->
-        <Label Grid.Row="9" Content="Angles" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
-        <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Label Grid.Row="10" Content="Angles" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
+        <StackPanel Grid.Row="11" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Label Content="Start:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
             <Label Content="{Binding StartAngle}" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
             <Label Content="End:" Style="{StaticResource SubtitleSidePanelHeaderLabel}"/>
