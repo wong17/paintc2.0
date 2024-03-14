@@ -10,12 +10,17 @@
 	<Authors>Denis Wong</Authors>
     <Description>Herramienta básica de dibujo que genera el código .c utilizando graphics.h para ser utilizado en Borland Turbo C 2.0</Description>
     <Copyright>Denis Wong</Copyright>
+    <ApplicationIcon>paintc_icono.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Images\cursor.png" />
     <None Remove="Resources\Images\lightbulb.png" />
     <None Remove="Resources\Images\tool-box.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="paintc_icono.ico" />
   </ItemGroup>
 
   <ItemGroup>
