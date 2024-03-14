@@ -7,4 +7,4 @@ Herramienta básica de dibujo para crear trazos y figuras sencillas que genera e
 
 ![paintc1-edited](https://github.com/wong17/paintc2.0/assets/64237085/88fae7f2-7a1b-4e42-8292-7ee28865dfaf)
 
-![image](https://github.com/wong17/paintc2.0/assets/64237085/7ab6875d-396b-452a-a87b-882f95375348)
+![image](https://github.com/wong17/paintc2.0/assets/64237085/bddec1ee-95d7-4862-948c-8278e1803ce2)
