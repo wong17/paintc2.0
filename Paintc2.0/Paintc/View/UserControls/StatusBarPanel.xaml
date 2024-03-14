@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controller="clr-namespace:Paintc.Controller.UserControls"
              mc:Ignorable="d"
-             d:DesignHeight="47" d:DesignWidth="720">
+             d:DesignHeight="47" d:DesignWidth="1920">
 
     <UserControl.DataContext>
         <controller:StatusBarPanelController/>
@@ -16,6 +16,7 @@
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <!---->
         <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal">
@@ -31,6 +32,12 @@
             <Border Width="26" Height="26" Background="White" Margin="0,0,5,0">
                 <Rectangle Width="25" Height="25" Fill="{Binding Brush, UpdateSourceTrigger=PropertyChanged}"></Rectangle>
             </Border>
+        </StackPanel>
+        <!---->
+        <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Source="/Resources/Images/lightbulb.png" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Stretch="Uniform" Height="32" Width="32" />
+            <Label Content="{Binding HintText}" Style="{StaticResource SubtitleSidePanelHeaderLabel}" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

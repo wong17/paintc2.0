@@ -7,12 +7,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<Authors>Denis Wong</Authors>
+    <Description>Herramienta básica de dibujo que genera el código .c utilizando graphics.h para ser utilizado en Borland Turbo C 2.0</Description>
+    <Copyright>Denis Wong</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\lightbulb.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.CodeDom" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\lightbulb.png" />
   </ItemGroup>
 
   <ItemGroup>

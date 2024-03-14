@@ -87,6 +87,21 @@ namespace Paintc.Controller
         /// </summary>
         private CGAColorPalette? _currentColor;
 
+        /// <summary>
+        /// Contiene mensajes de ayuda en base a la herramienta seleccionada
+        /// </summary>
+        private readonly Dictionary<ToolType, string> _toolHints = new()
+        {
+            { ToolType.PolygonTool, "Press left click to add a vertex | Press right click to close the polygon" },
+            { ToolType.LineTool, "Press left click and drag the mouse to draw a line" },
+            { ToolType.RectangleTool, "Press left click and drag the mouse to draw a rectangle" },
+            { ToolType.EllipseTool, "Press left click and drag the mouse to draw a ellipse" },
+            { ToolType.EraserTool, "Press left click to select a shape to remove" },
+            { ToolType.FillerTool, "Press left click to select a shape to change fill color" },
+            { ToolType.PencilTool, "While pressing left click drag the mouse to create a free shape" },
+            { ToolType.SelectTool, "Press left click to select a shape to view its properties" }
+        };
+
         #endregion PROPERTIES
 
         #region TOOLBAR_PANEL
@@ -110,6 +125,9 @@ namespace Paintc.Controller
                 PropertiesPanelService.Instance.SetEnableShapeOptions(_selectedShape);
                 PropertiesPanelService.Instance.ShowPropertiesPanel(_selectedShape);
             }
+
+            // Agregar hint del uso de la herramienta "Ctrl + Scroll: Zoom in/out (inside canvas)"
+            StatusBarPanelService.Instance.UpdateHintText(_toolHints.GetValueOrDefault(_toolbox.CurrentTool));
         }
 
         /// <summary>

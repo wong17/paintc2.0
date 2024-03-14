@@ -27,5 +27,10 @@ namespace Paintc.Service
         public event EventHandler<CGAColorPalette>? UpdateCurrentColorEventHandler;
 
         public void UpdateCurrentColor(CGAColorPalette color) => UpdateCurrentColorEventHandler?.Invoke(this, color);
+
+        // Código a ejecutar para mostrar una ayuda al usuario sobre los controles de la herramienta actualmente seleccionada
+        public event EventHandler<string?>? UpdateHintTextEventHandler;
+
+        public void UpdateHintText(string? hint) => UpdateHintTextEventHandler?.Invoke(this, hint);
     }
 }
