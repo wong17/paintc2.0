@@ -13,30 +13,34 @@
     
     <Grid Background="{StaticResource BlackBrush}" Height="47" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
             <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="160" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <!---->
-        <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal" >
+            <Image Source="/Resources/Images/cursor.png" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Stretch="Uniform" Height="28" Width="28" />
             <Label Content="{Binding MousePositionText}" Style="{StaticResource SubtitleSidePanelHeaderLabel}" />
         </StackPanel>
         <!---->
         <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+            <Image Source="/Resources/Images/tool-box.png" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Stretch="Uniform" Height="28" Width="28" />
             <Label Content="{Binding SelectedToolText}" Style="{StaticResource SubtitleSidePanelHeaderLabel}" />
         </StackPanel>
         <!---->
         <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal">
-            <Label Content="Current color:" Style="{StaticResource SubtitleSidePanelHeaderLabel}" />
-            <Border Width="26" Height="26" Background="White" Margin="0,0,5,0">
-                <Rectangle Width="25" Height="25" Fill="{Binding Brush, UpdateSourceTrigger=PropertyChanged}"></Rectangle>
+            <Border Width="21" Height="21" Background="White" VerticalAlignment="Center">
+                <Rectangle Width="20" Height="20" Fill="{Binding Brush, UpdateSourceTrigger=PropertyChanged}"></Rectangle>
             </Border>
+            <Label Content="Current color" Style="{StaticResource SubtitleSidePanelHeaderLabel}" />
         </StackPanel>
         <!---->
         <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image Source="/Resources/Images/lightbulb.png" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   Stretch="Uniform" Height="32" Width="32" />
+                   Stretch="Uniform" Height="24" Width="24" />
             <Label Content="{Binding HintText}" Style="{StaticResource SubtitleSidePanelHeaderLabel}" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>

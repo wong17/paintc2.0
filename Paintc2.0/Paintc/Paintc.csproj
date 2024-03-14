@@ -13,7 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\cursor.png" />
     <None Remove="Resources\Images\lightbulb.png" />
+    <None Remove="Resources\Images\tool-box.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\cursor.png" />
     <Resource Include="Resources\Images\lightbulb.png" />
+    <Resource Include="Resources\Images\tool-box.png" />
   </ItemGroup>
 
   <ItemGroup>
