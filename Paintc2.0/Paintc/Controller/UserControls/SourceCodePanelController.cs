@@ -84,6 +84,7 @@ namespace Paintc.Controller.UserControls
 
         private void SetPrimitiveShapesCollection(object? sender, ObservableCollection<SimpleShapeBase>? shapesCollection)
         {
+            /* Se actualiza tambien al momento de eliminar una figura desde el explorador. */
             PrimitiveShapes = shapesCollection;
         }
 

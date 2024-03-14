@@ -81,8 +81,11 @@ namespace Paintc.Controller.UserControls
             var result = MessageBox.Show($"Are you sure you want to remove {shapeName} from the drawing area?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.No)
                 return;
+
             // Elimina figura/forma del canvas
             DrawingHandler.Instance.RemoveShape(shapeName.ToString());
+            // Actualizar codigo del tab 'Source code'
+            SourceCodePanelService.Instance.SetPrimitiveShapesCollection(DrawingHandler.Instance.GetSimpleShapes());
         }
 
         /// <summary>
