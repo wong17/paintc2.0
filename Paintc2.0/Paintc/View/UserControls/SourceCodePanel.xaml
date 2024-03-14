@@ -29,8 +29,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <UniformGrid Rows="1" Columns="3" HorizontalAlignment="Right">
-                <Button Content="Refresh" Style="{StaticResource SourceCodePanelBtn}" Command="{Binding RefreshButtonClick}"/>
+            <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Right">
                 <Button Content="Copy" Style="{StaticResource SourceCodePanelBtn}" Command="{Binding CopyButtonClick}"/>
                 <Button Content="Save" Style="{StaticResource SourceCodePanelBtn}" Command="{Binding SaveButtonClick}"/>
             </UniformGrid>
