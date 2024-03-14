@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paintc", "Paintc\Paintc.csproj", "{DFDC67E2-F60F-413A-B126-95E5891C07CF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Paintc2.0", "Paintc2.0\Paintc2.0.vdproj", "{CE39357E-8992-4AD1-866D-E766B29E2F9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFDC67E2-F60F-413A-B126-95E5891C07CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE39357E-8992-4AD1-866D-E766B29E2F9D}.Debug|Any CPU.ActiveCfg = Debug
+		{CE39357E-8992-4AD1-866D-E766B29E2F9D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
