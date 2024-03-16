@@ -157,11 +157,12 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             #line default
             #line hidden
             this.Write("\r\n  /* Establecer color de relleno */\r\n  setfillstyle(fillPattern, color);\r\n  /* " +
-                    "Dibujar polígono usando el arreglo de puntos */\r\n  fillpoly(n, points);\r\n}\r\n\r\n");
+                    "Establecer color de linea de borde */\r\n  setcolor(color);\r\n  /* Dibujar polígono" +
+                    " usando el arreglo de puntos */\r\n  fillpoly(n, points);\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 63 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+        #line 65 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
  
 	public CPoly poly { get; set; }
 	public CanvasSettings settings { get; set; }
