@@ -46,9 +46,13 @@ namespace Paintc.Shapes
         public override SimpleShapeBase GetSimpleShape()
         {
             int color = (int)CGAColorPalette.White;
+            int fill = (int)CGAColorPalette.White;
 
             if (_polygon.Stroke is SolidColorBrush strokeBrush)
                 color = (int)CGAColorPaletteService.GetCGAColorPalette(strokeBrush.Color);
+
+            if (_polygon.Fill is SolidColorBrush fillBrush)
+                fill = (int)CGAColorPaletteService.GetCGAColorPalette(fillBrush.Color);
 
             /* Crea una lista de vértices */
             List<CVertex> vertices = [];
@@ -68,7 +72,7 @@ namespace Paintc.Shapes
                 Name = Name,
                 Vertices = vertices,
                 Stroke = color,
-                Fill = color,
+                Fill = fill,
                 FillPattern = Convert.ToInt32(FillPattern.SOLID_FILL)
             };
 

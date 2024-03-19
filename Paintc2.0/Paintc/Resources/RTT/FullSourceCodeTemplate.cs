@@ -454,23 +454,30 @@ foreach (var pixel in pencil.Pixels)
             
             #line default
             #line hidden
-            this.Write("];\r\n\r\n  int color = ");
+            this.Write("];\r\n\r\n  int fill = ");
             
             #line 159 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Fill));
             
             #line default
             #line hidden
-            this.Write(";\r\n  int fillPattern = ");
+            this.Write(";\r\n  int stroke = ");
             
             #line 160 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(poly.Stroke));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n  int fillPattern = ");
+            
+            #line 161 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.FillPattern));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n  /* Agregar coordenadas de vértices al arreglo */\r\n");
             
-            #line 163 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 164 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
  
 for (int i = 0; i < poly.Vertices.Count * 2; i += 2) 
 { 
@@ -480,46 +487,46 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             #line hidden
             this.Write("  points[");
             
-            #line 167 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 168 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("] = ");
             
-            #line 167 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 168 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Vertices[i / 2].X));
             
             #line default
             #line hidden
             this.Write(";\r\n  points[");
             
-            #line 168 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 169 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i + 1));
             
             #line default
             #line hidden
             this.Write("] = ");
             
-            #line 168 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 169 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Vertices[i / 2].Y));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 169 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 170 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
 
 } 
 
             
             #line default
             #line hidden
-            this.Write("  /* Establecer color de relleno */\r\n  setfillstyle(fillPattern, color);\r\n  /* Es" +
-                    "tablecer color de linea de borde */\r\n  setcolor(color);\r\n  /* Dibujar polígono u" +
+            this.Write("  /* Establecer color de relleno */\r\n  setfillstyle(fillPattern, fill);\r\n  /* Est" +
+                    "ablecer color de linea de borde */\r\n  setcolor(stroke);\r\n  /* Dibujar polígono u" +
                     "sando el arreglo de puntos */\r\n  fillpoly(n, points);\r\n\r\n");
             
-            #line 179 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 180 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
    
 }
 
@@ -528,7 +535,7 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             #line hidden
             this.Write("}\r\n\r\n");
             
-            #line 184 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+            #line 185 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
 
 }
 
@@ -539,7 +546,7 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 188 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
+        #line 189 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
  
     public ObservableCollection<SimpleShapeBase> shapes { get; set; }
     public CanvasSettings settings { get; set; }

@@ -95,23 +95,30 @@ int main()
             
             #line default
             #line hidden
-            this.Write("];\r\n\r\n  int color = ");
+            this.Write("];\r\n\r\n  int fill = ");
             
             #line 43 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Fill));
             
             #line default
             #line hidden
-            this.Write(";\r\n  int fillPattern = ");
+            this.Write(";\r\n  int stroke = ");
             
             #line 44 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(poly.Stroke));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n  int fillPattern = ");
+            
+            #line 45 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.FillPattern));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n  /* Agregar coordenadas de vértices al arreglo */\r\n");
             
-            #line 47 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 48 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
  
 for (int i = 0; i < poly.Vertices.Count * 2; i += 2) 
 { 
@@ -121,48 +128,48 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
             #line hidden
             this.Write("  points[");
             
-            #line 51 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 52 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("] = ");
             
-            #line 51 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 52 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Vertices[i / 2].X));
             
             #line default
             #line hidden
             this.Write(";\r\n  points[");
             
-            #line 52 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 53 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i + 1));
             
             #line default
             #line hidden
             this.Write("] = ");
             
-            #line 52 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 53 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(poly.Vertices[i / 2].Y));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 53 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+            #line 54 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
 
 } 
 
             
             #line default
             #line hidden
-            this.Write("\r\n  /* Establecer color de relleno */\r\n  setfillstyle(fillPattern, color);\r\n  /* " +
-                    "Establecer color de linea de borde */\r\n  setcolor(color);\r\n  /* Dibujar polígono" +
+            this.Write("\r\n  /* Establecer color de relleno */\r\n  setfillstyle(fillPattern, fill);\r\n  /* E" +
+                    "stablecer color de linea de borde */\r\n  setcolor(stroke);\r\n  /* Dibujar polígono" +
                     " usando el arreglo de puntos */\r\n  fillpoly(n, points);\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 65 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
+        #line 66 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\CPolyTemplate.tt"
  
 	public CPoly poly { get; set; }
 	public CanvasSettings settings { get; set; }

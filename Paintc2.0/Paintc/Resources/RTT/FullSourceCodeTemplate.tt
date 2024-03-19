@@ -156,7 +156,8 @@ foreach (var pixel in pencil.Pixels)
   int n = <#= poly.Vertices.Count #>;
   int points[<#= poly.Vertices.Count * 2#>];
 
-  int color = <#= poly.Fill #>;
+  int fill = <#= poly.Fill #>;
+  int stroke = <#= poly.Stroke #>;
   int fillPattern = <#= poly.FillPattern #>;
 
   /* Agregar coordenadas de vértices al arreglo */
@@ -170,9 +171,9 @@ for (int i = 0; i < poly.Vertices.Count * 2; i += 2)
 } 
 #>
   /* Establecer color de relleno */
-  setfillstyle(fillPattern, color);
+  setfillstyle(fillPattern, fill);
   /* Establecer color de linea de borde */
-  setcolor(color);
+  setcolor(stroke);
   /* Dibujar polígono usando el arreglo de puntos */
   fillpoly(n, points);
 
