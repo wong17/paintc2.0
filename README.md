@@ -10,3 +10,5 @@ Herramienta básica de dibujo para crear trazos y figuras sencillas que genera e
 ![image](https://github.com/wong17/paintc2.0/assets/64237085/bddec1ee-95d7-4862-948c-8278e1803ce2)
 
 ![WhatsApp Image 2024-03-24 at 13 47 27_61943d19](https://github.com/wong17/paintc2.0/assets/64237085/59074e99-911e-4214-b833-2271dedc68c4)
+
+![image](https://github.com/wong17/paintc2.0/assets/64237085/503bdf89-c5f5-41b7-986f-00f655773b65)
