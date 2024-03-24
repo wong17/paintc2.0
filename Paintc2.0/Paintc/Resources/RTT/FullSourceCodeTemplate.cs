@@ -48,7 +48,7 @@ foreach (var shape in shapes)
             
             #line default
             #line hidden
-            this.Write(" */\r\ndraw_");
+            this.Write(" */\r\nvoid draw_");
             
             #line 18 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(shape.Name));
@@ -122,7 +122,7 @@ foreach (var shape in shapes)
             
             #line default
             #line hidden
-            this.Write("draw_");
+            this.Write("void draw_");
             
             #line 57 "D:\Repositories\paintc2.0\Paintc2.0\Paintc\Resources\RTT\FullSourceCodeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(shape.Name));

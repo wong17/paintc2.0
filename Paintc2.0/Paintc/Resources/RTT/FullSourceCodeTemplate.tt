@@ -15,7 +15,7 @@ foreach (var shape in shapes)
 {
 #>
 /* Dibuja <#= shape.Name #> */
-draw_<#= shape.Name #>();
+void draw_<#= shape.Name #>();
 <#
 }
 #>
@@ -54,7 +54,7 @@ foreach (var shape in shapes)
 foreach (var shape in shapes)
 {
 #>
-draw_<#= shape.Name #>()
+void draw_<#= shape.Name #>()
 {
 <#
     if (shape is CRectangle rectangle)
