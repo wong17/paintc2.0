@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
-using Paintc.Controller;
-using Paintc.Controller.UserControls;
+using Paintc.ViewModels;
+using Paintc.ViewModels.UserControls;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -23,9 +23,9 @@ namespace Paintc.Service
             }
 
             // Ocultar cuadricula del canvas si esta activa
-            var isGridActive = DrawingPanelController.GetShowGrid(drawingArea);
+            var isGridActive = DrawingPanelViewModel.GetShowGrid(drawingArea);
             if (isGridActive)
-                DrawingPanelController.SetShowGrid(drawingArea, !isGridActive);
+                DrawingPanelViewModel.SetShowGrid(drawingArea, !isGridActive);
 
             // Guardar la matriz de transformación actual
             Transform transform = drawingArea.LayoutTransform;
@@ -64,7 +64,7 @@ namespace Paintc.Service
 
             // Mostrar cuadricula del canvas si estaba activa
             if (isGridActive)
-                DrawingPanelController.SetShowGrid(drawingArea, isGridActive);
+                DrawingPanelViewModel.SetShowGrid(drawingArea, isGridActive);
         }
     }
 }

@@ -1,15 +1,18 @@
 ﻿<Application x:Class="Paintc.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="/View/MainWindow.xaml">
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!--<hc:ThemeResources RequestedTheme="Dark"/>
+                <hc:Theme/>-->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Strings/Texts.xaml" />
                 <ResourceDictionary Source="Resources/Images/Images.xaml" />
-                <ResourceDictionary Source="View/UserControls/ShapeProperties/DataTemplate.xaml" />
+                <ResourceDictionary Source="Views/UserControls/ShapeProperties/DataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,4 +1,4 @@
-﻿using Paintc.Controller;
+﻿using Paintc.ViewModels;
 using Paintc.Core;
 using Paintc.Resources.RTT;
 using Paintc.Shapes.C;
