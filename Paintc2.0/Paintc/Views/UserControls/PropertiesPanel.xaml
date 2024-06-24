@@ -68,10 +68,15 @@
                 <Grid.RowDefinitions>
                     <!--Show grid-->
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <UniformGrid Grid.Row="0" Rows="1" Columns="1">
+                <UniformGrid Grid.Row="0" Rows="2" Columns="1">
                     <CheckBox Content="Show grid line" x:Name="ShowGridCheckbox" Style="{StaticResource CanvasOptionsCheckBoxStyle}" />
+                    <Slider x:Name="GridSlider" Style="{StaticResource CanvasOptionsSliderStyle}"
+                            IsEnabled="{Binding ElementName=ShowGridCheckbox, Path=IsChecked}" Minimum="1" Maximum="10"
+                            Value="{Binding SliderValue, Mode=TwoWay}"
+                            ></Slider>
                 </UniformGrid>
             </Grid>
             

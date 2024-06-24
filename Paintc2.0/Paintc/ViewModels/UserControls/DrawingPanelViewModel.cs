@@ -3,6 +3,8 @@ using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Views.UserControls;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +21,8 @@ namespace Paintc.ViewModels.UserControls
         private static ResourceDictionary? _brushResource;
         private static DrawingBrush? _gridBrush;
 
+        private static double _oldGridSize = 1;
+
         #region ATTACHED_PROPERTIES
 
         public static bool GetShowGrid(DependencyObject obj) => (bool)obj.GetValue(ShowGridProperty);
@@ -31,15 +35,17 @@ namespace Paintc.ViewModels.UserControls
 
         private static void ShowGridCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not Canvas canvas || _gridBrush is null)
+            // Obtener el GeometryDrawing "DrawingBackground" del DrawingBrush "_gridBrush"
+            if (d is not Canvas canvas || _gridBrush is null || _gridBrush.Drawing is not DrawingGroup drawingGroup)
                 return;
 
             var value = (bool)e.NewValue;
             if (value)
             {
-                _gridBrush.Viewport = new Rect(0, 0, canvas.ActualWidth / 10, canvas.ActualHeight / 10);
-                // Obtener el GeometryDrawing "DrawingBackground" del DrawingBrush "_gridBrush"
-                var drawingGroup = _gridBrush.Drawing as DrawingGroup;
+                var canvasWidth = canvas.ActualWidth;
+                var cellSize = _oldGridSize == 1 ? canvasWidth / _oldGridSize / 10 : _oldGridSize;
+
+                _gridBrush.Viewport = new Rect(0, 0, cellSize, cellSize);
 
                 GeometryDrawing? geometryDrawing = drawingGroup?.Children[0] as GeometryDrawing;
                 if (geometryDrawing is not null)
@@ -47,12 +53,49 @@ namespace Paintc.ViewModels.UserControls
 
                 RectangleGeometry? rectangleGeometry = geometryDrawing?.Geometry as RectangleGeometry;
                 if (rectangleGeometry is not null)
-                    rectangleGeometry.Rect = new Rect(0, 0, _gridBrush.Viewport.Width - 1, _gridBrush.Viewport.Height - 1);
+                    rectangleGeometry.Rect = new Rect(0, 0, cellSize, cellSize);
 
                 canvas.Background = _gridBrush;
                 return;
             }
 
+            canvas.Background = _colorBrush;
+        }
+
+        public static double GetGridSize(DependencyObject obj) => (double)obj.GetValue(GridSizeProperty);
+
+        public static void SetGridSize(DependencyObject obj, double value) => obj.SetValue(GridSizeProperty, value);
+
+        // Using a DependencyProperty as the backing store for GridSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GridSizeProperty =
+            DependencyProperty.RegisterAttached("GridSize", typeof(double), typeof(DrawingPanelViewModel), new PropertyMetadata((double)0, UpdateGridSizeCallback));
+
+        private static void UpdateGridSizeCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Canvas canvas || _gridBrush is null || _gridBrush.Drawing is not DrawingGroup drawingGroup)
+                return;
+
+            var newSize = (double)e.NewValue;
+            if (newSize != 0)
+            {
+                var canvasWidth = canvas.ActualWidth;
+                var cellSize = canvasWidth / newSize / 10;
+
+                _gridBrush.Viewport = new Rect(0, 0, cellSize, cellSize);
+
+                GeometryDrawing? geometryDrawing = drawingGroup?.Children[0] as GeometryDrawing;
+                if (geometryDrawing is not null)
+                    geometryDrawing.Brush = _colorBrush;
+
+                RectangleGeometry? rectangleGeometry = geometryDrawing?.Geometry as RectangleGeometry;
+                if (rectangleGeometry is not null)
+                    rectangleGeometry.Rect = new Rect(0, 0, cellSize, cellSize);
+
+                _oldGridSize = cellSize;
+                canvas.Background = _gridBrush;
+                return;
+            }
+            
             canvas.Background = _colorBrush;
         }
 
@@ -92,6 +135,7 @@ namespace Paintc.ViewModels.UserControls
             PropertiesPanelService.Instance.CanvasResizerEventHandler += CanvasResizerEventHandler;
             PropertiesPanelService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
             PropertiesPanelService.Instance.ShowGridEventHandler += ShowGridEventHandler;
+            PropertiesPanelService.Instance.UpdateGridSizeEventHandler += UpdateGridSizeEventHandler;
 
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
@@ -212,19 +256,27 @@ namespace Paintc.ViewModels.UserControls
             if (GetShowGrid(_drawingPanel.CustomCanvas) && _gridBrush is not null)
             {
                 SetShowGrid(_drawingPanel.CustomCanvas, false);
+                SetGridSize(_drawingPanel.CustomCanvas, 0);
                 SetShowGrid(_drawingPanel.CustomCanvas, true);
+                SetGridSize(_drawingPanel.CustomCanvas, 1);
             }
             else
                 _drawingPanel.CustomCanvas.Background = _colorBrush;
         }
 
         /// <summary>
-        /// 
+        /// Se ejecuta cuando se invoca el metodo 'ShowGrid' del servicio 'PropertiesPanelService'
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowGridEventHandler(object? sender, bool flag) => 
-            SetShowGrid(_drawingPanel.CustomCanvas, flag);
+        /// <param name="flag"></param>
+        private void ShowGridEventHandler(object? sender, bool flag) => SetShowGrid(_drawingPanel.CustomCanvas, flag);
+
+        /// <summary>
+        /// Se ejecuta cuando se invoca el metodo 'UpdateGridSize' del servicio 'PropertiesPanelService'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="value"></param>
+        private void UpdateGridSizeEventHandler(object? sender, double value) => SetGridSize(_drawingPanel.CustomCanvas, value);
 
         #endregion PROPERTIESPANEL_SERVICE
 

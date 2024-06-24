@@ -29,6 +29,20 @@ namespace Paintc.ViewModels.UserControls
         /* Se encarga de mostrar el panel de propiedades adecuado según la figura que se seleccione */
         private readonly PropertiesPanelNavigator _panelsNavigator;
 
+        private double _sliderValue;
+
+        public double SliderValue
+        {
+            get { return _sliderValue; }
+            set
+            {
+                if (SetField(ref _sliderValue, value) && _drawingPanelProperties.ShowGridCheckbox.IsChecked == true)
+                {
+                    PropertiesPanelService.Instance.UpdateGridSize(value);
+                }
+            }
+        }
+
         /// <summary>
         ///
         /// </summary>
@@ -36,6 +50,7 @@ namespace Paintc.ViewModels.UserControls
         public PropertiesPanelViewModel(PropertiesPanel drawingPanelProperties)
         {
             _drawingPanelProperties = drawingPanelProperties;
+            drawingPanelProperties.DataContext = this;
             // Events
             _drawingPanelProperties.GraphicsModeCmbbox.SelectionChanged += GraphicsModeCmbbox_SelectionChanged;
             _drawingPanelProperties.BackgroundColorCmbbox.SelectionChanged += BackgroundColorCmbbox_SelectionChanged;

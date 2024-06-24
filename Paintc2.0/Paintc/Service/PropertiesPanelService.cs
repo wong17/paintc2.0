@@ -45,5 +45,11 @@ namespace Paintc.Service
         public event EventHandler<bool>? ShowGridEventHandler;
 
         public void ShowGrid(bool flag) => ShowGridEventHandler?.Invoke(this, flag);
+
+        // Actualiza el tamaño del grid
+        public event EventHandler<double>? UpdateGridSizeEventHandler;
+
+        public void UpdateGridSize(double newSize) => UpdateGridSizeEventHandler?.Invoke(this, newSize);
+
     }
 }
