@@ -3,12 +3,11 @@ using Paintc.Enums;
 using Paintc.Model;
 using Paintc.Service;
 using Paintc.Views.UserControls;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Paintc.ViewModels.UserControls
 {
@@ -21,7 +20,7 @@ namespace Paintc.ViewModels.UserControls
         private static ResourceDictionary? _brushResource;
         private static DrawingBrush? _gridBrush;
 
-        private static double _oldGridSize = 1;
+        private static double _oldSliderValue = 1;
 
         #region ATTACHED_PROPERTIES
 
@@ -43,7 +42,7 @@ namespace Paintc.ViewModels.UserControls
             if (value)
             {
                 var canvasWidth = canvas.ActualWidth;
-                var cellSize = _oldGridSize == 1 ? canvasWidth / _oldGridSize / 10 : _oldGridSize;
+                var cellSize = _oldSliderValue == 1 ? canvasWidth / _oldSliderValue / 10 : _oldSliderValue;
 
                 _gridBrush.Viewport = new Rect(0, 0, cellSize, cellSize);
 
@@ -91,12 +90,41 @@ namespace Paintc.ViewModels.UserControls
                 if (rectangleGeometry is not null)
                     rectangleGeometry.Rect = new Rect(0, 0, cellSize, cellSize);
 
-                _oldGridSize = cellSize;
+                _oldSliderValue = cellSize; // Para que cuando se desactive el grid y se vuelva a mostrar aparezca del mismo tamaño
                 canvas.Background = _gridBrush;
                 return;
             }
             
             canvas.Background = _colorBrush;
+        }
+
+        public static string? GetBackgroundImage(DependencyObject obj) => (string?)obj.GetValue(BackgroundImageProperty);
+
+        public static void SetBackgroundImage(DependencyObject obj, string? value) => obj.SetValue(BackgroundImageProperty, value);
+
+        // Using a DependencyProperty as the backing store for BackgroundImage.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackgroundImageProperty =
+            DependencyProperty.RegisterAttached("BackgroundImage", typeof(string), typeof(DrawingPanelViewModel), new PropertyMetadata("", SelectBackgroundImageCallback));
+
+        private static void SelectBackgroundImageCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Canvas canvas)
+                return;
+
+            var imagePath = (string?)e.NewValue;
+            if (string.IsNullOrEmpty(imagePath))
+            {
+                canvas.Background = _colorBrush;
+                return;
+            }
+
+            var imageBrush = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Absolute)),
+                Stretch = Stretch.UniformToFill
+            };
+
+            canvas.Background = imageBrush;
         }
 
         #endregion
@@ -136,6 +164,7 @@ namespace Paintc.ViewModels.UserControls
             PropertiesPanelService.Instance.ChangeBackgroundColorEventHandler += ChangeBackgroundColorEventHandler;
             PropertiesPanelService.Instance.ShowGridEventHandler += ShowGridEventHandler;
             PropertiesPanelService.Instance.UpdateGridSizeEventHandler += UpdateGridSizeEventHandler;
+            PropertiesPanelService.Instance.SelectBackgroundImageEventHandler += SelectBackgroundImageEventHandler;
 
             // Events
             _drawingPanel.CustomCanvas.LayoutTransform = scaleTransform;
@@ -277,6 +306,13 @@ namespace Paintc.ViewModels.UserControls
         /// <param name="sender"></param>
         /// <param name="value"></param>
         private void UpdateGridSizeEventHandler(object? sender, double value) => SetGridSize(_drawingPanel.CustomCanvas, value);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="imagePath"></param>
+        private void SelectBackgroundImageEventHandler(object? sender, string? imagePath) => SetBackgroundImage(_drawingPanel.CustomCanvas, imagePath);
 
         #endregion PROPERTIESPANEL_SERVICE
 

@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Paintc.Commands;
+using Microsoft.Win32;
 
 namespace Paintc.ViewModels.UserControls
 {
@@ -38,10 +40,41 @@ namespace Paintc.ViewModels.UserControls
             {
                 if (SetField(ref _sliderValue, value) && _drawingPanelProperties.ShowGridCheckbox.IsChecked == true)
                 {
+                    // Notificar al servicio que ha cambiado el valor del slide
                     PropertiesPanelService.Instance.UpdateGridSize(value);
                 }
             }
         }
+
+        private string? _backgroundImagePath;
+
+        public string? BackgroundImagePath
+        {
+            get => _backgroundImagePath;
+            set
+            {
+                if (SetField(ref _backgroundImagePath, value))
+                {
+                    // Notificar al servicio que se ha seleccionado una nueva imagen de fondo
+                    PropertiesPanelService.Instance.SelectBackgroundImage(value);
+                    IsDeleteBackgroundImageButtonEnabled = true;
+                }
+            }
+        }
+
+        private bool _isDeleteBackgroundImageButtonEnabled = false;
+
+        public bool IsDeleteBackgroundImageButtonEnabled
+        {
+            get => _isDeleteBackgroundImageButtonEnabled;
+            set
+            {
+                SetField(ref _isDeleteBackgroundImageButtonEnabled, value);
+            }
+        }
+
+        public RelayCommand SelectBackgroundImageCommand { get; private set; }
+        public RelayCommand DeleteBackgroundImageCommand { get; private set; }
 
         /// <summary>
         ///
@@ -51,6 +84,10 @@ namespace Paintc.ViewModels.UserControls
         {
             _drawingPanelProperties = drawingPanelProperties;
             drawingPanelProperties.DataContext = this;
+
+            SelectBackgroundImageCommand = new RelayCommand(obj => true, SelectBackgroundImage);
+            DeleteBackgroundImageCommand = new RelayCommand(obj => true, DeleteBackgroundImage);
+
             // Events
             _drawingPanelProperties.GraphicsModeCmbbox.SelectionChanged += GraphicsModeCmbbox_SelectionChanged;
             _drawingPanelProperties.BackgroundColorCmbbox.SelectionChanged += BackgroundColorCmbbox_SelectionChanged;
@@ -83,6 +120,36 @@ namespace Paintc.ViewModels.UserControls
             _panelsNavigator = new();
             PropertiesPanelService.Instance.ShowPropertiesPanelEventHandler += ShowPropertiesPanel;
             PropertiesPanelService.Instance.UpdatePropertiesPanelEventHandler += UpdatePropertiesPanel;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void DeleteBackgroundImage(object? obj)
+        {
+            if (!string.IsNullOrEmpty(BackgroundImagePath))
+            {
+                BackgroundImagePath = string.Empty;
+                IsDeleteBackgroundImageButtonEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Abre el explorador de archivos para seleccionar una imagen y ponerla de fondo en el canvas
+        /// </summary>
+        /// <param name="obj"></param>
+        private void SelectBackgroundImage(object? obj)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BackgroundImagePath = openFileDialog.FileName;
+            }
         }
 
         /// <summary>
@@ -157,6 +224,11 @@ namespace Paintc.ViewModels.UserControls
             {
                 // Actualizar nuevo color...
                 _currentColor = color;
+
+                // Eliminar imagen de fondo
+                if (!string.IsNullOrEmpty(BackgroundImagePath))
+                    DeleteBackgroundImage(null);
+
                 // Cambiar color del fondo
                 PropertiesPanelService.Instance.ChangeBackgroundColor(_currentColor);
                 _drawingPanelProperties.BackgroundColorRectangle.Fill = new SolidColorBrush(_currentColor.Color);
@@ -219,7 +291,7 @@ namespace Paintc.ViewModels.UserControls
         /// Actualiza los valores del panel de propiedades de acuerdo a los cambios que se hagan en la figura (cambiar tamaño o posición)
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="obj"></param>
         /// <exception cref="NotImplementedException"></exception>
         private void UpdatePropertiesPanel(object? sender, object? obj)
         {
@@ -243,6 +315,14 @@ namespace Paintc.ViewModels.UserControls
         /// <param name="e"></param>
         private void ShowGridCheckbox_Checked(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(BackgroundImagePath))
+            {
+                _drawingPanelProperties.ShowGridCheckbox.IsChecked = false;
+                MessageBox.Show("Ops.. Lo sentimos, no se puede mostrar el Grid mientras este de fondo sea una imagen :( " +
+                    "se incorporara esta funcionalidad en futuras versiones.", 
+                    "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             PropertiesPanelService.Instance.ShowGrid(_drawingPanelProperties.ShowGridCheckbox.IsChecked ?? false);
         }
     }

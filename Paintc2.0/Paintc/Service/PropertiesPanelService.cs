@@ -51,5 +51,9 @@ namespace Paintc.Service
 
         public void UpdateGridSize(double newSize) => UpdateGridSizeEventHandler?.Invoke(this, newSize);
 
+        // Notifica cuando se ha seleccionado una imagen para poner de fondo en el canvas
+        public event EventHandler<string?>? SelectBackgroundImageEventHandler;
+
+        public void SelectBackgroundImage(string? imagePath) => SelectBackgroundImageEventHandler?.Invoke(this, imagePath);
     }
 }

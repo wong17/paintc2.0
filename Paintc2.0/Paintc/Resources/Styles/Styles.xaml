@@ -107,6 +107,39 @@
         <Setter Property="Margin" Value="0,10,10,10"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
+    <Style x:Key="CanvasBackgroundImageButtonStyle" TargetType="Button">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Margin" Value="5,0,5,0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style x:Key="CanvasDeleteBackgroundImageButtonStyle" TargetType="Button">
+        <Setter Property="Margin" Value="0,0,5,0"></Setter>
+        <Setter Property="FontWeight" Value="SemiBold"></Setter>
+        <Setter Property="Background" Value="#ebebeb"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="Black"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#e81123"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="Black"></Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="Gray"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     
     <!--Checkbox-->
     <Style x:Key="ShapeOptionsCheckBoxStyle" TargetType="CheckBox">

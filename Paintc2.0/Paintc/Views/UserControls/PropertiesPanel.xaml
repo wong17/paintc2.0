@@ -52,10 +52,23 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="BackgroundColorCmbbox" Grid.Column="0" Style="{StaticResource ComboboxStyle}" ></ComboBox>
-                <Border Grid.Column="1" Width="26" Height="26" Background="White" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!---->
+                <ComboBox x:Name="BackgroundColorCmbbox" Grid.Row="0" Grid.Column="0" Style="{StaticResource ComboboxStyle}" ></ComboBox>
+                <Border Grid.Row="0" Grid.Column="1" Width="26" Height="26" Background="White" Margin="0,0,5,0">
                     <Rectangle x:Name="BackgroundColorRectangle" Width="25" Height="25" Fill="Black"></Rectangle>
                 </Border>
+                <!---->
+                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CanvasBackgroundImageButtonStyle}"
+                        Command="{Binding SelectBackgroundImageCommand}">
+                    Select image as background...</Button>
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CanvasDeleteBackgroundImageButtonStyle}"
+                        Command="{Binding DeleteBackgroundImageCommand}" IsEnabled="{Binding IsDeleteBackgroundImageButtonEnabled}"
+                        >X
+                </Button>
             </Grid>
 
             <!--Canvas options-->

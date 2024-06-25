@@ -158,8 +158,8 @@ namespace Paintc.ViewModels
         {
             if (_toolbox is null || _drawingPanel is null || _currentColor is null || _state == DrawingState.Drawing)
             {
-                MessageBox.Show("Caja de herramienta, canvas, color inicial o estado inicial no se han iniciado", 
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Caja de herramienta, canvas, color inicial o estado inicial no se han iniciado", 
+                //    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
