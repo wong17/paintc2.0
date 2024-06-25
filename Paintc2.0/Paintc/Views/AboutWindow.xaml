@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:viewmodels="clr-namespace:Paintc.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AboutWindowViewModel}"
         mc:Ignorable="d"
-        Title="About Paintc2.0 - Alpha 1.0" Height="400" Width="400" WindowStartupLocation="CenterOwner"
+        Title="About Paintc2.0 - Alpha 1.1" Height="400" Width="400" WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize" Background="{StaticResource GrayBrush}">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,8 +26,9 @@
             <TextBlock Grid.Row="1" Text="Ctrl + Scroll: Zoom in/out (inside drawing area)" Foreground="White" FontSize="14" 
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Height="30" >
-                <Hyperlink NavigateUri="https://github.com/wong17/paintc2.0.git" FontSize="16" Foreground="LightBlue" >
-                    Github repository (private)
+                <Hyperlink NavigateUri="https://github.com/wong17/paintc2.0.git" FontSize="16" Foreground="LightBlue" 
+                           Command="{Binding OpenGithubRepositoryCommand}" CommandParameter="https://github.com/wong17/paintc2.0.git">
+                    Github repository
                 </Hyperlink>
             </TextBlock>
         </Grid>

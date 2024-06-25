@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         x:Name="PaintcWindow"
-        Title="Paintc2.0 - Alpha 1.0" Width="1920" Height="1080" WindowStartupLocation="CenterScreen"
+        Title="Paintc2.0 - Alpha 1.1" Width="1920" Height="1080" WindowStartupLocation="CenterScreen"
         ap:MainWindowAttachedProperty.SaveWindowState="false">
 
     <!---->
