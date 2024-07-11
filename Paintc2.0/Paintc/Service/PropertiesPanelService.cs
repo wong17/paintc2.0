@@ -26,6 +26,11 @@ namespace Paintc.Service
 
         public void ChangeBackgroundColor(CGAColor color) => ChangeBackgroundColorEventHandler?.Invoke(this, color);
 
+        // Notifica cuando se selecciona una imagen para guardar el ultimo color de fondo del canvas
+        public event EventHandler<CGAColor>? SaveCurrentBackgroundColorEventHandler;
+
+        public void SaveCurrentBackgroundColor(CGAColor color) => SaveCurrentBackgroundColorEventHandler?.Invoke(this, color);
+
         // Notifica cuando hay una forma/figura seleccionada para habilitar o deshabilitar opciones
         public event EventHandler<ShapeBase?>? SetEnableShapeOptionsEventHandler;
 

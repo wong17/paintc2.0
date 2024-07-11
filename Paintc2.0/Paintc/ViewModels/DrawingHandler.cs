@@ -39,6 +39,8 @@ namespace Paintc.ViewModels
 
                 ToolboxPanelService.Instance.UpdateSelectedColorEventHandler += UpdateSelectedColorEventHandler;
                 ToolboxPanelService.Instance.UpdateSelectedColor(CGAColorPalette.White);
+
+                PropertiesPanelService.Instance.SaveCurrentBackgroundColorEventHandler += SaveCurrentBackgroundColorEventHandler;
             }
         }
 
@@ -72,7 +74,7 @@ namespace Paintc.ViewModels
         public DrawingState State { get => _state; }
 
         /// <summary>
-        ///
+        /// Posición (x,y) del mouse sobre el canvas
         /// </summary>
         private Point _lastMousePosition = new();
 
@@ -84,9 +86,14 @@ namespace Paintc.ViewModels
         private int _globalShapeCounter = 0;
 
         /// <summary>
-        ///
+        /// Color seleccionado para dibujar con la herramienta
         /// </summary>
         private CGAColorPalette? _currentColor;
+
+        /// <summary>
+        /// Color de fondo actual del canvas
+        /// </summary>
+        private CGAColorPalette? _currentBackgroundColor;
 
         /// <summary>
         /// Contiene mensajes de ayuda en base a la herramienta seleccionada
@@ -354,8 +361,12 @@ namespace Paintc.ViewModels
         /// </summary>
         public int GetBackgroundColor()
         {
-            if (_drawingPanel is null || _drawingPanel.CustomCanvas.Background is not SolidColorBrush brush)
+            if (_drawingPanel is null)
                 return Convert.ToInt32(CGAColorPalette.Black); // Fondo por defecto
+
+            // Devuelve el último color de fondo del canvas antes de poner la imagen para usarlo en la plantilla de código
+            if (_drawingPanel.CustomCanvas.Background is not SolidColorBrush brush)
+                return Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(CGAColorPaletteService.GetColor(_currentBackgroundColor)));
 
             return Convert.ToInt32(CGAColorPaletteService.GetCGAColorPalette(brush.Color)); // Fondo actual en el canvas
         }
@@ -477,6 +488,16 @@ namespace Paintc.ViewModels
                 return;
 
             _selectedShape.IsResizableProperty = isResizable;
+        }
+
+        /// <summary>
+        /// Guarda el ultimo color de fondo (color actual) del canvas al momento que se selecciona una imagen como fondo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveCurrentBackgroundColorEventHandler(object? sender, CGAColor currentBgColor)
+        {
+            _currentBackgroundColor = currentBgColor.Cpalette;
         }
 
         #endregion PROPERTIES_PANEL

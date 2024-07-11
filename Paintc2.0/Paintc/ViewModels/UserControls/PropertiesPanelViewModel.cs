@@ -149,6 +149,13 @@ namespace Paintc.ViewModels.UserControls
             if (openFileDialog.ShowDialog() == true)
             {
                 BackgroundImagePath = openFileDialog.FileName;
+                // Guardar el ultimo color de fondo del canvas antes de poner la imagen de fondo
+                if (_drawingPanelProperties.BackgroundColorCmbbox.SelectedItem is CGAColor color)
+                {
+                    _currentColor = color;
+                    // Actualizar
+                    PropertiesPanelService.Instance.SaveCurrentBackgroundColor(_currentColor);
+                }
             }
         }
 
