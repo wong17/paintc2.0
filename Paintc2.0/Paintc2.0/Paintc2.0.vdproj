@@ -43,6 +43,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -59,6 +67,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -289,7 +305,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_474892C2FAFF42DAB75853FDC13779EC"
             {
-            "Name" = "8:Paintc2.0 - Alpha 1.0"
+            "Name" = "8:Paintc2.0 - Alpha 1.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -303,7 +319,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DE1599A0A7A0474889C41CC13C429ACB"
             {
-            "Name" = "8:Paintc2.0 - Alpha 1.0"
+            "Name" = "8:Paintc2.0 - Alpha 1.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
